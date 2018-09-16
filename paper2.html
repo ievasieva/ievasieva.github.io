@@ -47,10 +47,6 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
-<script src="libs/viz-0.3/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.0/grViz.js"></script>
 
 
 
@@ -775,8 +771,7 @@ segm+NETWDIF+revdif
 <p>By exploring the differences between the different solution terms, we divided the solutions in two groups - the firms that have separate ventrues for one of the paradoxical goals (SPIN), and the firms that do not (spin). Figure <a href="paper2.html#fig:solvizBAL">4.3</a> vizualized these solutions as pathways, where on the left we can see solution paths 3 to 5, and solutions 1 and 2 are on the right.</p>
 <p>-more than half of the cases that are succesful in achieving both creative and business performance use structural separation -both the result table and this graph present a very connfigurational and complex picture of the pathaways for achieving balance, confirming the hypotheses - none of the conditions are found sufficient (or neccessary on their own) -the superset relations found are true -</p>
 <div class="figure"><span id="fig:solvizBAL"></span>
-<div id="htmlwidget-efdb70f367dc07da5561" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-efdb70f367dc07da5561">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  SPIN; spin\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  REVDIF; revdif; NETWDIF;vpdif; REVDIFsegm; revdifSEGM; netwdifvpdif; NETWDIFVPDIF; netwdif\n\n  # several \"edge\" statements\n  spin->REVDIF spin->revdif REVDIF->vpdif revdif->NETWDIF \n  SPIN->REVDIFsegm SPIN->revdifSEGM REVDIFsegm->netwdifvpdif REVDIFsegm->NETWDIFVPDIF\n  revdifSEGM->netwdif\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<img src="solvizBAL.png" alt="Vizualization of sufficient configurations of conditions for BAL." width="388" />
 <p class="caption">
 Figure 4.3: Vizualization of sufficient configurations of conditions for BAL.
 </p>
@@ -912,8 +907,7 @@ Figure 4.3: Vizualization of sufficient configurations of conditions for BAL.
 </tbody>
 </table>
 <div class="figure"><span id="fig:solvizNOBP"></span>
-<div id="htmlwidget-ea8e189e0a3efcd089ab" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ea8e189e0a3efcd089ab">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  segm; SEGMSPINDIF; NETWDIF\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  VPDIF; REVDIFspindif; vpdif; revdifnetwdif; revdifspindif\n\n  # several \"edge\" statements\n  segm->VPDIF segm->REVDIFspindif SEGMSPINDIF -> vpdif SEGMSPINDIF->revdifnetwdif\n  NETWDIF->revdifspindif\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<img src="solvizNOBP.png" alt="Vizualization of sufficient configurations of conditions for NOBP." width="388" />
 <p class="caption">
 Figure 4.4: Vizualization of sufficient configurations of conditions for NOBP.
 </p>
@@ -1034,8 +1028,7 @@ Figure 4.4: Vizualization of sufficient configurations of conditions for NOBP.
 </tbody>
 </table>
 <div class="figure"><span id="fig:solvizNOCP"></span>
-<div id="htmlwidget-e14d54d154e205469dae" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e14d54d154e205469dae">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  segm; SEGM\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  NETWDIF; VPDIFnetwdif; vpdifnetwdif; revdif; spindifREVDIF; SPINDIFrevdif; SPINDIF\n\n  # several \"edge\" statements\n  segm->NETWDIF NETWDIF-> revdif \n  segm->VPDIFnetwdif VPDIFnetwdif->spindifREVDIF VPDIFnetwdif->SPINDIFrevdif \n  SEGM->vpdifnetwdif vpdifnetwdif->SPINDIF\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<img src="solvizNOCP.png" alt="Vizualization of sufficient configurations of conditions for NOCP." width="309" />
 <p class="caption">
 Figure 4.5: Vizualization of sufficient configurations of conditions for NOCP.
 </p>
