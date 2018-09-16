@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Paradox management through business model design</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Paradox management through business model design" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Ieva Rozentale">
 
 
-<meta name="date" content="2018-08-30">
+<meta name="date" content="2018-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.0/grViz.js"></script>
 
 
 
@@ -66,41 +70,111 @@
 <li><a href="./">Ieva's Disseratation</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Notes on draft</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Notes on draft</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#to-do-big"><i class="fa fa-check"></i>To-do big</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#to-do-small"><i class="fa fa-check"></i>To-do small</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#for-later"><i class="fa fa-check"></i>For later</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#a-note-on-methodology-studying-organizations-as-configurations"><i class="fa fa-check"></i><b>1.1</b> A note on methodology: Studying organizations as configurations</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#encountering-and-studying-paradoxes-why"><i class="fa fa-check"></i><b>1.1</b> Encountering and studying paradoxes: Why?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#framing-strategic-conflicts"><i class="fa fa-check"></i><b>1.2</b> Framing strategic conflicts</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#pursuing-conflicting-goals"><i class="fa fa-check"></i><b>1.3</b> Pursuing conflicting goals</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#approaches-to-coping-with-the-paradox"><i class="fa fa-check"></i><b>1.4</b> Approaches to coping with the paradox</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#business-modelling-for-complexity"><i class="fa fa-check"></i><b>1.5</b> Business modelling for complexity</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#heterogeneity-of-organizationl-commitments-and-performance-implications"><i class="fa fa-check"></i><b>1.6</b> Heterogeneity of organizationl commitments and performance implications</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#purpose-and-overview-of-the-thesis"><i class="fa fa-check"></i><b>1.7</b> Purpose and overview of the thesis</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#a-note-on-methodology-studying-organizations-as-configurations"><i class="fa fa-check"></i><b>1.8</b> A note on methodology: Studying organizations as configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="paper0.html"><a href="paper0.html"><i class="fa fa-check"></i><b>2</b> THRIVING OFF OF TENSIONS:</a></li>
-<li class="chapter" data-level="3" data-path="paper1.html"><a href="paper1.html"><i class="fa fa-check"></i><b>3</b> <em>CRAFTING</em> BUSINESS MODELS FOR PARADOXICAL GOALS:</a></li>
+<li class="chapter" data-level="3" data-path="paper1.html"><a href="paper1.html"><i class="fa fa-check"></i><b>3</b> <em>CRAFTING</em> BUSINESS MODELS FOR PARADOXICAL GOALS:</a><ul>
+<li class="chapter" data-level="3.1" data-path="paper1.html"><a href="paper1.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="paper1.html"><a href="paper1.html#literature-review"><i class="fa fa-check"></i><b>3.2</b> Literature review</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="paper1.html"><a href="paper1.html#coping-with-strategic-paradoxes"><i class="fa fa-check"></i><b>3.2.1</b> Coping with strategic paradoxes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="paper1.html"><a href="paper1.html#business-model-design"><i class="fa fa-check"></i><b>3.2.2</b> Business model design</a></li>
+<li class="chapter" data-level="3.2.3" data-path="paper1.html"><a href="paper1.html#a-paradox-perspective-to-business-model-design-conceptual-framework"><i class="fa fa-check"></i><b>3.2.3</b> A paradox perspective to business model design: Conceptual framework</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="paper1.html"><a href="paper1.html#research-approach-and-methods"><i class="fa fa-check"></i><b>3.3</b> Research approach and methods</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="paper1.html"><a href="paper1.html#research-setting-creativity-and-commerce-as-a-paradox"><i class="fa fa-check"></i><b>3.3.1</b> Research setting: Creativity and commerce as a paradox</a></li>
+<li class="chapter" data-level="3.3.2" data-path="paper1.html"><a href="paper1.html#case-selection-data-collection-and-analysis"><i class="fa fa-check"></i><b>3.3.2</b> Case selection, data collection and analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="paper1.html"><a href="paper1.html#findings-designing-business-models-for-paradoxical-goals"><i class="fa fa-check"></i><b>3.4</b> Findings: Designing business models for paradoxical goals</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="paper1.html"><a href="paper1.html#integration-tactics"><i class="fa fa-check"></i><b>3.4.1</b> Integration tactics</a></li>
+<li class="chapter" data-level="3.4.2" data-path="paper1.html"><a href="paper1.html#differentiation-tactics"><i class="fa fa-check"></i><b>3.4.2</b> Differentiation tactics</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="paper1.html"><a href="paper1.html#discussion"><i class="fa fa-check"></i><b>3.5</b> Discussion</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="paper1.html"><a href="paper1.html#cognitive-business-model-design-under-pluralism"><i class="fa fa-check"></i><b>3.5.1</b> Cognitive business model design under pluralism</a></li>
+<li class="chapter" data-level="3.5.2" data-path="paper1.html"><a href="paper1.html#synergies-and-pitfalls-in-paradoxical-business-models"><i class="fa fa-check"></i><b>3.5.2</b> Synergies and pitfalls in paradoxical business models</a></li>
+<li class="chapter" data-level="3.5.3" data-path="paper1.html"><a href="paper1.html#managerial-implications-paradoxical-decision-making-beyond-business-models"><i class="fa fa-check"></i><b>3.5.3</b> Managerial Implications: Paradoxical decision-making beyond business models</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="paper1.html"><a href="paper1.html#conclusions"><i class="fa fa-check"></i><b>3.6</b> Conclusions</a></li>
+<li class="chapter" data-level="3.7" data-path="paper1.html"><a href="paper1.html#acknowledgment"><i class="fa fa-check"></i><b>3.7</b> Acknowledgment</a></li>
+<li class="chapter" data-level="3.8" data-path="paper1.html"><a href="paper1.html#appendix-a-main-business-model-choice-domains-for-creative-service-firms."><i class="fa fa-check"></i><b>3.8</b> Appendix A: Main business model choice domains for (creative) service firms.</a></li>
+<li class="chapter" data-level="3.9" data-path="paper1.html"><a href="paper1.html#appendix-b-case-and-data-source-description."><i class="fa fa-check"></i><b>3.9</b> Appendix B: Case and data source description.</a></li>
+<li class="chapter" data-level="3.10" data-path="paper1.html"><a href="paper1.html#appendix-c-inductive-research-process-and-data-structure."><i class="fa fa-check"></i><b>3.10</b> Appendix C: Inductive research process and data structure.</a></li>
+<li class="chapter" data-level="3.11" data-path="paper1.html"><a href="paper1.html#references"><i class="fa fa-check"></i><b>3.11</b> References</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="paper2.html"><a href="paper2.html"><i class="fa fa-check"></i><b>4</b> KILLING TWO BIRDS WITH ONE BUSINESS MODEL:</a><ul>
-<li class="chapter" data-level="4.1" data-path="paper2.html"><a href="paper2.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.1" data-path="paper2.html"><a href="paper2.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="paper2.html"><a href="paper2.html#theoretical-background-and-conceptual-framework"><i class="fa fa-check"></i><b>4.2</b> Theoretical background and conceptual framework</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="paper2.html"><a href="paper2.html#business-models-and-firm-performance"><i class="fa fa-check"></i><b>4.2.1</b> Business models and firm performance</a></li>
 <li class="chapter" data-level="4.2.2" data-path="paper2.html"><a href="paper2.html#organizational-goals-pluralism-and-paradoxes-of-performing"><i class="fa fa-check"></i><b>4.2.2</b> Organizational goals, pluralism and paradoxes of performing</a></li>
 <li class="chapter" data-level="4.2.3" data-path="paper2.html"><a href="paper2.html#a-paradox-approach-to-business-models-the-conceptual-framework"><i class="fa fa-check"></i><b>4.2.3</b> A paradox approach to business models: The conceptual framework</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="paper2.html"><a href="paper2.html#the-analytical-model-and-hypotheses"><i class="fa fa-check"></i><b>4.3</b> The analytical model and hypotheses</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="paper2.html"><a href="paper2.html#venture-separation"><i class="fa fa-check"></i><b>4.3.1</b> Venture separation</a></li>
-<li class="chapter" data-level="4.3.2" data-path="paper2.html"><a href="paper2.html#portfolio-diversification"><i class="fa fa-check"></i><b>4.3.2</b> Portfolio diversification</a></li>
+<li class="chapter" data-level="4.3.1" data-path="paper2.html"><a href="paper2.html#portfolio-diversification"><i class="fa fa-check"></i><b>4.3.1</b> Portfolio diversification</a></li>
+<li class="chapter" data-level="4.3.2" data-path="paper2.html"><a href="paper2.html#client-segmentation"><i class="fa fa-check"></i><b>4.3.2</b> Client segmentation</a></li>
 <li class="chapter" data-level="4.3.3" data-path="paper2.html"><a href="paper2.html#network-differentiation"><i class="fa fa-check"></i><b>4.3.3</b> Network differentiation</a></li>
 <li class="chapter" data-level="4.3.4" data-path="paper2.html"><a href="paper2.html#dual-revenue-models"><i class="fa fa-check"></i><b>4.3.4</b> Dual revenue models</a></li>
-<li class="chapter" data-level="4.3.5" data-path="paper2.html"><a href="paper2.html#balancing-the-balancing-act"><i class="fa fa-check"></i><b>4.3.5</b> Balancing the balancing act</a></li>
+<li class="chapter" data-level="4.3.5" data-path="paper2.html"><a href="paper2.html#venture-separation-and-integrated-culture"><i class="fa fa-check"></i><b>4.3.5</b> Venture separation and integrated culture</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="paper2.html"><a href="paper2.html#methods-and-data"><i class="fa fa-check"></i><b>4.4</b> Methods and data</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="paper2.html"><a href="paper2.html#qca-and-its-suitability-for-the-study-of-business-models-and-paradox-management"><i class="fa fa-check"></i><b>4.4.1</b> QCA and its suitability for the study of business models and paradox management</a></li>
 <li class="chapter" data-level="4.4.2" data-path="paper2.html"><a href="paper2.html#research-setting-and-data-collection"><i class="fa fa-check"></i><b>4.4.2</b> Research setting and data collection</a></li>
-<li class="chapter" data-level="4.4.3" data-path="paper2.html"><a href="paper2.html#measures-and-calibration"><i class="fa fa-check"></i><b>4.4.3</b> Measures and calibration</a></li>
-<li class="chapter" data-level="4.4.4" data-path="paper2.html"><a href="paper2.html#fuzzy-set-qualitative-comparative-analysis"><i class="fa fa-check"></i><b>4.4.4</b> Fuzzy-set Qualitative Comparative Analysis</a></li>
-<li class="chapter" data-level="4.4.5" data-path="paper2.html"><a href="paper2.html#post-qca-process-tracing"><i class="fa fa-check"></i><b>4.4.5</b> Post-QCA Process-tracing</a></li>
+<li class="chapter" data-level="4.4.3" data-path="paper2.html"><a href="paper2.html#measures-calibration-and-analyses"><i class="fa fa-check"></i><b>4.4.3</b> Measures, calibration, and analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="paper2.html"><a href="paper2.html#results-and-discussion"><i class="fa fa-check"></i><b>4.5</b> Results and discussion</a></li>
+<li class="chapter" data-level="4.5" data-path="paper2.html"><a href="paper2.html#results"><i class="fa fa-check"></i><b>4.5</b> Results</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="paper2.html"><a href="paper2.html#analysis-1-high-creative-high-business-performance"><i class="fa fa-check"></i><b>4.5.1</b> Analysis 1: High creative, high business performance</a></li>
+<li class="chapter" data-level="4.5.2" data-path="paper2.html"><a href="paper2.html#analysis-2-high-creative-low-business-performance"><i class="fa fa-check"></i><b>4.5.2</b> Analysis 2: High creative, low business performance</a></li>
+<li class="chapter" data-level="4.5.3" data-path="paper2.html"><a href="paper2.html#analysis-3-low-creative-high-business-performance"><i class="fa fa-check"></i><b>4.5.3</b> Analysis 3: Low creative, high business performance</a></li>
+<li class="chapter" data-level="4.5.4" data-path="paper2.html"><a href="paper2.html#analysis-4-low-creative-low-business-performance"><i class="fa fa-check"></i><b>4.5.4</b> Analysis 4: Low creative, low business performance</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> ORGANIZATIONAL COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODEL HETEROGENEITY, AND PERFORMANCE:</a></li>
-<li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a><ul>
-<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html#summary-of-results"><i class="fa fa-check"></i><b>6.1</b> Summary of results</a></li>
+<li class="chapter" data-level="4.6" data-path="paper2.html"><a href="paper2.html#discussion-1"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+<li class="chapter" data-level="4.7" data-path="paper2.html"><a href="paper2.html#conclusion"><i class="fa fa-check"></i><b>4.7</b> Conclusion</a></li>
+<li class="chapter" data-level="4.8" data-path="paper2.html"><a href="paper2.html#App2A"><i class="fa fa-check"></i><b>4.8</b> Appendix A: Sample description</a></li>
+<li class="chapter" data-level="4.9" data-path="paper2.html"><a href="paper2.html#App2B"><i class="fa fa-check"></i><b>4.9</b> Appendix B: Measures and calibration</a></li>
+<li class="chapter" data-level="4.10" data-path="paper2.html"><a href="paper2.html#App2C"><i class="fa fa-check"></i><b>4.10</b> Appendix C: Model evaluation</a></li>
+<li class="chapter" data-level="4.11" data-path="paper2.html"><a href="paper2.html#App2D"><i class="fa fa-check"></i><b>4.11</b> Appendix D: Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>7</b> Appendices</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODELS, AND PERFORMANCE:</a><ul>
+<li class="chapter" data-level="5.1" data-path="paper3.html"><a href="paper3.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="paper3.html"><a href="paper3.html#literature-review-1"><i class="fa fa-check"></i><b>5.2</b> Literature review</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="paper3.html"><a href="paper3.html#strategic-pluralism-and-decision-making"><i class="fa fa-check"></i><b>5.2.1</b> Strategic pluralism and decision-making</a></li>
+<li class="chapter" data-level="5.2.2" data-path="paper3.html"><a href="paper3.html#business-model-heterogeneity-and-organizational-success-in-pluralistic-settings"><i class="fa fa-check"></i><b>5.2.2</b> Business model heterogeneity and organizational success in pluralistic settings</a></li>
+<li class="chapter" data-level="5.2.3" data-path="paper3.html"><a href="paper3.html#conflicts-and-success-criteria-in-the-creative-service-firms"><i class="fa fa-check"></i><b>5.2.3</b> Conflicts and success criteria in the creative service firms</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="paper3.html"><a href="paper3.html#methods"><i class="fa fa-check"></i><b>5.3</b> Methods</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="paper3.html"><a href="paper3.html#a-configurational-approach-to-the-study-of-business-models"><i class="fa fa-check"></i><b>5.3.1</b> A configurational approach to the study of business models</a></li>
+<li class="chapter" data-level="5.3.2" data-path="paper3.html"><a href="paper3.html#qualitative-comparative-analysis"><i class="fa fa-check"></i><b>5.3.2</b> Qualitative Comparative Analysis</a></li>
+<li class="chapter" data-level="5.3.3" data-path="paper3.html"><a href="paper3.html#data-and-research-setting"><i class="fa fa-check"></i><b>5.3.3</b> Data and research setting</a></li>
+<li class="chapter" data-level="5.3.4" data-path="paper3.html"><a href="paper3.html#survey-measures"><i class="fa fa-check"></i><b>5.3.4</b> Survey measures</a></li>
+<li class="chapter" data-level="5.3.5" data-path="paper3.html"><a href="paper3.html#fuzzy-set-calibration-and-qualitative-comparative-analysis"><i class="fa fa-check"></i><b>5.3.5</b> Fuzzy set calibration and Qualitative Comparative Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="paper3.html"><a href="paper3.html#results-1"><i class="fa fa-check"></i><b>5.4</b> Results</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="paper3.html"><a href="paper3.html#analysis-1-high-creative-high-business-performance-1"><i class="fa fa-check"></i><b>5.4.1</b> Analysis 1: High creative, high business performance</a></li>
+<li class="chapter" data-level="5.4.2" data-path="paper3.html"><a href="paper3.html#analysis-2-low-creative-high-business-performance"><i class="fa fa-check"></i><b>5.4.2</b> Analysis 2: Low creative, high business performance</a></li>
+<li class="chapter" data-level="5.4.3" data-path="paper3.html"><a href="paper3.html#analysis-3-high-creative-low-business-performance"><i class="fa fa-check"></i><b>5.4.3</b> Analysis 3: High creative, low business performance</a></li>
+<li class="chapter" data-level="5.4.4" data-path="paper3.html"><a href="paper3.html#analysis-4-low-creative-low-business-performance-1"><i class="fa fa-check"></i><b>5.4.4</b> Analysis 4: Low creative, low business performance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="paper3.html"><a href="paper3.html#discussion-2"><i class="fa fa-check"></i><b>5.5</b> Discussion</a></li>
+<li class="chapter" data-level="5.6" data-path="paper3.html"><a href="paper3.html#conclusions-1"><i class="fa fa-check"></i><b>5.6</b> Conclusions</a></li>
+<li class="chapter" data-level="5.7" data-path="paper3.html"><a href="paper3.html#appendices"><i class="fa fa-check"></i><b>5.7</b> Appendices</a></li>
+<li class="chapter" data-level="5.8" data-path="paper3.html"><a href="paper3.html#references-1"><i class="fa fa-check"></i><b>5.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="paper1.html"><a href="paper1.html#conclusions"><i class="fa fa-check"></i><b>6</b> Conclusions</a><ul>
+<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6.1</b> Summary of results</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="paper3.html"><a href="paper3.html#appendices"><i class="fa fa-check"></i><b>7</b> Appendices</a></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -123,120 +197,120 @@
             <section class="normal" id="section-">
 <div id="paper2" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> KILLING TWO BIRDS WITH ONE BUSINESS MODEL:</h1>
-<p><strong>UNRAVELING SUCCESFUL CONFIGURATIONS FOR ACHIEVING CONFLICTING GOALS</strong></p>
+<p><strong>UNRAVELING SUCCESFUL CONFIGURATIONS FOR ACHIEVING CONFLICTING PERFORMANCE GOALS</strong><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 <blockquote>
 <blockquote>
-<p><strong>Abstract.</strong> Contemporary firms often have to work towards achieving contradictory performance-criteria (Denis et al., 2007), and this requires designing complex business models (Smith et al., 2013). Paradox management, ambidexterity, and business model literature has identified several separate strategies at the business model level that would help tackling this challenge - portfolio differentiation (Andriopoulos and Lewis, 2009), client segmentation (Bednarek et al., 2106), finding complementary partners (Yunus et al., 2010), multi-sided revenue models (Osterwalder &amp; Pigneur, 2010), and venture separation (Markides &amp; Charitou, 2004, DeFillippi, 2015). However, it is not clear how these strategies combine, and if they can be linked to high performance. This article aims to identify the configurations of business model related decisions that are necessary and/or sufficient for performing well in two conflicting domains simultaneously. Our study is based on a comparative case survey of business modelling practices of 140 Dutch creative service firms (e.g. design agencies, advertisement firms, architecture firms). We leverage paradox theory and configurational methods to conceptualize business models as a combination integrating and separating decisions directed towards the two conflicting goals, in our case - creative and commercial success. Our results, based in a fuzzy set Qualitative Comparative analysis (fsQCA), show which business model configurations 1) contribute to a high performance in both conflicting strategic goals, 2) lead to a misbalance towards either creative or commercial performance, and 3) are representative of firms that score low on both performance dimensions.</p>
+<p><strong>Abstract.</strong> Contemporary firms often have to work towards achieving contradictory performance-criteria <span class="citation">(Denis, Langley, and Rouleau <a href="paper1.html#ref-Denis2007">2007</a>)</span>, and this requires designing complex business models <span class="citation">(Smith, Gonin, and Besharov <a href="paper1.html#ref-Smith2013">2013</a>)</span>. While much of the literature has kept it to discussing the interplay between structural separation and integrated organizational culture <span class="citation">(O’Reilly and Tushman <a href="paper1.html#ref-OReilly2013">2013</a>)</span>, some scholars have identified several separate strategies at the business model level that would help tackling this challenge - portfolio differentiation <span class="citation">(Andriopoulos and Lewis <a href="paper1.html#ref-Andriopoulos2009">2009</a>)</span>, client segmentation <span class="citation">(Bednarek et al. <a href="paper1.html#ref-Bednarek2016">2016</a>)</span>, finding complementary partners <span class="citation">(Yunus, Moingeon, and Lehmann-Ortega <a href="paper1.html#ref-Yunus2010">2010</a>)</span>, multi-sided revenue models <span class="citation">(Osterwalder and Pigneur <a href="paper1.html#ref-Osterwalder2010">2010</a>)</span>. However, it is not clear how these strategies combine, and if they can be linked to high performance. This article aims to identify the configurations of business model related decisions that are necessary and/or sufficient for performing well in two conflicting domains simultaneously. Our study is based on a comparative case survey of business modelling practices of 179 Dutch creative service firms (i.e., design agencies, advertisement firms, architecture firms). We leverage paradox theory and configurational methods to conceptualize business models as a combination integrating and separating decisions directed towards the two conflicting goals, in our case - creative and commercial success. Our results, based in a fuzzy set Qualitative Comparative analysis (fsQCA), show the degree to which firms can rely on differentiation. More precisely, we uncover which business model configurations of differentiation decisions (or their absence) 1) contribute to a high performance in both conflicting strategic goals, 2) lead to a misbalance towards either creative or commercial performance, and 3) are representative of firms that score low on both performance dimensions.</p>
 </blockquote>
 </blockquote>
-<div id="introduction" class="section level2">
+<div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">4.1</span> Introduction</h2>
 <blockquote>
 <p>‘Building business models that merely pursue profits almost pale as a hedonistic or pecuniary quest aside the grand challenge of building business models that matter.’<br />
 – <cite>Alex Osterwalder</cite></p>
 </blockquote>
 <blockquote>
-<p>“A:Big clients subsidise small clients. ME:What value do you get from the small then? A:Love.’ – <cite>Alex Osterwalder</cite></p>
+<p>“A:Big clients subsidise small clients. ME:What value do you get from the small then? A:Love.’ – <cite>Anonymous interview respondent</cite></p>
 </blockquote>
-<p>The business model has proven to be a useful concept for explaining how firms create value (Magretta, 2002) and outperform each other (Afuah, 2004; Zott and Amit, 2007). According to the business model perspective, they do so by converting their goals (Smith et al., 2010) into better-performing configurations of decisions about value propositions, target markets, value creation mechanisms and revenue models (Baden-Fuller and Mangematin, 2013; Osterwalder and Pigneur, 2010) than those of their competitors. While viewing firms in terms of business models has helped managers, as well as researchers to understand and articulate better the processes of value creation and capture, the literature has been surprisingly over-focused on explaining the economic value creation (Massa et al., 2017), and very limited attention has been paid to understanding business models in cases were firms have to generate other value than profit.</p>
-<p>As recently discussed in various theoretical domains, e.g. paradox theory, institutional logics, organizational pluralism, or triple-bottom line, more and more contemporary firms are compelled to satisfy competing, even conflicting demands at the same time (Bednarek et al., 2017, Besharov and Smith (2014)). The common examples of other performance goals alongside profit-making include social (Smith et al., 2013) and environmental missions (Dixon and Clifford, 2007), corporate social responsibility (Wong and Dhanesh, 2017), multiple stakeholder satisfaction (Jarzabkowski et al., 2013), or creative performance, as in the case of the research setting of this study - the creative service firms (Jacobs, 2013). The long-term success and competitive advantage of firms facing conflicting demands depend heavily on their ability to strike a balance in these different domains (Smith, 2014). The question is then - how can firms build business models that are able to manage conflicting goals simultaneously?</p>
-<p>One can find empirical and theorerical suggestions on different strategies for managing conflicting goals applicable at the business model level in prior literature on corporate venturing, business models, and paradox management. Markides and Charitou (2004) have explored the conditions under which it would beneficial to create separate ventures for business models having different strategic intents. Andriopoulos and Lowe (2000) observed that design firms shift between projects aimed at financial goals and employee satisfaction; DeFillippi (2015) argued that in the context of media companies, vertical value chain integration of smaller production companies into bigger media businesses can help firms to tackle the ambidexterity challenge; Yunus et al. (2010) discussed the benefits of separate social and marketing networks in the context of social enterprises; Grassl (2012) examined the use of different revenue mechanisms for different client groups in hybrid organizations.</p>
-<p>Given their interdependent nature, such “design choices in business model components cannot be considered in isolation but should be balanced in order to develop a viable business model” (Haaker et al., 2006). While the identified strategies undoubtedly can help firms to grapple the challenge of satisfying multiple performance crieria simultaneously, it is unknow how they combine. It is thus the aim of this article to unravel how these different business model level strategies combine for high performance in pluralistic (dual performance) settings.</p>
-<p>In order to reach our research objective, we first leverage insights from paradox literature to build a theoretical framework of business modelling for conflicting goals. According to paradox theory, integration and separation are the two generic organizational and individual responses to conflicting demands. We examine prior studies that show how these are applied with respect to four business model elements - content of the value proposition, client and market selection, network organization, and revenue model. Based on prior business model studies, we also include venture separation as a variable in our analyses. We study survey data on business modeling practices of 140 Dutch creative service firms. Using Qualitative Comparative Analysis (QCA), we examine 1) how the identified separation / integration practices at different business model elements combine for achieving high creative and commercial performance; 2) which configurations can explain scoring low on one or both of the performance dimensions.</p>
+<p>The business model has proven to be a useful concept for explaining how firms create value <span class="citation">(Magretta <a href="paper1.html#ref-Magretta2002">2002</a>)</span> and outperform each other <span class="citation">(Afuah <a href="paper1.html#ref-Afuah2004">2004</a>; Zott and Amit <a href="paper1.html#ref-Zott2007">2007</a>)</span>. According to the business model perspective, they do so by converting their goals <span class="citation">(W. K. Smith, Binns, and Tushman <a href="paper1.html#ref-Smith2010">2010</a>)</span> into better-performing configurations of decisions about value propositions, target markets, value creation mechanisms and revenue models <span class="citation">(Baden-Fuller and Mangematin <a href="paper1.html#ref-Baden2013">2013</a>; Osterwalder and Pigneur <a href="paper1.html#ref-Osterwalder2010">2010</a>)</span> than those of their competitors. While viewing firms in terms of business models has helped managers, as well as researchers to understand and articulate better the processes of value creation and capture, the literature has been surprisingly over-focused on explaining the economic value creation <span class="citation">(Massa, Tucci, and Afuah <a href="paper1.html#ref-Massa2017">2017</a>)</span>, and very limited attention has been paid to understanding business models in cases were firms have to generate other value than profit.</p>
+<p>As recently discussed in various theoretical domains such as paradox theory, institutional logics, organizational pluralism, or triple-bottom line, more and more contemporary firms are compelled to satisfy competing, even conflicting performance criteria at the same time <span class="citation">(Bednarek, Paroutis, and Sillince <a href="paper1.html#ref-Bednarek2017">2017</a>, <span class="citation">Besharov and Smith (<a href="paper1.html#ref-Besharov2014">2014</a>)</span>)</span>. The common examples of other performance goals alongside profit-making include social <span class="citation">(Smith, Gonin, and Besharov <a href="paper1.html#ref-Smith2013">2013</a>)</span> and environmental missions <span class="citation">(Dixon and Clifford <a href="paper1.html#ref-Dixon2007">2007</a>)</span>, corporate social responsibility <span class="citation">(Wong and Dhanesh <a href="paper1.html#ref-Wong2017">2017</a>)</span>, multiple stakeholder satisfaction <span class="citation">(Jarzabkowski, Le, and Van de Ven <a href="paper1.html#ref-Jarzabkowski2013">2013</a>)</span>, or creative performance, as in the case of the research setting of this study - the creative service firms <span class="citation">(D. Jacobs <a href="paper1.html#ref-Jacobs2013">2013</a>)</span>. The long-term success and competitive advantage of firms facing conflicting demands depend heavily on their ability to strike a balance in these different domains <span class="citation">(<span class="citeproc-not-found" data-reference-id="Smith"><strong>???</strong></span>)</span>. The question is then - how can firms build business models that are able to manage conflicting goals simultaneously?</p>
+<p>One can find empirical and theoretical propositions on different strategies for managing conflicting goals applicable at the business model level in prior literature on corporate venturing, business models, and paradox management. <span class="citation">C. Markides and Charitou (<a href="paper1.html#ref-Markides2004">2004</a>)</span> have explored the conditions under which it would beneficial to create separate ventures for business models having different strategic intents. <span class="citation">Andriopoulos and Lowe (<a href="paper1.html#ref-Andriopoulos2000">2000</a>)</span> observed that design firms shift between projects aimed at financial goals and employee satisfaction; <span class="citation">DeFillippi (<a href="paper1.html#ref-DeFillippi2015">2015</a>)</span> argued that in the context of media companies, portfolio diversification can help firms to tackle the ambidexterity challenge; <span class="citation">Yunus, Moingeon, and Lehmann-Ortega (<a href="paper1.html#ref-Yunus2010">2010</a>)</span> discussed the benefits of separate social and marketing networks in the context of social enterprises; <span class="citation">Grassl (<a href="paper1.html#ref-Grassl2012">2012</a>)</span> examined the use of different revenue mechanisms for different client groups in hybrid organizations.</p>
+<p>While the identified strategies undoubtedly can help firms to grapple the challenge of satisfying multiple performance crieria simultaneously, it is unknow how they combine. Given their interdependent nature, such “design choices in business model components cannot be considered in isolation but should be balanced in order to develop a viable business model” <span class="citation">(Haaker, Faber, and Bouwman <a href="paper1.html#ref-Haaker2006">2006</a>)</span>. It is thus the aim of this article to unravel how these different business model level strategies combine for high performance in pluralistic (dual performance) settings.</p>
+<p>In order to reach our research objective, we first leverage insights from paradox literature to build a conceptual framework of business modelling for conflicting goals. According to paradox theory, integration and separation are the two generic organizational and individual responses to conflicting demands. We examine prior studies that show how these are applied with respect to four business model elements - content of the value proposition, client and market selection, network organization, and revenue model. Based on prior studies in ambidexterity, we also include two organization-level variables, namely, venture separation and integrated culture as a variable in our analyses. We study survey data on business modeling practices of 179 Dutch creative service firms. Using two-step fuzzy set Qualitative Comparative Analysis (fsQCA) <span class="citation">(C. Q. Schneider <a href="paper1.html#ref-Schneider2018">2018</a>)</span>, we examine 1) how the identified separation / integration practices at different business model elements combine for achieving high creative and commercial performance; 2) which configurations can explain scoring low on one or both of the performance dimensions.</p>
 <p><span style="color:red">The contribution of this paper is three-fold: 1) Confirming the theoretical assumptions of paradox theory, our results show that firms that rely only on one of the strategies throughout their business models underperform in one of the performance dimensions. 2) The findings equally deepen our understanding of business models, emphasizing that specific business model elements change their importance in combination with other elements. 3) They show how neoconfigurational methods can be used in order to study business models beyond single cases.</span></p>
 <p>The remainder of the paper unfolds as follows: first, we combine business model and paradox literature to build the conceptual model and formulate hypotheses. Second, the data, sample, and the suitability and application of configurational methods are explained. Finally, we discuss the results, conclusions, and implications for further research and practice.</p>
 </div>
 <div id="theoretical-background-and-conceptual-framework" class="section level2">
 <h2><span class="header-section-number">4.2</span> Theoretical background and conceptual framework</h2>
-<p>In order to build our conceptual model, we embed the study of business models in two increasingly prominent meta-theoretical approaches, namely, paradox theory (e.g. Poole and Van de Ven, 1989; Schad et al., 2016; Smith and Lewis, 2011) and configurational theory (Fiss et al., 2013; Misangyi et al., 2017; e.g. Snow et al., 2006). Paradox theory provides a lens for understanding how business models can serve as a device for managing conflicting demands. Configurational approach offers both theoretical and methodic tools that allow for better conceptualization and analysis of business models and their relationship to paradoxes. In this section, we explain how we connect the first two perspectives. Configurational approach is discussed in the methods section.</p>
+<p>In order to build our conceptual model, we embed the study of business models in two increasingly prominent meta-theoretical approaches, namely, paradox theory <span class="citation">(e.g. Poole and Van de Ven <a href="paper1.html#ref-Poole1989">1989</a>; Schad et al. <a href="paper1.html#ref-Schad2016">2016</a>; W. K. Smith and Lewis <a href="paper1.html#ref-Smith2011">2011</a>)</span> and configurational theory <span class="citation">(P. C. Fiss et al. <a href="paper1.html#ref-Fiss2013">2013</a>; Misangyi2017; Snow, Miles, and Miles <a href="paper1.html#ref-Snow2006">2006</a>)</span>. Paradox theory provides a lens for understanding how business models can serve as a device for managing conflicting demands. Configurational approach offers both theoretical and methodic tools that allow for better conceptualization and analysis of business models and their relationship to paradoxes. In this section, we explain how we connect the first two perspectives. Configurational approach is discussed in the methods section.</p>
 <div id="business-models-and-firm-performance" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Business models and firm performance</h3>
-<p>A business model explains how firms “create, deliver and capture value” (Osterwalder and Pigneur, 2010, p. 14). More specifically, it can be defined as “the design by which an organization converts a given set of strategic choices - about markets, customers, value propositions - into value, and uses a particular organizational architecture - of people, competencies, processes, culture and measurement systems - in order to create and capture this value” (Smith et al., 2010, p. 450).</p>
-<p>Studying firms from a business model perspective emerged as an alternative way of conceptualizing and describing how firms do business (Magretta, 2002). When compared to earlier perspectives, such as resourced-based view or industrial organization, the business model perspective focuses on “voluntary choices over environmental conditions” (Demil et al., 2015). The business model thus reflects the decisions firms make about their products, markets, resource organization and revenue models. By making these decisions, firms create mechanisms or systems that transform their strategic goals and needs into value.</p>
-<p>While a considerable body of work has been dedicated to developing component-based conceptual frameworks for the study of business models (Osterwalder et al., 2005; Wirtz et al., 2016), no agreement on one single conceptualization has been reached among the scholars. Notwithstanding the disagreements, in line with the given definitions, most studies commonly distinguish four basic domains or components of business models:<br />
+<p>A business model explains how firms “create, deliver and capture value” <span class="citation">(Osterwalder and Pigneur <a href="paper1.html#ref-Osterwalder2010">2010</a>, 14)</span>. More specifically, it can be defined as “the design by which an organization converts a given set of strategic choices - about markets, customers, value propositions - into value, and uses a particular organizational architecture - of people, competencies, processes, culture and measurement systems - in order to create and capture this value” <span class="citation">(W. K. Smith, Binns, and Tushman <a href="paper1.html#ref-Smith2010">2010</a>, 450)</span>.</p>
+<p>Studying firms from a business model perspective emerged as an alternative way of conceptualizing and describing how firms do business <span class="citation">(Magretta <a href="paper1.html#ref-Magretta2002">2002</a>)</span>. When compared to earlier perspectives, such as resourced-based view or industrial organization, the business model perspective focuses on “voluntary choices over environmental conditions” <span class="citation">(Demil et al. <a href="paper1.html#ref-Demil2015">2015</a>)</span>. The business model thus reflects the decisions firms make about their products, markets, resource organization and revenue models. By making these decisions, firms create mechanisms or systems that transform their strategic goals and needs into value.</p>
+<p>While a considerable body of work has been dedicated to developing component-based conceptual frameworks for the study of business models <span class="citation">(Osterwalder, Pigneur, and Tucci <a href="paper1.html#ref-Osterwalder2005">2005</a>; Wirtz et al. <a href="paper1.html#ref-Wirtz2016">2016</a>)</span>, no agreement on one single conceptualization has been reached among the scholars. Notwithstanding the disagreements, in line with the given definitions, most studies commonly distinguish four basic domains or components of business models:<br />
 - <em>Value proposition</em> describes the basic features of the offering, the type of value it is generating and the perceived basis of differentiation from competitors.<br />
 - <em>Value delivery</em> describes the demand side or the customer infrastructure that the firm builds - its target markets and customers to whom the value is delivered; how they are acquired and reached.<br />
 - <em>Value creation</em> depicts the supply side of the firm, namely, what internal and external resources, activities and structures are needed to generate the value proposition.<br />
-- <em>Value capture</em> describes the financial aspects of the firm’s value mechanisms <span class="citation">(Morris, Schindehutte, and Allen <a href="#ref-Morris2005">2005</a>; Osterwalder, Pigneur, and Tucci <a href="#ref-Osterwalder2005">2005</a>; Teece <a href="#ref-Teece2010">2010</a>)</span>.</p>
-<p>Research, as well as evidence from the practice show that successful combinations of decisions in these four domains can grant firms advantage over competitors and explain performance differentials (Zott and Amit, 2008, 2007). This can take place in different ways. Firms can use superior business model designs upon the commercializing of new technology (Chesbrough and Rosenbloom, 2002). Business models can also be subject to innovation themselves, as firms either create new ways of delivering and capturing value in established industries (Mason and Spring, 2011; Teece, 2010), or respond to the changes in their competitive environments through business model adaptation (Volberda and Lewin, 2003). Some authors have even gone so far to say that the future quest of sustainable competitive advantage lies in business models (Casadesus-Masanell and Ricart, 2011). However, just as most of the strategic literature (De Wit and Meyer, 2010), also the literature on business models has largely ignored the fact that firms might have a purpose beyond profit-maximization (Massa et al., 2017). Apart from setting-specific studies in fields like social entrepreneurship (Grassl, 2012) or sustainability (Bohnsack et al., 2014), business models are mostly studied as strategic decisions that help to create economic value (Magretta, 2002).</p>
+- <em>Value capture</em> describes the financial aspects of the firm’s value mechanisms <span class="citation">(Morris, Schindehutte, and Allen <a href="paper1.html#ref-Morris2005">2005</a>; Osterwalder, Pigneur, and Tucci <a href="paper1.html#ref-Osterwalder2005">2005</a>; Teece <a href="paper1.html#ref-Teece2010">2010</a>)</span>.</p>
+<p>Research, as well as evidence from the practice show that successful combinations of decisions in these four domains can grant firms advantage over competitors and explain performance differentials <span class="citation">(Zott and Amit <a href="paper1.html#ref-Zott2008">2008</a>, <span class="citation">Zott and Amit (<a href="paper1.html#ref-Zott2007">2007</a>)</span>)</span>. This can take place in different ways. Firms can use superior business model designs upon the commercializing of new technology <span class="citation">(Chesbrough and Rosenbloom <a href="paper1.html#ref-Chesbrough2002">2002</a>)</span>. Business models can also be subject to innovation themselves, as firms either create new ways of delivering and capturing value in established industries <span class="citation">(Mason and Spring <a href="paper1.html#ref-Mason2011">2011</a>; Teece <a href="paper1.html#ref-Teece2010">2010</a>)</span>, or respond to the changes in their competitive environments through business model adaptation <span class="citation">(Volberda and Lewin <a href="paper1.html#ref-Volberda2003">2003</a>)</span>. Some authors have even gone so far to say that the future quest of sustainable competitive advantage lies in business models <span class="citation">(R. Casadesus-Masanell and Ricart <a href="paper1.html#ref-Casadesus2011">2011</a>)</span>. However, just as most of the strategic literature <span class="citation">(De Wit and Meyer <a href="paper1.html#ref-DeWit2010">2010</a>)</span>, also the literature on business models has largely ignored the fact that firms might have a purpose beyond profit-maximization <span class="citation">(Massa, Tucci, and Afuah <a href="paper1.html#ref-Massa2017">2017</a>)</span>. Apart from setting-specific studies in fields like social entrepreneurship <span class="citation">(Grassl <a href="paper1.html#ref-Grassl2012">2012</a>)</span> or sustainability <span class="citation">(Bohnsack, Pinkse, and Kolk <a href="paper1.html#ref-Bohnsack2014">2014</a>)</span>, business models are mostly studied as strategic decisions that help to create economic value <span class="citation">(Magretta <a href="paper1.html#ref-Magretta2002">2002</a>)</span>.</p>
 </div>
 <div id="organizational-goals-pluralism-and-paradoxes-of-performing" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Organizational goals, pluralism and paradoxes of performing</h3>
-<p>Despite the dominance of profit-maximization paradigm, firms increasingly aspire or are compelled to create other value than the economic, e.g. social, stakeholder, environmental, and hence are pursuing several objectives simultaneously. Diverse research agendas have addressed this phenomenon, including institutional theory, triple-bottom-line, and organizational hybridity. Since our interest lies in the way managers make strategic decisions about business models, particularly, when there are conflicts and incompatibilities across the demands firms face, we leverage literature on pluralism and organizational paradoxes.</p>
-<p>The concept or organizational pluralism is used to describe contexts that are characterized by “multiple objectives, diffuse power and knowledge-based work processes” (Denis et al., 2007, p. 180). Pluralism arises as a result of “the divergent goals and interests of different groups, each of which have sufficient power bases to ensure that their goals are legitimate to the strategy of the organization” (Jarzabkowski and Fenton, 2006, p. 631). Pluralism can find its source both within and outside the organization. For instance, in the case of professional service firms, the need to retain highly skilled employees often requires managers to act against the market interests, as the profitable work is not always the most interesting one, but the skilled professionals need to be challenged enough to be motivated to perform well (Teece, 2003). In hybrid organizations, such as hospitals or universities, competing demands are created by the need to satisfy different stakeholder groups like funding bodies, regulatory institutions, and different client groups (Denis et al., 2007).</p>
-<p>While most settings exhibit some levels of pluralism, in particularly salient settings, it can create what paradox scholars refer to as performing or strategic paradoxes - “contradictions in organizational objectives based on the divergent definitions of success held by important stakeholders” (Bednarek et al., 2017, p.80). Strategic paradoxes are characterized by conflict, incompatibility, and interdependence (Jarzabkowski et al., 2013). The multitude of stakeholders and competing goals surface tensions as the individuals struggle to make conflicting decisions, and carry out conflicting tasks and roles simultaneously (Jarzabkowski et al., 2013; Luscher and Lewis, 2008). Moreover, since they are all legitimate, making choices is impossible. To examplify, scientific institutions face strategic paradoxes, as their sustainability depends on the long-term ability of producing excellent research, as well as the short-term immediate capacity of creating societal and commercial impact by providing educational services and commercializing research results (Bednarek et al., 2017). Other examples of settings in which strategic paradoxes are dominant include the ambidextrous firms, social enterprises, learning organizations (Smith et al., 2010), and also the setting of this study - the creative industries firms, whose success is defined both in creative and commercial terms, yet each requires conflicting decisions, resources and structures to be implemented (DeFillippi et al., 2007; Jacobs, 2012).</p>
-<p>Strategic paradoxes are particularly influential for they penetrate the whole organization, having immediate implications for management and organization, and thereby determine firm performance and the ability to sustain itself in the long run (Jarzabkowski and Fenton, 2006; Smith, 2014). With respect to performance evaluation, strategic paradoxes create what we could call the double-success criterion (Jacobs, 2013) or double performance standards. Literature on social entrepreneurship, corporate social responsibility, sustainability, and triple-bottom-line has argued that performance measures in such increasingly complex settings have to be extended beyond profit to include measures concerning, for instance, social performance, environmental performance, markets, customers, internal processes, and learning and development (Hubbard, 2009). The question within the context of our research is - how can firms deal with paradoxes of performing when designing their business models?</p>
+<p>Despite the dominance of profit-maximization paradigm, firms increasingly aspire or are compelled to create other value than the economic, e.g. social, stakeholder, environmental, and hence are pursuing several performance objectives simultaneously. Diverse research agendas have addressed this phenomenon, including institutional theory, triple-bottom-line, and organizational hybridity. Since our interest lies in the way managers make strategic decisions about business models, particularly, when there are conflicts and incompatibilities across the demands firms face, we leverage literature on pluralism and organizational paradoxes.</p>
+<p>The concept or organizational pluralism is used to describe contexts that are characterized by “multiple objectives, diffuse power and knowledge-based work processes” <span class="citation">(Denis, Langley, and Rouleau <a href="paper1.html#ref-Denis2007">2007</a>, 180)</span>. Pluralism arises as a result of “the divergent goals and interests of different groups, each of which have sufficient power bases to ensure that their goals are legitimate to the strategy of the organization” <span class="citation">(Jarzabkowski and Fenton <a href="paper1.html#ref-Jarzabkowski2006">2006</a>, 631)</span>. Pluralism can find its source both within and outside the organization. For instance, in the case of professional service firms (also our research setting), the need to retain highly skilled employees often requires managers to act against the market interests, as the profitable work is not always the most interesting one, but the skilled professionals need to be challenged enough to be motivated to perform well <span class="citation">(Teece <a href="paper1.html#ref-Teece2003">2003</a>)</span>. In hybrid organizations, such as hospitals or universities, competing demands are created by the need to satisfy different stakeholder groups like funding bodies, regulatory institutions, and different client groups <span class="citation">(Denis, Langley, and Rouleau <a href="paper1.html#ref-Denis2007">2007</a>)</span>.</p>
+<p>While most settings exhibit some levels of pluralism, in particularly salient settings, it can create what paradox scholars refer to as performing or <em>strategic paradoxes</em> - “contradictions in organizational objectives based on the divergent definitions of success held by important stakeholders” <span class="citation">(Bednarek, Paroutis, and Sillince <a href="paper1.html#ref-Bednarek2017">2017</a>, 80)</span>. Strategic paradoxes are characterized by conflict, incompatibility, and interdependence <span class="citation">(Jarzabkowski, Le, and Van de Ven <a href="paper1.html#ref-Jarzabkowski2013">2013</a>)</span>. The multitude of stakeholders and competing goals surface tensions as the individuals struggle to make conflicting decisions, and carry out conflicting tasks and roles simultaneously <span class="citation">(Jarzabkowski, Le, and Van de Ven <a href="paper1.html#ref-Jarzabkowski2013">2013</a>; Luscher and Lewis <a href="paper1.html#ref-Luscher2008">2008</a>)</span>. Moreover, since they are all legitimate, making choices is impossible. To examplify, scientific institutions face strategic paradoxes, as their sustainability depends on the long-term ability of producing excellent research, as well as the short-term immediate capacity of creating societal and commercial impact by providing educational services and commercializing research results <span class="citation">(Bednarek, Paroutis, and Sillince <a href="paper1.html#ref-Bednarek2017">2017</a>)</span>. Other examples of settings in which strategic paradoxes are dominant include the ambidextrous firms, social enterprises, learning organizations <span class="citation">(W. K. Smith, Binns, and Tushman <a href="paper1.html#ref-Smith2010">2010</a>)</span>, and also the setting of this study - the creative industries firms, whose success is defined both in creative and commercial terms, yet each requires conflicting decisions, resources and structures to be implemented <span class="citation">(DeFillippi, Grabher, and Jones <a href="paper1.html#ref-DeFillippi2007">2007</a>; D. Jacobs <a href="paper1.html#ref-Jacobs2012">2012</a>)</span>.</p>
+<p>Strategic paradoxes are particularly influential for they penetrate the whole organization, having immediate implications for management and organization, and thereby determine firm performance and the ability to sustain itself in the long run <span class="citation">(Jarzabkowski and Fenton <a href="paper1.html#ref-Jarzabkowski2006">2006</a>; W. K. Smith <a href="paper1.html#ref-Smith2014">2014</a>)</span>. With respect to performance evaluation, strategic paradoxes create what we could call the <em>double-success criterion</em> <span class="citation">(D. Jacobs <a href="paper1.html#ref-Jacobs2013">2013</a>)</span>. Literature on social entrepreneurship, corporate social responsibility, sustainability, and triple-bottom-line has argued that performance measures in such increasingly complex settings have to be extended beyond profit to include measures concerning, for instance, social performance, environmental performance, markets, customers, internal processes, and learning and development <span class="citation">(Hubbard <a href="paper1.html#ref-Hubbard2009">2009</a>)</span>. The question within the context of our research is - how can business model design assist firm in achieving conflicting performance goals?</p>
 </div>
 <div id="a-paradox-approach-to-business-models-the-conceptual-framework" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> A paradox approach to business models: The conceptual framework</h3>
-<p>Figure 2.1 illustrates the assumed relationship between organizational goals business models and firm perfromance under the classic profit-maximization paradigm. This is the way most business model literature studies business models.</p>
-<div class="figure">
-<img src="Figure%202.1.png" alt="Business modelling for profit maximization." width="366" />
+<p>Figure <a href="paper2.html#fig:fig21">4.1</a> illustrates the assumed relationship between organizational goals business models and firm perfromance under the classic profit-maximization paradigm. This is the way most business model literature studies business models.</p>
+<div class="figure"><span id="fig:fig21"></span>
+<img src="Figure2.1.png" alt="Business modelling for profit maximization." width="366" />
 <p class="caption">
-(#fig:fig2.1)Business modelling for profit maximization.
+Figure 4.1: Business modelling for profit maximization.
 </p>
 </div>
-<p>According to paradox scholars, complex strategic demands and aspirations require designing “complex business models” that would be able to accommodate the confliciting demands (Smith et al., 2013). The business model literature holds no immediate answers explaining the workings of such complex business models. To build the conceptual framwork, we levarage three key insights from paradox theory.</p>
-<p>First, not all strategic conflicts can be framed in terms of choice. In line with the literature on pluralism, since all conflicting objectives are legitimate, a choice cannot be made. Instead, firms have to adopt what is referred to as the both/and approach to managing (Smith, 2014). It opposes the more traditional contingency approaches and trade-off thinking, which imply that strategic conflicts can only be resolved by a choice. “The core premise is not problem solving through fit, but coexistence”(Lewis and Smith, 2014, p. 3). According to the both/and perspective, success of firms that face strategic paradoxes will depend on their ability to accept the paradoxical nature of their objectives and learning how to cope with them. As paradoxes are not only conflicting, but also interdependent and persistent over time, making choice in favor of one objective, would never solve the situation, as the neglected objective one will resurface eventually. This means that instead of solving situations, paradoxes have to be managed (Smith, 2011).</p>
+<p>According to paradox scholars, complex strategic demands and aspirations require designing “complex business models” that would be able to accommodate the confliciting demands <span class="citation">(Smith, Gonin, and Besharov <a href="paper1.html#ref-Smith2013">2013</a>)</span>. The business model literature holds no immediate answers explaining the workings of such complex business models. To build the conceptual framwork, we levarage three key insights from paradox theory.</p>
+<p>First, not all strategic conflicts can be framed in terms of choice. In line with the literature on pluralism, since all conflicting objectives are legitimate, a choice cannot be made. Instead, firms have to adopt what is referred to as the <em>both/and</em> approach to managing <span class="citation">(W. K. Smith <a href="paper1.html#ref-Smith2014">2014</a>)</span>. It opposes the more traditional contingency approaches and trade-off thinking, which imply that strategic conflicts can only be resolved by a choice. “The core premise is not problem solving through fit, but coexistence”<span class="citation">(Lewis and Smith <a href="paper1.html#ref-Lewis2014">2014</a>, 3)</span>. According to the both/and perspective, success of firms that face strategic paradoxes will depend on their ability to accept the paradoxical nature of their objectives and learning how to cope with them. As paradoxes are not only conflicting, but also interdependent and persistent over time, making choice in favor of one objective, would never solve the situation, as the neglected objective one will resurface eventually. This means that instead of solving situations, paradoxes have to be managed <span class="citation">(W. K. Smith and Lewis <a href="paper1.html#ref-Smith2011">2011</a>)</span>. Empirically, it implies that in salient settings, we consider paradoxes as given and do not attempt to measure them.</p>
 <p>Second, managing paradoxes implies that with respect to goals and performance evaluation they are enacting a balancing act - attempting to balance the performance in paradoxical domains over time. According to our qualitative interviews, in practice this usually manifests as requirement that the performance in all relevant domains over time is 1) above the “break-even” point, and 2) equally well attained. The operationalization of performance balance is further discussed in the methods section.</p>
-<p>Third, paradox theory offers meta-thoeretical models explaining the ways managers apply considerations about conflicting goals in their decision-making. According to most paradox research (Smith and Lewis, 2011), there are the two generic approaches a firm can adapt in its decisions, structures, and contexts in order to cope with paradoxes - integration and separation (or differentiation). Differentiation approach to paradox management prescribes dealing with tensions through segmentation and/or source splitting, e.g. establishing separate units, teams, even ventures, leadership structures, processes, segmenting and shifting between activities over time (Poole and Van de Ven, 1989; Fairhurst et al., 2016). Integration approach implies searching for compromise in terms of middle-way or solutions that embrace both poles (Fairhurst et al., 2016), e.g. hiring all-around employees that adhere to both visions (O’Reilly and Tushman, 2013), or building common organizational value system through communication of strategic goals (Kolsteeg, 2014).</p>
-<div class="figure">
-<img src="Figure%202.2.png" alt="Business modelling for conflicting goals." width="487" />
+<p>Third, paradox theory offers meta-thoeretical models explaining the ways managers apply considerations about conflicting goals in their decision-making. According to most paradox research <span class="citation">(W. K. Smith and Lewis <a href="paper1.html#ref-Smith2011">2011</a>)</span>, there are the two generic approaches a firm can adapt in its decisions, structures, and contexts in order to cope with paradoxes - integration and separation [<span class="citation">(<span class="citeproc-not-found" data-reference-id="or"><strong>???</strong></span>)</span> differentiation). Differentiation approach to paradox management prescribes dealing with tensions through segmentation and/or source splitting, e.g. establishing separate units, teams, even ventures, leadership structures, processes, segmenting and shifting between activities over time <span class="citation">(Poole and Van de Ven <a href="paper1.html#ref-Poole1989">1989</a>; Fairhurst et al. <a href="paper1.html#ref-Fairhurst2016">2016</a>)</span>. Integration approach implies searching for compromise in terms of middle-way or solutions that embrace both poles, e.g. hiring all-around employees that adhere to both visions <span class="citation">(O’Reilly and Tushman <a href="paper1.html#ref-OReilly2013">2013</a>)</span>, or building common organizational value system through communication of strategic goals <span class="citation">(Kolsteeg <a href="paper1.html#ref-Kolsteeg2014">2014</a>)</span>.</p>
+<div class="figure"><span id="fig:figp22"></span>
+<img src="Figure2.2.png" alt="Business modelling for conflicting goals." width="719" />
 <p class="caption">
-(#fig:fig2.2)Business modelling for conflicting goals.
+Figure 4.2: Business modelling for conflicting goals.
 </p>
 </div>
-<p>When synthesizing these insights conceptually, the process of business model design changes from that presented in the Figure 1 to a more complex one, presented in Figure 2. Visually, the only difference between business modelling for profit-maximization and for strategic paradoxes is the addition of an extra goal dimension, and, consequently, an extra performance dimension. However, the fact that more than one goals is driving decision-making and potentially even creating conflicts changes as seemingly incompatible decisions might be made, changes the very nature of the business modelling process. While in the first case business model design can be viewed as a process of optimizing, in the second it resembles for a process of compromising and balancing. The goals are expected to be directly reflected in the business model decisions, and they can either accommodate both goals simultaneously (integrate) or separately (differentiate). This would not be the case, in case there would be only one goal.</p>
+<p>When synthesizing these insights conceptually, the process of business model design changes from that presented in the Figure <a href="paper2.html#fig:fig21">4.1</a> to a more complex one, presented in Figure <a href="#fig:fig22"><strong>??</strong></a>. Visually, the only difference between business modelling for profit-maximization and for strategic paradoxes is the addition of an extra goal dimension, and, consequently, an extra performance dimension. However, the fact that more than one goals is driving decision-making and potentially even creating conflicts changes as seemingly incompatible decisions might be made, changes the very nature of the business modelling process. While in the first case business model design can be viewed as a process of optimizing, in the second it resembles for a process of compromising and balancing. The goals are expected to be directly reflected in the business model decisions, and they can either accommodate both goals simultaneously (integrate) or separately (differentiate). This would not be the case, in case there would be only one goal.</p>
 </div>
 </div>
 <div id="the-analytical-model-and-hypotheses" class="section level2">
 <h2><span class="header-section-number">4.3</span> The analytical model and hypotheses</h2>
-<p>As already highlighted in the introduction, there is evidence in prior literature that firms use the integration and separation strategies with respect to the decisions that compose their business models. The studies are slightly “hidden” in that they usually lack one of the theoretical components of our study - either they rely on paradox theory and only implicitly discuss some aspects of business modelling (e.g. Andriopoulos and Lowe, 2000; DeFillippi, 2015, 2009), or they study business models in the light of similar questions as discussed in the paradox literature, without using the paradox theory to explain them (Markides and Charitou, 2004; Markides, 2013; Yunus et al., 2010). In order to build our framework, we searched literature for evidence of firms using integration / differentiation strategies in the general domains of business models outlined previously - content of value proposition, clients and markets, resource organization (aka value creation) and revenue model. Some insights on how this takes place also came from our interviews. This process leads us to select five most common strategies that we will use in our analysis.</p>
-<div id="venture-separation" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Venture separation</h3>
-<p>Structural separation is probably the most commonly explored strategy for dealing with strategic paradoxes, particularly widely discussed in the ambidexterity literature, where the authors have suggested to create separate units or even ventures for pursuing innovation activities, such as R&amp;D, as opposed to exploitation activities (O’Reilly and Tushmann, 2004). In the creative industries literature, DeFillippi (2015) highlighted the practice of media businesses having “created a diverse set of production studios, some of which specialize in more innovative, idiosyncratic projects for which there is a less clear link to established franchises, IP and their associated user groups whereas other studios focus on more mass market franchises that exploit existing IP.” (p.17)</p>
-<p>In the business model literature, this issue has been addressed under the discussion of whether business models that are designed for different competitive strategies can be accommodate in a single firm or not. According, to Markides and Charitou (2004), “separation is the preferred strategy when the new market is not only strategically different from the existing business but also when the two markets face serious tradeoffs and conflicts.” (p.24) The authors further argue that in cases where strategic intents and markets are similar, the existing infrastructure and the business model of the focal firm is enough. Since, in the case of paradoxical strategies, there is a conflict, we could expect that firms who have spun off either commercial or creative activities in other affiliated ventures will be able to score high on both performance dimensions. Accordingly, if they have not done so, they will require implementing other strategies in their business models that allow them to cope with the strategic paradox.</p>
-<p><em>Hypothesis 1a:</em> The application of paradoxical venture separation is an individually sufficient condition for high creative and commercial performance.<br />
-<em>Hypothesis 1b:</em> The absence of paradoxical venture separation will require other paradox management strategies to be implemented at the business model of the focal firm (INUS condition).</p>
-</div>
+<p>As already highlighted in the introduction, there is evidence in prior literature that firms use the integration and separation strategies with respect to the decisions that compose their business models. The studies are slightly “hidden” in that they usually lack one of the theoretical components of our study - either they rely on paradox theory and only implicitly discuss some aspects of business modelling <span class="citation">(Andriopoulos and Lowe <a href="paper1.html#ref-Andriopoulos2000">2000</a>; DeFillippi <a href="paper1.html#ref-DeFillippi2015">2015</a>; <a href="paper1.html#ref-DeFillippi2009">2009</a>)</span>, or they study business models in the light of similar questions as discussed in the paradox literature, without using the paradox theory to explain them <span class="citation">(C. Markides and Charitou <a href="paper1.html#ref-Markides2004">2004</a>; C. C. Markides <a href="paper1.html#ref-Markides2013">2013</a>; Yunus, Moingeon, and Lehmann-Ortega <a href="paper1.html#ref-Yunus2010">2010</a>)</span>. In order to build our framework, we searched literature for evidence of firms using differentiation / integration strategies in the general domains of business models outlined previously - content of value proposition, clients and markets, resource organization (aka value creation) and revenue model. Some insights on how this takes place also came from our interviews. Interestingly, at the business model level, we found only differentiation strategies discussed. We selected four most common strategies to use in our analyses. We equally included two organization-level variables in our model - integrated organizational culture and structural venture separation. These have been the main focus of most ambidexterity literature <span class="citation">(O’Reilly and Tushman <a href="paper1.html#ref-OReilly2013">2013</a>)</span>, and will be analyzed as contextual conditions. We elaborate on this further.</p>
 <div id="portfolio-diversification" class="section level3">
-<h3><span class="header-section-number">4.3.2</span> Portfolio diversification</h3>
-<p>Internal to firm, one of the main business model choices for firms is that of their value offering - the portfolio of services and/or products that they provide. Prior research in ambidexterity (Andriopoulos and Lewis, 2009; ) and creative industries (Bettiol et al., 2012; DeFillippi, 2015) has shown that diversifying the portfolio to include offering that tackle the different strategic intents separately can help to effectively target conflicting performance objectives. Earlier research in innovation management (Wheelwright and Clark, 1992) has similarly suggested “aggregate project plans” that would include both profitable and high-risk projects. Moreover, not only has research found evidence to diversification in terms of horizontal offering, but also adding extra value chain activities to address different needs (Winterhalter et al., 2016). ###Client segmentation<br />
-According to Teece (2010), all business model design starts by selecting clients. Even in enterprises that have single strategic intents dual client segments are not uncommon, especially in platform models where one user group gets a service for free, while another segment pays for the access to this user base (Osterwalder and Pigneur, 2010). In the context of ambidexterity of knowledge intensive firms, Bednarek et al. (2016) demonstrated that client segmentation allows to tackle both exploration and exploitation over time through acquiring different knowledge in different client relationships. Similarly, Andripolous (2003) found evidence that managers in NPD design firms switch between different types of clients that are either commercially, or creatively interesting.</p>
+<h3><span class="header-section-number">4.3.1</span> Portfolio diversification</h3>
+<p>Internal to firm, one of the main business model choices for firms is that of their value offering - the portfolio of services and/or products that they provide. Prior research in ambidexterity <span class="citation">(Andriopoulos and Lewis <a href="paper1.html#ref-Andriopoulos2009">2009</a>)</span> and creative industries <span class="citation">(Bettiol, Di Maria, and Grandinetti <a href="paper1.html#ref-Bettiol2012">2012</a>; DeFillippi <a href="paper1.html#ref-DeFillippi2015">2015</a>)</span> has shown that diversifying the portfolio to include offering that tackle the different strategic intents separately can help to effectively target conflicting performance objectives. Earlier research in innovation management <span class="citation">(Wheelwright and Clark <a href="paper1.html#ref-Wheelwright1992">1992</a>)</span> has similarly suggested “aggregate project plans” that would include both profitable and high-risk projects. Moreover, not only has research found evidence to diversification in terms of horizontal offering, but also adding extra value chain activities to address different needs <span class="citation">(Winterhalter, Zeschky, and Gassmann <a href="paper1.html#ref-Winterhalter2016">2016</a>)</span>.</p>
+</div>
+<div id="client-segmentation" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Client segmentation</h3>
+<p>According to <span class="citation">Teece (<a href="paper1.html#ref-Teece2010">2010</a>)</span>, client selection is the most crucial business model choice. Even in enterprises that have single strategic intents dual client segments are not uncommon, especially in platform models where one user group gets a service for free, while another segment pays for the access to this user base <span class="citation">(Osterwalder and Pigneur <a href="paper1.html#ref-Osterwalder2010">2010</a>)</span>. In the context of ambidexterity of knowledge intensive firms, <span class="citation">Bednarek et al. (<a href="paper1.html#ref-Bednarek2016">2016</a>)</span> demonstrated that client segmentation allows to tackle both exploration and exploitation over time through acquiring different knowledge in different client relationships. Similarly, <span class="citation">Andriopoulos (<a href="paper1.html#ref-Andriopoulos2003">2003</a>)</span> found evidence that managers in NPD design firms switch between different types of clients that are either commercially, or creatively interesting.</p>
 </div>
 <div id="network-differentiation" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Network differentiation</h3>
-<p>Another way of attending to dual goals in the business model is through acquiring resources for the different strategic intents through separate networks. Yunus et al. (2010) illustrated this strategy in the case of business modelling for social enterprises. The authors argued that in order to build both social and commercial value, it is vital to attract complementary partners that have the skills and now-how not readily available to the firm. Baden-Fuller and Haefliger (2013) have discussed this in more theoretical terms, suggesting that two-sidedness at the value offering of business models also requires two-sided value chains and networks.</p>
+<p>Another way of attending to dual goals in the business model is through acquiring resources for the different strategic intents through separate networks. <span class="citation">Yunus, Moingeon, and Lehmann-Ortega (<a href="paper1.html#ref-Yunus2010">2010</a>)</span> illustrated this strategy in the case of business modelling for social enterprises. The authors argued that in order to build both social and commercial value, it is vital to attract complementary partners that have the skills and now-how not readily available to the firm. The research of <span class="citation">Kauppila (<a href="paper1.html#ref-Kauppila2010">2010</a>)</span> demonstrates the importance of structural separation of interorganizational partnerships for maximizing conflicting strategic intents. <span class="citation">Baden-Fuller and Mangematin (<a href="paper1.html#ref-Baden2013">2013</a>)</span> have discussed this in more theoretical terms, suggesting that two-sidedness at the value offering of business models also requires two-sided value chains and networks.</p>
 </div>
 <div id="dual-revenue-models" class="section level3">
 <h3><span class="header-section-number">4.3.4</span> Dual revenue models</h3>
-<p>Finally, benefits of separation have also been underlined with respect to revenue models, where different types of monetization would be applied for groups providing different value for the firm. For instance, the one-for-one revenue model of social enterprises like TOMS has showed how different intentions can be reach through different payment (or free) versions for different groups that cross-subsidize each other (Marquis and Park, 2014). In more traditional profit settings, Andriopoulos and Lewis (2009) exemplified how firms would do own investments in more innovative projects, while stick to classic budgeting practices for the more commercial ones.</p>
+<p>Finally, benefits of separation have also been underlined with respect to revenue models, where different types of monetization would be applied for groups providing different value for the firm. For instance, the one-for-one revenue model of social enterprises like TOMS has showed how different intentions can be reach through different payment (or free) versions for different groups that cross-subsidize each other <span class="citation">(Marquis and Park <a href="paper1.html#ref-Marquis2014">2014</a>)</span>. In more traditional profit settings, <span class="citation">Andriopoulos and Lewis (<a href="paper1.html#ref-Andriopoulos2009">2009</a>)</span> exemplified how firms would do own investments in more innovative projects, while stick to classic budgeting practices for the more commercial ones.</p>
 </div>
-<div id="balancing-the-balancing-act" class="section level3">
-<h3><span class="header-section-number">4.3.5</span> Balancing the balancing act</h3>
-<p>Since the conceptual framework has not been previously tested, it is impossible to formulate precise configurational hypotheses about the relationship between different variables in our model. While most of the business model research would suggest that the last four differentiation strategies outlined before would have to be all implemented in the same time, thus creating two-sided business models (Baden-Fuller and Haefliger, 2013), literature also argues that the multi-sidedness throughout the business model is very complex to implement successfully (Permentier and Gandia, 2017). In accordance with this conclusion, more recent studies in paradox research suggest that it not enough to apply only differentiation strategies (Smith, 2014). Paradoxically, in order to balance conflicting strategic intents, both integration and differentiation are needed. Differentiating allows understanding the individual contributions and demands of each strategic goal, while integrating motivates finding ways to link the two. If both are not used, one of the functions is missing and the firms fail to continuously commit to both poles.<br />
-While we did not find much discussions on integration strategies applied at the business model level, hence also they are absent from our model, we can expect that the absence of the implementation of a differentiation strategy means that the firm is at least to some extent trying to integrate both conflicting goals in its decision-making about business models. Combining these insights, we can formulate the following general hypotheses:</p>
-<p><em>Hypothesis 2a:</em> Balanced performance patterns will be result from business model designs that rely on a mix of both presence and absence of differentiation strategies. <em>Hypothesis 2b:</em> Unbalanced performance patterns will result from business model designs that only rely on presence or absence of differentiation strategies.</p>
-<p>Finally, given the interdependent nature of business modelling decision, we also expect that no single variable, except for venture separation, is individually necessary and or sufficient for reaching high performance in both domains. This means that we expect all configurations to consist of at least two conditions. This property of variables only jointly forming sufficient configurations is referred to INUS nature of a condition (variable) in QCA - insufficient but nonredundant parts of different configurations, which are themselves unnecessary but sufficient for the occurrence of the outcome (Fiss et al., 2013). Hence, we propose that:</p>
-<p><em>Hypothesis 3:</em> Portfolio diversification, client segmentation, network differentiation, and dual revenue models are INUS conditions for achieving high creative and commercial performance simultaneously.</p>
+<div id="venture-separation-and-integrated-culture" class="section level3">
+<h3><span class="header-section-number">4.3.5</span> Venture separation and integrated culture</h3>
+<p>While the presented business-model-level strategies are the focus of this study, we cannot ignore the earlier work at the organizational level. Probably the most important discussion on pursuing conflicting goals has dealt with the concepts of structural ambidexterity versus contextual ambidexterity <span class="citation">(O’Reilly and Tushman <a href="paper1.html#ref-OReilly2013">2013</a>)</span>. The former refers to the practice of creating separate units or even ventures for pursuing innovation activities, such as R&amp;D, as opposed to exploitation activities <span class="citation">(O’Reilly 3rd and Tushman <a href="paper1.html#ref-OReilly2004">2004</a>)</span>. The latter argues that structural separation risks with complete disintegration and hence failure, if not embedded in an organizational culture that stresses the synergy between two conflicting performance goals in an integrated manner <span class="citation">(Kauppila <a href="paper1.html#ref-Kauppila2010">2010</a>; Jansen et al. <a href="paper1.html#ref-Jansen2009">2009</a>)</span>. In line with this, <span class="citation">Burgers et al. (<a href="paper1.html#ref-Burgers2009">2009</a>)</span> showed that the success of corporate venturing is higher if structural separation is combined with integration at the leadership level. We can thus formulate the following hypothesis:</p>
+<p><strong>Hypothesis 1:</strong> Both the application of venture separation and an integrated organizational culture are neccessary conditions for achieving both high creative and commercial performance.</p>
+<p>In the business model literature, this issue has been addressed under the discussion of whether business models that are designed for different competitive strategies can be accommodate in a single firm or not. According, to <span class="citation">C. Markides and Charitou (<a href="paper1.html#ref-Markides2004">2004</a>)</span>, “separation is the preferred strategy when the new market is not only strategically different from the existing business but also when the two markets face serious tradeoffs and conflicts.” (p.24) The authors further argue that in cases where strategic intents and markets are similar, the existing infrastructure and the business model of the focal firm is enough. Since, in the case of paradoxical strategies, there is a conflict, we could expect that firms who have spun off either commercial or creative activities in other affiliated ventures will be able to score high on both performance dimensions. Accordingly, if they have not done so, they will require implementing other strategies in their business models that allow them to cope with the strategic paradox. This lbrings us to the second hypothesis:</p>
+<p><strong>Hypothesis 2:</strong> The absence of paradoxical venture separation will require other differentiationg paradox management strategies to be implemented at the business model of the focal firm (INUS condition) for the firms to be succesful at both performance dimensions.</p>
+<p>Since the conceptual framework has not been previously tested, it is impossible to formulate precise configurational hypotheses about the relationship between the different business-model-level variables in our model. While most of the business model research would suggest that the last four differentiation strategies outlined before would have to be all implemented in the same time, thus creating two-sided business models <span class="citation">(Baden-Fuller and Mangematin <a href="paper1.html#ref-Baden2013">2013</a>)</span>, literature also argues that the multi-sidedness throughout the business model is very complex to implement successfully <span class="citation">(Parmentier and Gandia <a href="paper1.html#ref-Parmentier2017">2017</a>)</span>. In accordance with this conclusion, more recent studies in paradox management research suggest that it not enough to apply only differentiation strategies <span class="citation">(W. K. Smith <a href="paper1.html#ref-Smith2014">2014</a>)</span>. Paradoxically, in order to balance conflicting strategic intents, both integration and differentiation are needed. Differentiating allows understanding the individual contributions and demands of each strategic goal, while integrating motivates finding ways to link the two. If both are not used, one of the functions is missing and the firms fail to continuously commit to both poles.</p>
+<p>While we did not find much discussions on integration strategies applied at the business model level, hence also they are absent from our model, we can expect that the absence of the implementation of a differentiation strategy means that the firm is at least to some extent trying to integrate both conflicting goals in its decision-making about business models. Combining these insights, we can formulate the following general hypotheses:</p>
+<p><strong>Hypothesis 3a:</strong> Balanced performance patterns will be result from business model designs that rely on a mix of both presence and absence of differentiation strategies.</p>
+<p><strong>Hypothesis 3b:</strong> Unbalanced performance patterns will result from business model designs that only rely on presence or absence of differentiation strategies.</p>
+<p>Finally, given the interdependent nature of business modelling decision, we also expect that no single variable is individually necessary and or sufficient for reaching high performance in both domains. This means that we expect all configurations to consist of at least two conditions. This property of variables only jointly forming sufficient configurations is referred to INUS nature of a condition (variable) in QCA - insufficient but nonredundant parts of different configurations, which are themselves unnecessary but sufficient for the occurrence of the outcome <span class="citation">(P. C. Fiss et al. <a href="paper1.html#ref-Fiss2013">2013</a>)</span>. Hence, we propose that:</p>
+<p><strong>Hypothesis 4:</strong> Portfolio diversification, client segmentation, network differentiation, and dual revenue models are INUS conditions for achieving high creative and commercial performance simultaneously.</p>
 </div>
 </div>
 <div id="methods-and-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Methods and data</h2>
-<p>As mentioned in the introduction, this study takes a configurational perspective to organizational success. In order to reach our research objective, we carried out a particular form of configurational analyses - the fuzzy set Qualitative Comparative Analysis (fsQCA). We investigated how five business model design choices described in the analytical model of the previous section - portfolio diversification, client segmentation, differentiated network organization, revenue model diversification, and differentiation through venture creation - interact to lead to (mis) balance between financial and creative returns. In our research design and analysis, we followed the work of Fiss (2011; 2007), Ragin (2009), Schenider and Wagemann (2012), and Schneider and Rohlfing (2013).</p>
+<p>As mentioned in the introduction, this study takes a configurational perspective to organizational success. In order to reach our research objective, we carried out a particular form of configurational analyses - the fuzzy set Qualitative Comparative Analysis (fsQCA). We investigated how five business model design choices described in the analytical model of the previous section - portfolio diversification, client segmentation, differentiated network organization, revenue model diversification, and differentiation through venture creation - interact to lead to (mis) balance between financial and creative returns. In our research design and analysis, we followed the work of <span class="citation">P. C. Fiss (<a href="paper1.html#ref-Fiss2011">2011</a>)</span>, <span class="citation">P. C. Fiss (<a href="paper1.html#ref-Fiss2007">2007</a>)</span>, <span class="citation">C. C. Ragin (<a href="paper1.html#ref-Ragin2009">2009</a>)</span>, <span class="citation">C. Q. Schneider and Wagemann (<a href="paper1.html#ref-Schneider2012">2012</a>)</span>, <span class="citation">S. Schneider and Spieth (<a href="paper1.html#ref-Schneider2013">2013</a>)</span>, and <span class="citation">C. Q. Schneider (<a href="paper1.html#ref-Schneider2018">2018</a>)</span>.</p>
 <div id="qca-and-its-suitability-for-the-study-of-business-models-and-paradox-management" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> QCA and its suitability for the study of business models and paradox management</h3>
-<p>Configurational perspective is based on the assumption that “cases under study [are] constellations of interconnected elements” (Misangyi et al., 2017, p. 256). QCA belongs to a family of comparative configurational methods (CCM) that allows for a systematical analysis of comparable cases to identify causally relevant structural conditions (variables) that lead to an identified outcome (Marx et al., 2013; Thiem et al., 2015). As such, QCA is a case-oriented, as opposed to variable-oriented methods (Marx et al., 2013). It is equally a set-theoretic method, employing a causes-to-effects approach to examine combinations of causal conditions instead of the more traditional search for linear causation (Mahoney and Goertz, 2006).</p>
-<p>QCA thus assists in answering questions that imply configurations, e.g. what factors (X, Z, etc.) combine to cause an outcome (Y)? More precisely it looks at what conditions or combinations of conditions are necessary and/or sufficient for an outcome to occur. Necessary conditions are present whenever we observe an outcome. Sufficient conditions are conditions that display the presence of an outcome whenever the conditions are present. As all configurational methods, also QCA is based on three main assumptions: 1) relationships to outcomes are nonlinear and asymmetric; 2) variables that are causally related in one configuration are not necessarily related in others, implying complex causality; and 3) configurations can be equifinal (Fiss, 2011, 2007).</p>
-<p>When applying QCA in organization studies, variables (also referred to as conditions) are defined in terms of sets of organizational attributes. The choice of conditions can be both theoretical and empirical, namely, based on the knowledge of cases and the setting (Schneider and Rohlfing, 2013). A set can be a single condition or a combination of conditions. Each case (firm’s response, in our case) is expressed in terms of its membership to the defined sets. For this study, we have chosen to carry out a fuzzy set QCA (fsQCA). In fsQCA cases are not only expressed in their full membership to the sets (1 is in, 0 is out), but also partial memberships can be assigned (partially in, partially out). The process of transforming gathered raw data about cases into membership scores is called calibration (Thiem and Dusa, 2013). It prescribes the definition of three qualitative thresholds: full membership, the cross-over point, and full non-membership. The crossover point, contrary to most accepted measurement scales, establishes a difference in kind, not degree. It is the score that indicates maximum ambiguity, that is, a firm has a degree of membership of 0.5 and also a degree of non-membership of 0.5 ini the given set. (Jacobs, 2018).</p>
-<p>When the data is calibrated into sets, QCA then relies on Boolean algebra to perform systematic cross-case analysis, and using reduction shows combinations that are necessary and or sufficient for the occurrence of an outcome (Rihoux &amp; Ragin, 2009). Finally, QCA as an approach (rather than only an analytical method) requires the results to be verified by case knowledge and by counterfactual analysis making it explicit what assumptions have been made about logical remainders (i.e. configurations that were not observed, yet are analytically possible) (Schneider and Rohlfing, 2013).</p>
-<p>The two following observations led to concluding that configurational approach is the most appropriate for our analytical framework: 1) The conceptualization of business models as a set of decision variables makes it a naturally configurational concept; 2) Both paradox theory and business model perspective oppose the contingency theory assumptions, i.e. “if-then” and “net-effects”, and instead look at the interaction between structures and practices and assume equifinality - idea that multiple configurations can have similar outcomes (Fiss et al., 2013; Nenonen and Storbacka, 2010; Lewis and Smith, 2014; T??uscher, 2017).</p>
-<p>Despite the apparent fit, not much configurational work exists in both areas. Even less so when it comes to linking the two streams. In paradox scholarship, the idea that organizations need both integrating and separating strategies is rather new, therefore not much research beyond theory building exists. In the case of business models, there has been a lack of methods that can empirically do justice to the complexity and configrutional nature of the concept. The lack of appropriate analytical tools has been a general problem of naturally configurational concepts. However, as argued by Fiss (2007) and Misangyi et al. (2017), the development of methods such as QCA and NCA has given rise to neoconfigurational perspective, allowing embracing causal complexity appropriately. These developments have paved the way to some recent applications of QCA in business model literature (T??uscher, 2017; Kulins et al, 2016; Aversa et al, 2015).</p>
+<p>Configurational perspective is based on the assumption that “cases under study [are] constellations of interconnected elements” <span class="citation">(Misangyi et al. <a href="paper1.html#ref-Misangyi2017">2017</a>, 256)</span>. QCA belongs to a family of comparative configurational methods (CCM) that allows for a systematical analysis of comparable cases to identify causally relevant structural conditions (variables) that lead to an identified outcome <span class="citation">(Marx et al. <a href="paper1.html#ref-Marx2013">2013</a>; Thiem, Baumgartner, and Bol <a href="paper1.html#ref-Thiem2015">2015</a>)</span>. As such, QCA is a case-oriented, as opposed to variable-oriented methods <span class="citation">(Marx et al. <a href="paper1.html#ref-Marx2013">2013</a>)</span>. It is equally a set-theoretic method, employing a causes-to-effects approach to examine combinations of causal conditions (sets) instead of the more traditional search for linear causation <span class="citation">(Mahoney and Goertz <a href="paper1.html#ref-Mahoney2006">2006</a>)</span>.</p>
+<p>QCA thus assists in answering questions that imply configurations, e.g. what conditions (X, Z, etc.) combine to cause an outcome (Y)? More precisely it looks at what conditions or combinations of conditions are necessary and/or sufficient for an outcome to occur. Necessary conditions are present whenever we observe an outcome. Sufficient conditions are conditions that display the presence of an outcome whenever the conditions are present. As all configurational methods, also QCA is based on three main assumptions: 1) relationships to outcomes are nonlinear and asymmetric; 2) variables that are causally related in one configuration are not necessarily related in others, implying complex causality; and 3) configurations can be equifinal <span class="citation">(P. C. Fiss <a href="paper1.html#ref-Fiss2011">2011</a>; <a href="paper1.html#ref-Fiss2007">2007</a>)</span>.</p>
+<p>When applying QCA in organization studies, variables (also referred to as conditions) are defined in terms of sets of organizational attributes. The choice of conditions can be both theoretical and empirical, namely, based on the knowledge of cases and the setting <span class="citation">(S. Schneider and Spieth <a href="paper1.html#ref-Schneider2013">2013</a>)</span>. A set can be a single condition or a combination of conditions. Each case (firm’s response, in our case) is expressed in terms of its membership to the defined sets. For this study, we have chosen to carry out a fuzzy set QCA (fsQCA). In fsQCA cases are not only expressed in their full membership to the sets (1 is in, 0 is out), but also partial memberships can be assigned (partially in, partially out). The process of transforming gathered raw data about cases into membership scores is called calibration <span class="citation">(Thiem and Dusa <a href="paper1.html#ref-Thiem2013">2013</a>)</span>. It prescribes the definition of three qualitative thresholds: full membership, the cross-over point, and full non-membership. The crossover point, contrary to most accepted measurement scales, establishes a difference in kind, not degree. It is the score that indicates maximum ambiguity, when a firm has both a degree of membership and non-mebmerhsip of 0.5 in the given set <span class="citation">(S. Jacobs <a href="paper1.html#ref-Jacobs2017">2017</a>)</span>.</p>
+<p>When the data is calibrated into sets, QCA then relies on Boolean algebra to perform systematic cross-case analysis, and using reduction shows combinations that are necessary and or sufficient for the occurrence of an outcome <span class="citation">(B. Rihoux and Ragin <a href="paper1.html#ref-Rihoux2009">2009</a>)</span>. Finally, QCA as an approach (rather than only an analytical method) requires the results to be verified by case knowledge and by counterfactual analysis making it explicit what assumptions have been made about logical remainders (i.e. configurations that were not observed, yet are analytically possible) <span class="citation">(S. Schneider and Spieth <a href="paper1.html#ref-Schneider2013">2013</a>)</span>.</p>
+<p>The two following observations led to concluding that configurational approach is the most appropriate for our analytical framework: 1) The conceptualization of business models as a set of decision variables makes it a naturally configurational concept; 2) Both paradox theory and business model perspective oppose the contingency theory assumptions, i.e. “if-then” and “net-effects”, and instead look at the interaction between structures and practices and assume equifinality - idea that multiple configurations can have similar outcomes <span class="citation">(P. C. Fiss et al. <a href="paper1.html#ref-Fiss2013">2013</a>; Nenonen and Storbacka <a href="paper1.html#ref-Nenonen2010">2010</a>; Lewis and Smith <a href="paper1.html#ref-Lewis2014">2014</a>; Täuscher <a href="paper1.html#ref-Tauscher2017">2017</a>)</span>.</p>
+<p>Despite the apparent fit, not much configurational work exists in both areas. Even less so when it comes to linking the two streams. In paradox scholarship, the idea that organizations need both integrating and separating strategies is rather new, therefore not much research beyond theory building exists. In the case of business models, there has been a lack of methods that can empirically do justice to the complexity and configrutional nature of the concept. The lack of appropriate analytical tools has been a general problem of naturally configurational concepts. However, as argued by <span class="citation">P. C. Fiss (<a href="paper1.html#ref-Fiss2007">2007</a>)</span> and <span class="citation">Misangyi et al. (<a href="paper1.html#ref-Misangyi2017">2017</a>)</span>, the development of methods such as QCA has given rise to neoconfigurational perspective, allowing embracing causal complexity appropriately. These developments have paved the way to some recent applications of QCA in business model literature <span class="citation">(Täuscher <a href="paper1.html#ref-Tauscher2017">2017</a>; Kulins, Leonardy, and Weber <a href="paper1.html#ref-Kulins2016">2016</a>; Aversa, Furnari, and Haefliger <a href="paper1.html#ref-Aversa2015">2015</a>)</span>.</p>
 </div>
 <div id="research-setting-and-data-collection" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Research setting and data collection</h3>
-<p><span style="color:red">RESEARCH SETTING DESCRIPTION : creative indsutries, double-success criterion, creative service firmes etc. mostly used in paradox research, keeping business models similar but distinct.</span></p>
-<p>Our analysis is based on 140 cases of Dutch creative service firms. The data for this studies was collected from two sources - interviews and a survey. The interview data allowed for a more in-depth understanding of the process of business model design, and paved the way to further develop the survey measures for the follow-up study. Table 1 shows the data sources. Measures are described in detail in the next section.</p>
+<p>Our analysis is based on 140 cases of Dutch creative service firms. The data for this studies was collected from two sources - interviews and a survey. The interview data allowed for a more in-depth understanding of the process of business model design, and paved the way to further develop the survey measures for the follow-up study. Table <a href="paper2.html#tab:datasources">4.1</a> shows the data sources. Measures are described in detail in the next section.</p>
 <table>
 <caption><span id="tab:datasources">Table 4.1: </span> Data sources.</caption>
 <colgroup>
@@ -259,7 +333,7 @@ While we did not find much discussions on integration strategies applied at the 
 <td>Developing and validating survey measures; Discussing the validity of interview findings</td>
 </tr>
 <tr class="odd">
-<td>Survey responses (n=140)</td>
+<td>Survey responses (n=179)</td>
 <td>Data for the QCA analysis; Data for the post-QCA analysis;</td>
 </tr>
 <tr class="even">
@@ -268,38 +342,27 @@ While we did not find much discussions on integration strategies applied at the 
 </tr>
 </tbody>
 </table>
-<p>The interview sample was targeted with diversity as the main criteria. In order to evaluate the sustainability of their performance, the firms were at least 5 years old and with a minimum of 5 full time employees. The first cases were gathered in the various subsectors of design and then further extended to other creative services, e.g. advertisement agencies, interactive and digital design consultancies. The semi-structured interviews with the founders or managers of the selected firms were conducted in 2015 and 2016, and lasted between 60 and 180 minutes. The interview guide was developed based on a prior literature review on business models, paradox management and the management characteristics of creative services firms. These interviews were transcribed, coded and analyzed using RQDA package in R. They were complemented with secondary data from websites, notes from various events where firms participated and reports. An overview of interview cases is provided in Appendix A.</p>
-<p>The interview data was used to develop measures for paradox management that could be used in survey research. It was distributed between June 2017 and March 2018. The survey was sent out to an initial sample of 125 members of Dutch Designers’ Association (n=25), and a follow up sample of a self-gathered data base of 6000 enterprises that according to the Dutch Chamber of Commerce have registered their activity as belonging to the creative service firms (n=115).</p>
-<p><span style="color:red">Table 2: Sample description. </span></p>
+<p>The interview sample was targeted with diversity as the main criteria. In order to evaluate the sustainability of their performance, the firms were at least 5 years old and with a minimum of 5 full time employees. The first cases were gathered in the various subsectors of design and then further extended to other creative services, e.g. advertisement agencies, interactive and digital design consultancies. The semi-structured interviews with the founders or managers of the selected firms were conducted in 2015 and 2016, and lasted between 60 and 180 minutes. The interview guide was developed based on a prior literature review on business models, paradox management and the management characteristics of creative services firms. They were complemented with secondary data from websites, notes from various events where firms participated and reports. This data was used to develop measures for paradox management that could be used in survey research. It was distributed between June 2017 and March 2018. The survey was sent out to an initial sample of 125 members of Dutch Designers’ Association (n=25), and a follow up sample of a self-gathered data base of 6000 enterprises that according to the Dutch Chamber of Commerce have registered their activity as belonging to the creative service firms (n=154). Our final sample, after removing unfinished responses and thos that do not match the sampling criteria, consists of 179 cases. Table <a href="#tab:tabfreq"><strong>??</strong></a> in Appendix <a href="paper2.html#App2A">4.8</a> shows the distribution of cases by sector and size of ther firm. Our firms consist of mostly micro firms (up to 10 employees) from the graphic design, advertisement, and architecture sectors.</p>
 </div>
-<div id="measures-and-calibration" class="section level3">
-<h3><span class="header-section-number">4.4.3</span> Measures and calibration</h3>
-<p>In order to convert our qualitative insights into conditions and cases suitable for a QCA, we followed the suggestions of Basurto and Speer (2012) on designing measures and calibration from interview data into sets. We first searched for specific first order themes (observable measures) operationalizing our analytical framework. We derived three types of qualitative observable measures - 1) business model measures, 2) performance measures, 3) and measures that would classify business model design choices in the two paradox management approaches of integration and differentiation (separation). Appendix B shows the qualitative measures. These were further used to aggregate the qualitative measures into survey questions.</p>
-<p>All the measures for conditions used in this study (Table 4.2) were single-item, measured on a 7-point Likert scale, asking the respondents to indicate the extent to which the statements are true about their business. In order to calibrate the data into sets, we used direct calibration setting 4 as the first inclusion score in the set “differentiation”. The non-membership would mean that the firms use an integration strategy with respect to the particular decision.</p>
+<div id="measures-calibration-and-analyses" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Measures, calibration, and analyses</h3>
+<p>All the measures for business-moel-level conditions used in this study were single-item, measured on a 7-point Likert scale, asking the respondents to indicate the extent to which they agreed with the statements about their business (1 = Strongly disagree; 7 = Strongly agree. The items are presented in Table <a href="paper2.html#tab:setsprox">4.2</a>. In order to calibrate the data into sets, we used direct calibration setting 4.01 as the first inclusion score in the set “differentiation”. The non-membership would mean that the firms use an integration strategy with respect to the particular decision. This calibration strategy was used because Likert scales are naturally categorical, and the middle point (score 4) is expressed verbally as “neither agree, nor disagree”, which is an equivalent of the 0.5 neither member, nor non-member score in fuzzy sets.</p>
 <table>
-<caption><span id="tab:setmeasures">Table 4.2: </span> Set-membership measures from surveys.</caption>
+<caption><span id="tab:setsprox">Table 4.2: </span> Set-membership measures from survey, proximate conditions.</caption>
 <colgroup>
 <col width="54%" />
 <col width="45%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Condition</th>
+<th>Business-model-level condition</th>
 <th>Survey measures</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>VPCH (Value proposition differentiation)</td>
-<td>Composite measure: Value proposition diversity AND Paradoxical differentiation of value proposition.</td>
-</tr>
-<tr class="even">
 <td>Some types of our services and products help reaching our financial and business goals, while others contribute to our creative goals.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>The average score of the importance of each type of value proposition along the value chain for the business model (4 indicators - The higher the more diversified).</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>SEGM (Approach to client segmentation)</td>
@@ -313,55 +376,814 @@ While we did not find much discussions on integration strategies applied at the 
 <td>REVDIF (Diversification of payment systems)</td>
 <td>Different revenue models and conditions are used for commercial projects and the projects we perceive as creative and/or challenging.</td>
 </tr>
+</tbody>
+</table>
+<p>In order to measure the organization-level conditions we used multiple-item composite measures equallty based on a 7-point Likert scale, asking the respondents to indicate the extent to which the statements are true about their business (Table <a href="paper2.html#tab:setsremote">4.3</a>). For the venture separation condition, we first asked if the company has any affiliate ventures, and if it did, weather their activity was focused on one of the performance goals more than the other. The maximum score of these two items was extracted for the calibration.</p>
+<table>
+<caption><span id="tab:setsremote">Table 4.3: </span> Set-membership measures from surveys, remote conditions.</caption>
+<colgroup>
+<col width="54%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Org-level condition</th>
+<th>Survey measures</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td>SPINDIF (Venture separation)</td>
-<td>Composite measure (creative OR commercial affiliate venture).</td>
+<td>Composite measure (creative OR commercial affiliate venture Y/N).</td>
 </tr>
 <tr class="even">
-<td>The other venture(s) connected to our firm focus(es) on the more commercial and/or entrepreneurial work.</td>
 <td></td>
+<td>The other venture(s) connected to our firm focus(es) on the more commercial and/or entrepreneurial work.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>The other venture(s) connected to our firm focus(es) on the more creative projects, as opposed to the commercial and entrepreneurial work.</td>
 </tr>
+<tr class="even">
+<td>INTCULT (Venture separation)</td>
+<td>Composite measure (the mean of both scores).</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>When it comes to our activities and processes, we always try to develop synergies and interactions between the creative and business-related aspects.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>When making decisions within our company, we seek synergies, integration, and compromises between our creative and commercial ambitions.</td>
+</tr>
 </tbody>
 </table>
-<p>Creative and business performance were measured using previously validated multi-item scales (Appendix C). The means of each performance dimension were calibrated using the direct method and 4.01 as the inclusion score. These were then transformed into four composite conditions:<br />
-- BAL: high creative performance AND high business performance;<br />
-- NOBP: high creative performance AND low business performance;<br />
-- NOCP: low creative performance AND high business performance;<br />
-- BOTHLOW: low creative performance AND low business performance;</p>
+<p>Creative and business performance were measured using slightly adjusted previously validated multi-item scales <span class="citation">(Lander <a href="paper1.html#ref-Lander2012">2012</a>)</span>. Creative performance scale consists of four items and the business performance scale of three items. The means of each performance dimension were calibrated using the direct method and 4.01 as the inclusion score. These were then transformed into four combined sets:</p>
+<ul>
+<li>BAL: high creative performance AND high business performance;<br />
+</li>
+<li>NOBP: high creative performance AND low business performance;<br />
+</li>
+<li>NOCP: low creative performance AND high business performance;<br />
+</li>
+<li>BOTHLOW: low creative performance AND low business performance;</li>
+</ul>
+<p>In our analyses, we ran separate QCAs for each of the outcomes. In fact, we first tried to have only two separate analysis - for the presence of a balance between both performance dimensions, and it’s absence. However, the results for the absence of balance yielded many superset disjunctions for the neccessity analysis, as well as high model ambuiguity, and low coverage and PRI scores for the sufficiency analysis. This indicated that our conditions were not able to explain the outcome variable at hand. We hence split the non-balance variable in three separate ones. (More information on the types of model evaluation and error avoidance strategies that we employed in order to ensure the robustness of our results can be found in Appendix C <a href="paper2.html#App2C">4.10</a>.)</p>
+<p>Table <a href="#tab:tabcor"><strong>??</strong></a> shows correlations among our variables (further referred to as conditions, in line with QCA standards). As we can see, the differentiation strategies are significantly positively correlated with each other, while they are not correlated with any of the performance conditions. The only significant correlation in terms of performance and paradox management strategies is found between the creative performance and intergated organizational culture, which is in line with the theoretical expectations. These insights speak in favour of the application of a configurational approach to the analysis of our data. Appendix <a href="paper2.html#App2B">4.9</a> presents more insights into the various descriptives of our raw and calibrated conditions.</p>
+
+<p>Before reporting the analysis, it has to be noted that following the suggestions for best practices of QCA <span class="citation">(C. C. Ragin <a href="paper1.html#ref-Ragin2009">2009</a>; C. Q. Schneider and Wagemann <a href="paper1.html#ref-Schneider2012">2012</a>; S. Jacobs <a href="paper1.html#ref-Jacobs2017">2017</a>)</span>, we also tried other calibration tresholds, as well as the TFR approach suggested by <span class="citation">Duşa (<a href="paper1.html#ref-Ducsa2018">2018</a>)</span>. However, while the solutions did not change much in the different versions indicating the robustness of our results, the other calibrations lead to a higher skewness of calibrated scores, hence lowering the consistency and PRI scores.</p>
 </div>
-<div id="fuzzy-set-qualitative-comparative-analysis" class="section level3">
-<h3><span class="header-section-number">4.4.4</span> Fuzzy-set Qualitative Comparative Analysis</h3>
 </div>
-<div id="post-qca-process-tracing" class="section level3">
-<h3><span class="header-section-number">4.4.5</span> Post-QCA Process-tracing</h3>
-</div>
-</div>
-<div id="results-and-discussion" class="section level2">
-<h2><span class="header-section-number">4.5</span> Results and discussion</h2>
-<div class="figure">
-<img src="Figure%202.3.png" alt="Example of result table that will be produced." width="503" />
+<div id="results" class="section level2">
+<h2><span class="header-section-number">4.5</span> Results</h2>
+<p>Once the data was calibrated, we started our analysis with constructing a truth table. Truth table is the main analytical device used in QCA. It displays all the possible the configurations of conditions (rows) and the configurations represented in our sample. As we can see in Table <a href="#tab:TTBAL"><strong>??</strong></a>, out of all the 64 configurations possible, there are 17 configurations of conditions not represented in our sample. This means they were either not observed or possibly do not even exist in the empirical world. There are no contradictory rows in our table, meaning that there are no cases where the same combination of conditions would lead to both balance and misbalance in both performance domains.</p>
+<p>Since our literature review discerned variables at two different levels - business model and organization - we first decided to try the two-step QCA <span class="citation">(C. Q. Schneider <a href="paper1.html#ref-Schneider2018">2018</a>)</span> procedure for testing our hypotheses. Instead of treating all conditions as the same, the two-step QCA distinguishes between remote and proximate conditions. While the proximate conditions remain the main focus of the configurational analysis, the remote conditions are seen as <em>contextual</em>, i.e. outcome-enabling conditions. In our analysis it meant that we first tested for the neccessity of the integrated organizational culture and structural differentiation conditions (and of their disjunction), and the proceeded to testing the sufficiency of the differentiation strategies at the business model level for achieving high creative and high business performance simultaneously, including the found neccessary remote conditions, if any, in the analysis. On its own, integrated culture could be considered a neccessary set (Table <a href="#tab:tabnecremBAL"><strong>??</strong></a>) and a part of a neccessary superset INTCULT + SPINDIF &lt;- BAL (Table <a href="#tab:ssBALrem"><strong>??</strong></a>). However, the Relevance of Neccessity scores of both are very low, suggesting that the sets are very large and thus possibly trivial. This was further confirmed when adding integrated culture as a condition in the sufficiency analysis, as would be appropriate according to the two-step QCA procedure. The analysis showed the absence of integrated culture as a individually sufficient condition, as well as gave many paths that included the absence of this condition in sufficient junctions, which logically contradicts the findings of the neccessity analysis. We therefore excluded the condition from the analysis, abandoned the two-step procedure, and proceeded with the regular QCA protocol, analyzing the neccessity and/or sufficiency of the remaining five conditions.</p>
+<p>We present the results per each outcome. Following the guidelines of Fiss (2011) and Ragin (2008), we report both core (⚫for presence and ⦻ for absence) and peripheral conditions (●for presence and ⦸ for absence). In our case, the peripheral conditions represent the ones present in the intermediate solutions, and the core conditions are the ones present in both the intermediate and parsimonious solution. The directional expectations we formulated were that for the analysis of BALANCE outcome set, all conditions contributed in their presence. For the other three analysis, according to our directional expectations, the conditions contributed to the outcomes in their absence.</p>
+<div id="analysis-1-high-creative-high-business-performance" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Analysis 1: High creative, high business performance</h3>
+<p>As presenetd in Table <a href="#tab:necBAL"><strong>??</strong></a> and Table <a href="#tab:necBAL2"><strong>??</strong></a>, none of the conditions (in their presence, nor absence) were found as neccessary for the outcome to occur. We did find two neccessary disjunctions (sets that combine conditions through logicall OR) that passed the 0.9 consistency and 0.6 coverage tresholds - 1) absence of value propositon differentiation OR absence of revenue model differentiation OR presence of network differentiation (vpdif + revdif + NETWDIF), and 2) absence of client segmentation OR absence of revenue model differentiation OR presence of network differentiation (segm + revdif + NETWDIF). Yet, they should be interpreted with care, as the relevance of neccessity (RoN) for these supersets is relatively low <span class="citation">(C. Q. Schneider <a href="paper1.html#ref-Schneider2018">2018</a>)</span>. We can therefore simply expect that these conditions will be parts of sets that are sufficient for the outcome to occur.</p>
+
+<p>After the analysis of neccessity, we turned to the truth table minimization for testing sufficiency of (combinations of) our conditions for achieving high perfromance in both dimensions. The results presented in Table <a href="paper2.html#tab:p2bothhigh">4.4</a> show the five configurations of conditions (i.e. solutions 1 to 5) describing business-model-level paradox management stratgies, which, according to our analysis, are sufficient for creative firms to score high on both creative and business performance. The overall consistency of the model is 0.805. The model coverage is 0.658, indicating that 66 percent of the membership in the outcome set can be explained by the five configurations we found. While that is not a low score, it also indicates that the paradox management strategies do not account for all the aspects that would relate to performance in our setting <span class="citation">(P. C. Fiss <a href="paper1.html#ref-Fiss2011">2011</a>)</span>. This is not a weird finding, seeing that business realities are more complex, and cannot be fully expressed in and explained by only five conditions.</p>
+<table>
+<caption><span id="tab:p2bothhigh">Table 4.4: </span> Solutions for high creative and high business performance.</caption>
+<thead>
+<tr class="header">
+<th>Conditions / Sol</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VPDIF</td>
+<td>⦻</td>
+<td></td>
+<td>⦸</td>
+<td>⚫</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>SEGM</td>
+<td></td>
+<td></td>
+<td>⦻</td>
+<td>⦻</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>NETWDIF</td>
+<td></td>
+<td>⚫</td>
+<td>⦻</td>
+<td>●</td>
+<td>⦻</td>
+</tr>
+<tr class="even">
+<td>REVDIF</td>
+<td>⚫</td>
+<td>⦻</td>
+<td>●</td>
+<td>●</td>
+<td>⦻</td>
+</tr>
+<tr class="odd">
+<td>SPIN</td>
+<td>⦻</td>
+<td>⦻</td>
+<td>●</td>
+<td>●</td>
+<td>⚫</td>
+</tr>
+<tr class="even">
+<td>Consistency</td>
+<td>0.853</td>
+<td>0.888</td>
+<td>0.906</td>
+<td>0.918</td>
+<td>0.850</td>
+</tr>
+<tr class="odd">
+<td>Raw coverage</td>
+<td>0.397</td>
+<td>0.338</td>
+<td>0.339</td>
+<td>0.332</td>
+<td>0.156</td>
+</tr>
+<tr class="even">
+<td>Unique coverage</td>
+<td>0.004</td>
+<td>0.0</td>
+<td>0.000</td>
+<td>0.010</td>
+<td>0.13</td>
+</tr>
+<tr class="odd">
+<td>PRI</td>
+<td>0.431</td>
+<td>0.391</td>
+<td>0.405</td>
+<td>0.445</td>
+<td>0.350</td>
+</tr>
+<tr class="even">
+<td>Nr. cases</td>
+<td>12</td>
+<td>13</td>
+<td>28</td>
+<td>6</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>Solution consistency</td>
+<td>0.805</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Solution coverage</td>
+<td>0.658</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Solution PRI</td>
+<td>0.421</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nr. Cases 1/0/C</td>
+<td>64/</td>
+<td>111/</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>By exploring the differences between the different solution terms, we divided the solutions in two groups - the firms that have separate ventrues for one of the paradoxical goals (SPIN), and the firms that do not (spin). Figure <a href="paper2.html#fig:solvizBAL">4.3</a> vizualized these solutions as pathways, where on the left we can see solution paths 3 to 5, and solutions 1 and 2 are on the right.</p>
+<p>-more than half of the cases that are succesful in achieving both creative and business performance use structural separation -both the result table and this graph present a very connfigurational and complex picture of the pathaways for achieving balance, confirming the hypotheses - none of the conditions are found sufficient (or neccessary on their own) -the superset relations found are true -</p>
+<div class="figure"><span id="fig:solvizBAL"></span>
+<div id="htmlwidget-8b8baf7a201249da97ed" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8b8baf7a201249da97ed">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  SPIN; spin\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  REVDIF; revdif; NETWDIF;vpdif; REVDIFsegm; revdifSEGM; netwdifvpdif; NETWDIFVPDIF; netwdif\n\n  # several \"edge\" statements\n  spin->REVDIF spin->revdif REVDIF->vpdif revdif->NETWDIF \n  SPIN->REVDIFsegm SPIN->revdifSEGM REVDIFsegm->netwdifvpdif REVDIFsegm->NETWDIFVPDIF\n  revdifSEGM->netwdif\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
-(#fig:fig2.3)Example of result table that will be produced.
+Figure 4.3: Vizualization of sufficient configurations of conditions for BAL.
 </p>
 </div>
+</div>
+<div id="analysis-2-high-creative-low-business-performance" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Analysis 2: High creative, low business performance</h3>
+<table>
+<caption><span id="tab:p2nobp">Table 4.5: </span> Solutions for high creative and low business performance.</caption>
+<thead>
+<tr class="header">
+<th>Conditions / Sol.</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VPDIF</td>
+<td>⚫</td>
+<td></td>
+<td>⦻</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>SEGM</td>
+<td>⦻</td>
+<td></td>
+<td>⚫</td>
+<td>⦻</td>
+<td>⚫</td>
+</tr>
+<tr class="odd">
+<td>NETWDIF</td>
+<td></td>
+<td>⚫</td>
+<td></td>
+<td></td>
+<td>⦸</td>
+</tr>
+<tr class="even">
+<td>REVDIF</td>
+<td></td>
+<td>⦻</td>
+<td></td>
+<td>⚫</td>
+<td>⦻</td>
+</tr>
+<tr class="odd">
+<td>SPINDIF</td>
+<td></td>
+<td>⦸</td>
+<td>⚫</td>
+<td>⦻</td>
+<td>⚫</td>
+</tr>
+<tr class="even">
+<td>Consistency</td>
+<td>0.782</td>
+<td>0.820</td>
+<td>0.879</td>
+<td>0.844</td>
+<td>0.834</td>
+</tr>
+<tr class="odd">
+<td>Raw coverage</td>
+<td>0.442</td>
+<td>0.419</td>
+<td>0.177</td>
+<td>0.383</td>
+<td>0.170</td>
+</tr>
+<tr class="even">
+<td>Unique coverage</td>
+<td>0.044</td>
+<td>0.092</td>
+<td>0.016</td>
+<td>0.019</td>
+<td>0.009</td>
+</tr>
+<tr class="odd">
+<td>PRI</td>
+<td>0.210</td>
+<td>0.152</td>
+<td>0.367</td>
+<td>0.295</td>
+<td>0.193</td>
+</tr>
+<tr class="even">
+<td>Nr. cases</td>
+<td>18</td>
+<td>16</td>
+<td>11</td>
+<td>16</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>Solution consistency</td>
+<td>0.732</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Solution coverage</td>
+<td>0.635</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Solution PRI</td>
+<td>0.201</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nr. Cases 1/0/C</td>
+<td>51/</td>
+<td>124/</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span id="fig:solvizNOBP"></span>
+<div id="htmlwidget-e6f66b72e9b1b6df6f1e" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e6f66b72e9b1b6df6f1e">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  segm; SEGMSPINDIF; NETWDIF\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  VPDIF; REVDIFspindif; vpdif; revdifnetwdif; revdifspindif\n\n  # several \"edge\" statements\n  segm->VPDIF segm->REVDIFspindif SEGMSPINDIF -> vpdif SEGMSPINDIF->revdifnetwdif\n  NETWDIF->revdifspindif\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 4.4: Vizualization of sufficient configurations of conditions for NOBP.
+</p>
+</div>
+</div>
+<div id="analysis-3-low-creative-high-business-performance" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Analysis 3: Low creative, high business performance</h3>
+<table>
+<caption><span id="tab:p2nocp">Table 4.6: </span> Solutions for low creative and high business performance.</caption>
+<thead>
+<tr class="header">
+<th>Conditions / Sol.</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VPDIF</td>
+<td></td>
+<td>⦻</td>
+<td>⚫</td>
+<td>⚫</td>
+</tr>
+<tr class="even">
+<td>SEGM</td>
+<td>⦻</td>
+<td>⚫</td>
+<td>⦻</td>
+<td>⦻</td>
+</tr>
+<tr class="odd">
+<td>NETWDIF</td>
+<td>⚫</td>
+<td>⦻</td>
+<td>⦻</td>
+<td>⦸</td>
+</tr>
+<tr class="even">
+<td>REVDIF</td>
+<td>⦻</td>
+<td></td>
+<td>⚫</td>
+<td>⦻</td>
+</tr>
+<tr class="odd">
+<td>SPINDIF</td>
+<td></td>
+<td>⚫</td>
+<td>⦸</td>
+<td>⚫</td>
+</tr>
+<tr class="even">
+<td>Consistency</td>
+<td>0.789</td>
+<td>0.841</td>
+<td>0.844</td>
+<td>0.853</td>
+</tr>
+<tr class="odd">
+<td>Raw coverage</td>
+<td>0.438</td>
+<td>0.201</td>
+<td>0.475</td>
+<td>0.182</td>
+</tr>
+<tr class="even">
+<td>Unique coverage</td>
+<td>0.056</td>
+<td>0.033</td>
+<td>0.091</td>
+<td>0.009</td>
+</tr>
+<tr class="odd">
+<td>PRI</td>
+<td>0.021</td>
+<td>0.032</td>
+<td>0.028</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td>Nr. cases</td>
+<td>6</td>
+<td>5</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Solution consistency</td>
+<td>0.739</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Solution coverage</td>
+<td>0.590</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Solution PRI</td>
+<td>0.024</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nr. Cases 1/0/C</td>
+<td>17/</td>
+<td>162/</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span id="fig:solvizNOCP"></span>
+<div id="htmlwidget-620dcc7dbaeda74de929" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-620dcc7dbaeda74de929">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  segm; SEGM\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  NETWDIF; VPDIFnetwdif; vpdifnetwdif; revdif; spindifREVDIF; SPINDIFrevdif; SPINDIF\n\n  # several \"edge\" statements\n  segm->NETWDIF NETWDIF-> revdif \n  segm->VPDIFnetwdif VPDIFnetwdif->spindifREVDIF VPDIFnetwdif->SPINDIFrevdif \n  SEGM->vpdifnetwdif vpdifnetwdif->SPINDIF\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 4.5: Vizualization of sufficient configurations of conditions for NOCP.
+</p>
+</div>
+</div>
+<div id="analysis-4-low-creative-low-business-performance" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Analysis 4: Low creative, low business performance</h3>
+<table>
+<caption><span id="tab:p2bothlow">Table 4.7: </span> Solutions for low creative and high business performance.</caption>
+<thead>
+<tr class="header">
+<th>Conditions / Sol.</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VPDIF</td>
+<td>⦻</td>
+</tr>
+<tr class="even">
+<td>SEGM</td>
+<td>⚫</td>
+</tr>
+<tr class="odd">
+<td>NETWDIF</td>
+<td>⦻</td>
+</tr>
+<tr class="even">
+<td>REVDIF</td>
+<td>⦸</td>
+</tr>
+<tr class="odd">
+<td>SPINDIF</td>
+<td>⚫</td>
+</tr>
+<tr class="even">
+<td>Nr. cases</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>Solution consistency</td>
+<td>0.864</td>
+</tr>
+<tr class="even">
+<td>Solution coverage</td>
+<td>0.181</td>
+</tr>
+<tr class="odd">
+<td>Solution PRI</td>
+<td>0.003</td>
+</tr>
+<tr class="even">
+<td>Nr. Cases 1/0/C</td>
+<td>5/174/0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="discussion-1" class="section level2">
+<h2><span class="header-section-number">4.6</span> Discussion</h2>
+<p>On the methodological side, the results show how two-step QCA <span class="citation">(C. Q. Schneider <a href="paper1.html#ref-Schneider2018">2018</a>)</span> can help to deal with different levels of analysis in organization studies applying QCA. In our case, looking at the culture and structure conditions first, showed that we can proceed without adding them into analysis, as confirmed by the decrease in PRI when they were all added in single analysis.</p>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">4.7</span> Conclusion</h2>
+</div>
+<div id="App2A" class="section level2">
+<h2><span class="header-section-number">4.8</span> Appendix A: Sample description</h2>
+
+</div>
+<div id="App2B" class="section level2">
+<h2><span class="header-section-number">4.9</span> Appendix B: Measures and calibration</h2>
+<table style="width:100%;">
+<caption>(#tab: p2perf) Original and retained items for performance scales and results of confirmatory factor analysis.</caption>
+<colgroup>
+<col width="66%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Items (original pool)</th>
+<th>Business performance</th>
+<th>Creative performance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gross profits per partner. (BP_1)</td>
+<td>0.729</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Competitive hourly fee. (BP_2)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Gross margin on provided services. (BP_3)</td>
+<td>0.730</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Competitive cost structure. (BP_4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Overhead percentage. (BP_5)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Retention of the largest clients. (BP_6)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Implementing new business models. (BP_7)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Retention of clients. (BP_8)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Attracting new clients. (BP_9)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Growth in profits. (BP_10)</td>
+<td></td>
+<td>0.810</td>
+</tr>
+<tr class="odd">
+<td>Growth in staff. (BP_11)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Efficient firm organization. (BP_12)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Producing highly innovative work. (CP_1)</td>
+<td></td>
+<td>0.749</td>
+</tr>
+<tr class="even">
+<td>Working on projects that challenge the boundaries of the field. (CP_2)</td>
+<td></td>
+<td>0.787</td>
+</tr>
+<tr class="odd">
+<td>Attracting the best creative professionals. (CP_3)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Reputation on the labor market. (CP_4)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Reputation among peers. (CP_5)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Receiving good critic’s reviews for its work. (CP_6)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Receiving industry awards for its work. (CP_7)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Delivering work that is relevant for the society. (CP_8)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Working on projects that match the firm’s creative and professional aspirations. (CP_9)</td>
+<td></td>
+<td>0.734</td>
+</tr>
+<tr class="even">
+<td>Creating the desired impact with its work. (CP_10)</td>
+<td></td>
+<td>0.679</td>
+</tr>
+<tr class="odd">
+<td>Keeping the employees challenged and satisfied. (CP_11)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Cronbach’s alpha</td>
+<td>0.798</td>
+<td>0.824</td>
+</tr>
+<tr class="odd">
+<td>AVE</td>
+<td>0.577</td>
+<td>0.552</td>
+</tr>
+<tr class="even">
+<td>Chi-Square</td>
+<td>0.006</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RMSEA</td>
+<td>0.084</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>SRMR</td>
+<td>0.045</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>CFI</td>
+<td>0.964</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<div class="figure"><span id="fig:figrawdistr"></span>
+<img src="dissertationmarathon_files/figure-html/figrawdistr-1.png" alt="Distribution of raw scores all conditions and outcomes." width="672" />
+<p class="caption">
+Figure 4.6: Distribution of raw scores all conditions and outcomes.
+</p>
+</div>
+<p>\begin{table}</p>
+\caption{(#tab:tabskew)Distribution of cases in sets below and above the 0.5 cross-over point, %.} 
+
+<p>\end{table}</p>
+</div>
+<div id="App2C" class="section level2">
+<h2><span class="header-section-number">4.10</span> Appendix C: Model evaluation</h2>
+<table>
+<caption><span id="tab:sofietable">Table 4.9: </span> Strategies to address errors and evaluate models by <span class="citation">S. Jacobs (<a href="paper1.html#ref-Jacobs2017">2017</a>)</span></caption>
+<colgroup>
+<col width="6%" />
+<col width="30%" />
+<col width="15%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Issue</th>
+<th>Description</th>
+<th>Solution strategy</th>
+<th>Application</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurement errors</td>
+<td>Sensitivity to changes in raw consistency levels</td>
+<td>Raw consistency</td>
+<td>Use of three different raw consistency thresholds</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Robustness test</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Plausibility &amp; tenability</td>
+<td>Limited diversity &amp; contradictions can trigger inferences that are implausible and/or contradictory</td>
+<td>Enhanced Standard Analysis</td>
+<td>Intermediate solution based on directional expectations and exclusion of contradictory rows and untenable assumptions</td>
+</tr>
+<tr class="even">
+<td>Causal relevance</td>
+<td>Only parsimonious solution removes causally irrelevant conditions from solution term</td>
+<td>Comparative presentation of parsimonious &amp; intermediate solution</td>
+<td>Parsimonious solution is causally interpretable and less sensitive to errors</td>
+</tr>
+<tr class="odd">
+<td>Skewness</td>
+<td>Skewed distributions can produce simultaneous subset relations, exacerbate limited diversity, and strongly distort parameters of fit</td>
+<td>Skewness statistics</td>
+<td>% of cases with membership &gt; 0.5 in sets in reported. Skewness is problematic if the vast majority (&gt; 85%) of the cases cluster in only one of the four possible intersecting areas of the XY plots with two digitals</td>
+</tr>
+<tr class="even">
+<td>Accuracy</td>
+<td>Degree to which observations correspond to set relation</td>
+<td>Consistency</td>
+<td>Necessity: ≥ 0.9</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>Sufficiency: ≥ 0.75</td>
+</tr>
+<tr class="even">
+<td>Explanatory power</td>
+<td>Empirical relevance of model</td>
+<td>Coverage</td>
+<td>Necessity: ≥ 0.6</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>RoN: ≥ 0.8</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>Sufficiency: Low coverage indicates low explanatory power</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="App2D" class="section level2">
+<h2><span class="header-section-number">4.11</span> Appendix D: Analyses</h2>
+
+
+
+
+
+
+
+
+
+
 
 </div>
 </div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Morris2005">
-<p>Morris, Michael, Minet Schindehutte, and Jeffrey Allen. 2005. “The Entrepreneur’s Business Model: Toward a Unified Perspective.” <em>Journal of Business Research</em> 58 (6): 726–35.</p>
-</div>
-<div id="ref-Osterwalder2005">
-<p>Osterwalder, Alexander, Yves Pigneur, and Christopher L. Tucci. 2005. “Clarifying Business Models: Origins, Present, and Future of the Concept.” <em>Communications of the Association for Information Systems</em> 16 (1): 1.</p>
-</div>
-<div id="ref-Teece2010">
-<p>Teece, David J. 2010. “Business Models, Business Strategy and Innovation.” <em>Long Range Planning</em> 43 (2): 172–94.</p>
-</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>The previous versions of this paper have been presented in 2016 EGOS colloqium, GIKA 2016, and QCA expert workshop in Zurich, 2017.<a href="paper2.html#fnref2">↩</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -387,10 +1209,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

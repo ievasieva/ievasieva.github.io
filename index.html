@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Paradox management through business model design</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Paradox management through business model design" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Ieva Rozentale">
 
 
-<meta name="date" content="2018-08-31">
+<meta name="date" content="2018-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -77,7 +77,7 @@
 <li class="chapter" data-level="2" data-path="paper0.html"><a href="paper0.html"><i class="fa fa-check"></i><b>2</b> THRIVING OFF OF TENSIONS:</a></li>
 <li class="chapter" data-level="3" data-path="paper1.html"><a href="paper1.html"><i class="fa fa-check"></i><b>3</b> <em>CRAFTING</em> BUSINESS MODELS FOR PARADOXICAL GOALS:</a></li>
 <li class="chapter" data-level="4" data-path="paper2.html"><a href="paper2.html"><i class="fa fa-check"></i><b>4</b> KILLING TWO BIRDS WITH ONE BUSINESS MODEL:</a></li>
-<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> ORGANIZATIONAL COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODEL HETEROGENEITY, AND PERFORMANCE:</a></li>
+<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODELS, AND PERFORMANCE:</a></li>
 <li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a><ul>
 <li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html#summary-of-results"><i class="fa fa-check"></i><b>6.1</b> Summary of results</a></li>
 </ul></li>
@@ -107,7 +107,7 @@
 <h1 class="title">Paradox management through business model design</h1>
 <h3 class="subtitle"><em>Disseration draft</em></h3>
 <h4 class="author"><em>Ieva Rozentale</em></h4>
-<h4 class="date"><em>2018-08-31</em></h4>
+<h4 class="date"><em>2018-09-16</em></h4>
 </div>
 <div id="notes-on-draft" class="section level1 unnumbered">
 <h1>Notes on draft</h1>
@@ -116,19 +116,23 @@
 <li>The introduction (to introduction) I wrote last summer. I included it in case it resonates, but can also be rewritten completely. I included the subsections I estimate to decribe in it and the questions they should answer.<br />
 </li>
 <li>Chapter 3 (aka Paper 1) is finished.</li>
-<li>Chapter 4 needs an update on analysis, since the last version had mixed data from interviews, but I will use survey data.</li>
-<li>Chapter 5 needs an update on analysis including validity tests and an extra opiniono n the correctness of PCA results and their calibration.<br />
+<li>Chapter 4 is finished, it needs review from supervisors and last validity checks of analyses.</li>
+<li>Chapter 5 needs an update on analysis including validity tests and an extra opinion on the correctness of PCA results and their calibration.<br />
 </li>
 <li>Chapter 2 (aka Paper 0) has a half that is written, but is not included in this draft yet not to confuse anyone. I only added abstract.</li>
 </ul>
 <div id="to-do-big" class="section level2 unnumbered">
 <h2>To-do big</h2>
 <ol start="0" style="list-style-type: decimal">
-<li>One clean data set from the last survey download - anonymous and publishable on dataverse<br />
+<li>(DONE) One clean data set from the last survey download - anonymous and publishable on dataverse<br />
 </li>
-<li>Redo the analysis of Paper 2 (“Killing two birds”) &amp; write up results<br />
+<li>(DONE)Redo the analysis of Paper 2 (“Killing two birds”) &amp; write up results<br />
 </li>
-<li>Rebustness and validity checks for Paper 3 (the last one), integrate suggestions from EGOS</li>
+<li>Rebustness and validity checks<br />
+2.1. Paper 2 ESA<br />
+2.2. Paper 3 PCA<br />
+2.3. Paper 3 ESA<br />
+</li>
 <li>Paper 0 (“Thriving off of tensions”) - write a shorter version than initially planned<br />
 </li>
 <li>Introduction</li>
@@ -140,14 +144,14 @@
 <div id="to-do-small" class="section level2 unnumbered">
 <h2>To-do small</h2>
 <ol style="list-style-type: decimal">
-<li>Paper 2 and 3 make cross-linkable references<br />
+<li>(DONE) Paper 2 and 3 make cross-linkable references<br />
 </li>
-<li>Check all the tables and figures so they follow a consecutive order, and rename filenames accordingly.</li>
+<li>(DONE) Check all the tables and figures so they follow a consecutive order, and rename filenames accordingly.</li>
 <li>Check the texts so they are not repetitive, for paper 3 I did quite some coying from earlier versions of other papers (is using the same texts across papers allowed?)<br />
 </li>
 <li>Position of appendices - in each chapter, or in a separate chapter for all papers together?<br />
 </li>
-<li>Make the rendering to pdf work properly with the tables</li>
+<li>(PROBLEMATIC, only html works properly) Make the rendering to pdf work properly with the tables</li>
 </ol>
 </div>
 <div id="for-later" class="section level2 unnumbered">
@@ -155,6 +159,8 @@
 <ol style="list-style-type: decimal">
 <li>Acknowledgements</li>
 <li>Report for industry - which are the interesting insights?<br />
+</li>
+<li>Can I make a separate site as an addition to the thesis?<br />
 </li>
 <li>Automized individual reports for participants</li>
 </ol>
@@ -185,10 +191,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

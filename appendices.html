@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Paradox management through business model design</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Paradox management through business model design" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Ieva Rozentale">
 
 
-<meta name="date" content="2018-08-30">
+<meta name="date" content="2018-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="conclusions.html">
-<link rel="next" href="references.html">
+<link rel="next" href="bibliography.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,6 +47,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.0/grViz.js"></script>
 
 
 
@@ -66,19 +70,111 @@
 <li><a href="./">Ieva's Disseratation</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Notes on draft</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Notes on draft</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#to-do-big"><i class="fa fa-check"></i>To-do big</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#to-do-small"><i class="fa fa-check"></i>To-do small</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#for-later"><i class="fa fa-check"></i>For later</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#a-note-on-methodology-studying-organizations-as-configurations"><i class="fa fa-check"></i><b>1.1</b> A note on methodology: Studying organizations as configurations</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#encountering-and-studying-paradoxes-why"><i class="fa fa-check"></i><b>1.1</b> Encountering and studying paradoxes: Why?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#framing-strategic-conflicts"><i class="fa fa-check"></i><b>1.2</b> Framing strategic conflicts</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#pursuing-conflicting-goals"><i class="fa fa-check"></i><b>1.3</b> Pursuing conflicting goals</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#approaches-to-coping-with-the-paradox"><i class="fa fa-check"></i><b>1.4</b> Approaches to coping with the paradox</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#business-modelling-for-complexity"><i class="fa fa-check"></i><b>1.5</b> Business modelling for complexity</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#heterogeneity-of-organizationl-commitments-and-performance-implications"><i class="fa fa-check"></i><b>1.6</b> Heterogeneity of organizationl commitments and performance implications</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#purpose-and-overview-of-the-thesis"><i class="fa fa-check"></i><b>1.7</b> Purpose and overview of the thesis</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#a-note-on-methodology-studying-organizations-as-configurations"><i class="fa fa-check"></i><b>1.8</b> A note on methodology: Studying organizations as configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="paper0.html"><a href="paper0.html"><i class="fa fa-check"></i><b>2</b> THRIVING OFF OF TENSIONS:</a></li>
-<li class="chapter" data-level="3" data-path="paper1.html"><a href="paper1.html"><i class="fa fa-check"></i><b>3</b> <em>CRAFTING</em> BUSINESS MODELS FOR PARADOXICAL GOALS:</a></li>
-<li class="chapter" data-level="4" data-path="paper2.html"><a href="paper2.html"><i class="fa fa-check"></i><b>4</b> KILLING TWO BIRDS WITH ONE BUSINESS MODEL:</a></li>
-<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> ORGANIZATIONAL COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODEL HETEROGENEITY, AND PERFORMANCE:</a></li>
-<li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a><ul>
-<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html#summary-of-results"><i class="fa fa-check"></i><b>6.1</b> Summary of results</a></li>
+<li class="chapter" data-level="3" data-path="paper1.html"><a href="paper1.html"><i class="fa fa-check"></i><b>3</b> <em>CRAFTING</em> BUSINESS MODELS FOR PARADOXICAL GOALS:</a><ul>
+<li class="chapter" data-level="3.1" data-path="paper1.html"><a href="paper1.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="paper1.html"><a href="paper1.html#literature-review"><i class="fa fa-check"></i><b>3.2</b> Literature review</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="paper1.html"><a href="paper1.html#coping-with-strategic-paradoxes"><i class="fa fa-check"></i><b>3.2.1</b> Coping with strategic paradoxes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="paper1.html"><a href="paper1.html#business-model-design"><i class="fa fa-check"></i><b>3.2.2</b> Business model design</a></li>
+<li class="chapter" data-level="3.2.3" data-path="paper1.html"><a href="paper1.html#a-paradox-perspective-to-business-model-design-conceptual-framework"><i class="fa fa-check"></i><b>3.2.3</b> A paradox perspective to business model design: Conceptual framework</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>7</b> Appendices</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3.3" data-path="paper1.html"><a href="paper1.html#research-approach-and-methods"><i class="fa fa-check"></i><b>3.3</b> Research approach and methods</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="paper1.html"><a href="paper1.html#research-setting-creativity-and-commerce-as-a-paradox"><i class="fa fa-check"></i><b>3.3.1</b> Research setting: Creativity and commerce as a paradox</a></li>
+<li class="chapter" data-level="3.3.2" data-path="paper1.html"><a href="paper1.html#case-selection-data-collection-and-analysis"><i class="fa fa-check"></i><b>3.3.2</b> Case selection, data collection and analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="paper1.html"><a href="paper1.html#findings-designing-business-models-for-paradoxical-goals"><i class="fa fa-check"></i><b>3.4</b> Findings: Designing business models for paradoxical goals</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="paper1.html"><a href="paper1.html#integration-tactics"><i class="fa fa-check"></i><b>3.4.1</b> Integration tactics</a></li>
+<li class="chapter" data-level="3.4.2" data-path="paper1.html"><a href="paper1.html#differentiation-tactics"><i class="fa fa-check"></i><b>3.4.2</b> Differentiation tactics</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="paper1.html"><a href="paper1.html#discussion"><i class="fa fa-check"></i><b>3.5</b> Discussion</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="paper1.html"><a href="paper1.html#cognitive-business-model-design-under-pluralism"><i class="fa fa-check"></i><b>3.5.1</b> Cognitive business model design under pluralism</a></li>
+<li class="chapter" data-level="3.5.2" data-path="paper1.html"><a href="paper1.html#synergies-and-pitfalls-in-paradoxical-business-models"><i class="fa fa-check"></i><b>3.5.2</b> Synergies and pitfalls in paradoxical business models</a></li>
+<li class="chapter" data-level="3.5.3" data-path="paper1.html"><a href="paper1.html#managerial-implications-paradoxical-decision-making-beyond-business-models"><i class="fa fa-check"></i><b>3.5.3</b> Managerial Implications: Paradoxical decision-making beyond business models</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="paper1.html"><a href="paper1.html#conclusions"><i class="fa fa-check"></i><b>3.6</b> Conclusions</a></li>
+<li class="chapter" data-level="3.7" data-path="paper1.html"><a href="paper1.html#acknowledgment"><i class="fa fa-check"></i><b>3.7</b> Acknowledgment</a></li>
+<li class="chapter" data-level="3.8" data-path="paper1.html"><a href="paper1.html#appendix-a-main-business-model-choice-domains-for-creative-service-firms."><i class="fa fa-check"></i><b>3.8</b> Appendix A: Main business model choice domains for (creative) service firms.</a></li>
+<li class="chapter" data-level="3.9" data-path="paper1.html"><a href="paper1.html#appendix-b-case-and-data-source-description."><i class="fa fa-check"></i><b>3.9</b> Appendix B: Case and data source description.</a></li>
+<li class="chapter" data-level="3.10" data-path="paper1.html"><a href="paper1.html#appendix-c-inductive-research-process-and-data-structure."><i class="fa fa-check"></i><b>3.10</b> Appendix C: Inductive research process and data structure.</a></li>
+<li class="chapter" data-level="3.11" data-path="paper1.html"><a href="paper1.html#references"><i class="fa fa-check"></i><b>3.11</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="paper2.html"><a href="paper2.html"><i class="fa fa-check"></i><b>4</b> KILLING TWO BIRDS WITH ONE BUSINESS MODEL:</a><ul>
+<li class="chapter" data-level="4.1" data-path="paper2.html"><a href="paper2.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="paper2.html"><a href="paper2.html#theoretical-background-and-conceptual-framework"><i class="fa fa-check"></i><b>4.2</b> Theoretical background and conceptual framework</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="paper2.html"><a href="paper2.html#business-models-and-firm-performance"><i class="fa fa-check"></i><b>4.2.1</b> Business models and firm performance</a></li>
+<li class="chapter" data-level="4.2.2" data-path="paper2.html"><a href="paper2.html#organizational-goals-pluralism-and-paradoxes-of-performing"><i class="fa fa-check"></i><b>4.2.2</b> Organizational goals, pluralism and paradoxes of performing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="paper2.html"><a href="paper2.html#a-paradox-approach-to-business-models-the-conceptual-framework"><i class="fa fa-check"></i><b>4.2.3</b> A paradox approach to business models: The conceptual framework</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="paper2.html"><a href="paper2.html#the-analytical-model-and-hypotheses"><i class="fa fa-check"></i><b>4.3</b> The analytical model and hypotheses</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="paper2.html"><a href="paper2.html#portfolio-diversification"><i class="fa fa-check"></i><b>4.3.1</b> Portfolio diversification</a></li>
+<li class="chapter" data-level="4.3.2" data-path="paper2.html"><a href="paper2.html#client-segmentation"><i class="fa fa-check"></i><b>4.3.2</b> Client segmentation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="paper2.html"><a href="paper2.html#network-differentiation"><i class="fa fa-check"></i><b>4.3.3</b> Network differentiation</a></li>
+<li class="chapter" data-level="4.3.4" data-path="paper2.html"><a href="paper2.html#dual-revenue-models"><i class="fa fa-check"></i><b>4.3.4</b> Dual revenue models</a></li>
+<li class="chapter" data-level="4.3.5" data-path="paper2.html"><a href="paper2.html#venture-separation-and-integrated-culture"><i class="fa fa-check"></i><b>4.3.5</b> Venture separation and integrated culture</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="paper2.html"><a href="paper2.html#methods-and-data"><i class="fa fa-check"></i><b>4.4</b> Methods and data</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="paper2.html"><a href="paper2.html#qca-and-its-suitability-for-the-study-of-business-models-and-paradox-management"><i class="fa fa-check"></i><b>4.4.1</b> QCA and its suitability for the study of business models and paradox management</a></li>
+<li class="chapter" data-level="4.4.2" data-path="paper2.html"><a href="paper2.html#research-setting-and-data-collection"><i class="fa fa-check"></i><b>4.4.2</b> Research setting and data collection</a></li>
+<li class="chapter" data-level="4.4.3" data-path="paper2.html"><a href="paper2.html#measures-calibration-and-analyses"><i class="fa fa-check"></i><b>4.4.3</b> Measures, calibration, and analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="paper2.html"><a href="paper2.html#results"><i class="fa fa-check"></i><b>4.5</b> Results</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="paper2.html"><a href="paper2.html#analysis-1-high-creative-high-business-performance"><i class="fa fa-check"></i><b>4.5.1</b> Analysis 1: High creative, high business performance</a></li>
+<li class="chapter" data-level="4.5.2" data-path="paper2.html"><a href="paper2.html#analysis-2-high-creative-low-business-performance"><i class="fa fa-check"></i><b>4.5.2</b> Analysis 2: High creative, low business performance</a></li>
+<li class="chapter" data-level="4.5.3" data-path="paper2.html"><a href="paper2.html#analysis-3-low-creative-high-business-performance"><i class="fa fa-check"></i><b>4.5.3</b> Analysis 3: Low creative, high business performance</a></li>
+<li class="chapter" data-level="4.5.4" data-path="paper2.html"><a href="paper2.html#analysis-4-low-creative-low-business-performance"><i class="fa fa-check"></i><b>4.5.4</b> Analysis 4: Low creative, low business performance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="paper2.html"><a href="paper2.html#discussion-1"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+<li class="chapter" data-level="4.7" data-path="paper2.html"><a href="paper2.html#conclusion"><i class="fa fa-check"></i><b>4.7</b> Conclusion</a></li>
+<li class="chapter" data-level="4.8" data-path="paper2.html"><a href="paper2.html#App2A"><i class="fa fa-check"></i><b>4.8</b> Appendix A: Sample description</a></li>
+<li class="chapter" data-level="4.9" data-path="paper2.html"><a href="paper2.html#App2B"><i class="fa fa-check"></i><b>4.9</b> Appendix B: Measures and calibration</a></li>
+<li class="chapter" data-level="4.10" data-path="paper2.html"><a href="paper2.html#App2C"><i class="fa fa-check"></i><b>4.10</b> Appendix C: Model evaluation</a></li>
+<li class="chapter" data-level="4.11" data-path="paper2.html"><a href="paper2.html#App2D"><i class="fa fa-check"></i><b>4.11</b> Appendix D: Analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="paper3.html"><a href="paper3.html"><i class="fa fa-check"></i><b>5</b> COMMITMENTS TO CONFLICTING LOGICS, BUSINESS MODELS, AND PERFORMANCE:</a><ul>
+<li class="chapter" data-level="5.1" data-path="paper3.html"><a href="paper3.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="paper3.html"><a href="paper3.html#literature-review-1"><i class="fa fa-check"></i><b>5.2</b> Literature review</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="paper3.html"><a href="paper3.html#strategic-pluralism-and-decision-making"><i class="fa fa-check"></i><b>5.2.1</b> Strategic pluralism and decision-making</a></li>
+<li class="chapter" data-level="5.2.2" data-path="paper3.html"><a href="paper3.html#business-model-heterogeneity-and-organizational-success-in-pluralistic-settings"><i class="fa fa-check"></i><b>5.2.2</b> Business model heterogeneity and organizational success in pluralistic settings</a></li>
+<li class="chapter" data-level="5.2.3" data-path="paper3.html"><a href="paper3.html#conflicts-and-success-criteria-in-the-creative-service-firms"><i class="fa fa-check"></i><b>5.2.3</b> Conflicts and success criteria in the creative service firms</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="paper3.html"><a href="paper3.html#methods"><i class="fa fa-check"></i><b>5.3</b> Methods</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="paper3.html"><a href="paper3.html#a-configurational-approach-to-the-study-of-business-models"><i class="fa fa-check"></i><b>5.3.1</b> A configurational approach to the study of business models</a></li>
+<li class="chapter" data-level="5.3.2" data-path="paper3.html"><a href="paper3.html#qualitative-comparative-analysis"><i class="fa fa-check"></i><b>5.3.2</b> Qualitative Comparative Analysis</a></li>
+<li class="chapter" data-level="5.3.3" data-path="paper3.html"><a href="paper3.html#data-and-research-setting"><i class="fa fa-check"></i><b>5.3.3</b> Data and research setting</a></li>
+<li class="chapter" data-level="5.3.4" data-path="paper3.html"><a href="paper3.html#survey-measures"><i class="fa fa-check"></i><b>5.3.4</b> Survey measures</a></li>
+<li class="chapter" data-level="5.3.5" data-path="paper3.html"><a href="paper3.html#fuzzy-set-calibration-and-qualitative-comparative-analysis"><i class="fa fa-check"></i><b>5.3.5</b> Fuzzy set calibration and Qualitative Comparative Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="paper3.html"><a href="paper3.html#results-1"><i class="fa fa-check"></i><b>5.4</b> Results</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="paper3.html"><a href="paper3.html#analysis-1-high-creative-high-business-performance-1"><i class="fa fa-check"></i><b>5.4.1</b> Analysis 1: High creative, high business performance</a></li>
+<li class="chapter" data-level="5.4.2" data-path="paper3.html"><a href="paper3.html#analysis-2-low-creative-high-business-performance"><i class="fa fa-check"></i><b>5.4.2</b> Analysis 2: Low creative, high business performance</a></li>
+<li class="chapter" data-level="5.4.3" data-path="paper3.html"><a href="paper3.html#analysis-3-high-creative-low-business-performance"><i class="fa fa-check"></i><b>5.4.3</b> Analysis 3: High creative, low business performance</a></li>
+<li class="chapter" data-level="5.4.4" data-path="paper3.html"><a href="paper3.html#analysis-4-low-creative-low-business-performance-1"><i class="fa fa-check"></i><b>5.4.4</b> Analysis 4: Low creative, low business performance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="paper3.html"><a href="paper3.html#discussion-2"><i class="fa fa-check"></i><b>5.5</b> Discussion</a></li>
+<li class="chapter" data-level="5.6" data-path="paper3.html"><a href="paper3.html#conclusions-1"><i class="fa fa-check"></i><b>5.6</b> Conclusions</a></li>
+<li class="chapter" data-level="5.7" data-path="paper3.html"><a href="paper3.html#appendices"><i class="fa fa-check"></i><b>5.7</b> Appendices</a></li>
+<li class="chapter" data-level="5.8" data-path="paper3.html"><a href="paper3.html#references-1"><i class="fa fa-check"></i><b>5.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="paper1.html"><a href="paper1.html#conclusions"><i class="fa fa-check"></i><b>6</b> Conclusions</a><ul>
+<li class="chapter" data-level="6.1" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6.1</b> Summary of results</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="paper3.html"><a href="paper3.html#appendices"><i class="fa fa-check"></i><b>7</b> Appendices</a></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -110,7 +206,7 @@
         </div>
       </div>
 <a href="conclusions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bibliography.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -128,10 +224,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
