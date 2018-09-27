@@ -1,0 +1,534 @@
+###############################################################################
+##                                                                           ##
+##  Title       : Replication material for "Paper 2"                         ##
+##                                                                           ##
+##  Author      : Ieva Rozentale                                             ##
+##  Affiliation : Amsterdam Business School                                  ##
+##  Version     : 07/09/2018                                                 ##
+##  RQ          : What (combinations of) separation strategies at            ## 
+##                BM level are nec./suf. for superior perfromance in both    ##
+##                goals?                                                     ##
+##  Description : Data only from the surveys   N=179                         ## 
+##                Calibration TFR only                                       ## 
+##                                                                           ## 
+##                                                                           ## 
+###############################################################################
+
+pkg <- c("corrr", "janitor", "readr", "tidyr", "devtools", "dplyr", "plyr", "tidyselect", "e1071", "purrr", "psy", "psych", "GPArotation", "tibble", "boot", "ltm", "xtable", "kableExtra", "sem", "lavaan", "irr", "QCA", "SetMethods", "Hmisc")
+
+# Check if packages are not installed and assign the
+# names of the packages not installed to the variable new.pkg
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+install.packages("install.load")
+library(install.load)
+
+# If there are any packages in the list that aren't installed,
+# install them
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos = "http://cran.rstudio.com")
+}
+
+# Load the packages into R
+library(dplyr)
+library(knitr)
+library(corrr)
+library(readr)
+library(tidyr)
+library(devtools)
+library(plyr)
+library(tidyselect)
+library(QCA)
+library(SetMethods)
+library(graphics)
+library(Hmisc)
+library(janitor)
+
+bots_clean <- read_csv("~/Dropbox/1PhD/Articles/Survey Data/bots_clean_small.csv") #MAC
+bots_clean <-read_csv("C:/Users/irozent1/Dropbox/1PhD/Articles/Survey Data/bots_clean_small.csv") #WINDOWS
+
+#Select only the variables that are relevant - caseID, all possible diffs, performance, spinouts. 
+
+p2 <- subset(bots_clean, select=c("Q1_1","Q1_3", "Q1_8", "Q3_BM2_1", "Q3_BM2_2", "Q3_BM2_3", "Q3_BM2_4", 
+                                  "Q9_BM8_1", "Q9_BM8_2", "Q5_BM4_2", "Q13_1", "Q13_3", "Q13_4", "Q13_5", 
+                                  "Q14_SPSEP_1", "Q14_SPSEP_2", "Q20_BP_1", "Q20_BP_2", "Q20_BP_3", "Q20_BP_4", 
+                                  "Q20_BP_5", "Q20_BP_6", "Q20_BP_7", "Q20_BP_8", "Q20_BP_9", "Q20_BP_10",
+                                  "Q20_BP_11", "Q20_BP_12", "Q20_CP_1", "Q20_CP_2", "Q20_CP_3", "Q20_CP_4", 
+                                  "Q20_CP_5", "Q20_CP_6", "Q20_CP_7", "Q20_CP_8", "Q20_CP_9", "Q20_CP_10","Q20_CP_11", 
+                                  "Q16_Q16_INT1",  "Q16_Q16_INT2",  "Q16_Q16_INT3",  "Q16_Q16_INT4",  "Q16_Q16_INT5", 
+                                  "Q16_Q16_INT6",  "Q16_Q16_DIF1", "Q16_Q16_DIF2", "Q16_Q16_DIF3", "Q16_Q16_DIF4", 
+                                  "Q16_Q16_DIF5", "Q16_Q16_DIF6"))
+
+p2$Q1_1[130] <- "Restored"
+
+##From the pre-test I can conclude that there are four performance dimensions in our scales, not two. 
+##For this paper two of them are used. The other measures deal with employee satisfaction and client retention. 
+p2$CP <- rowMeans(p2[,c("Q20_CP_1", "Q20_CP_2", "Q20_CP_9", "Q20_CP_10")]) ##Adding creative performance to data frame
+p2$BP <- round(rowMeans(p2[,  c("Q20_BP_1", "Q20_BP_3", "Q20_BP_10")]),2) ##Adding business performance to data frame
+
+#Creating a new data frame for analysis
+
+newdf <- p2[,c("Q1_1", "Q16_Q16_DIF1", "Q16_Q16_DIF3", "Q16_Q16_DIF4", 
+               "Q16_Q16_DIF5", "CP", "BP")]
+
+#DIF1 - Portfolio diversification
+#DIF3 - Client segmentation
+#DIF4 - Partner segmentation
+#DIF5 - Different revenue models
+
+#INT2 + INT6 - Integrated culture variable
+newdf$INTCULT <- rowMeans(p2[,  c("Q16_Q16_INT6", "Q16_Q16_INT2")])
+
+#Adding venture separation as a variable 
+newdf$SPINDIF <- pmax(p2$Q14_SPSEP_1, p2$Q14_SPSEP_2)
+
+#Create numeric identifiers for cases
+newdf$NUMID <- 1:179
+
+#Rename columns
+colnames(newdf) <- c("ID", "VPDIF", "SEGM", "NETWDIF", "REVDIF", "CP", "BP", "INTCULT", "SPINDIF", "NUMID")
+
+#Reorder columns
+newdf <- newdf[,c(1,10,2,3,4,5,9,8,6,7)]
+
+#Write anonymous data frame without case names
+write.csv2(newdf[,2:10], "myrawdataP2.csv")
+
+#newdf$BAL <- pmin(newdf$CP, newdf$BP)
+
+#3#############
+##-----------##
+## ANALYSIS  ##
+##-----------##
+###############
+
+
+#fsq <- read.csv("C:/Users/irozent1/Dropbox/1PhD/Articles/Survey Data/myrawdata.csv") #Windows
+fsq <- read.csv2("~/Dropbox/1PhD/Articles/Survey Data/myrawdataP2.csv") #MAC
+fsq <- fsq[2:10]
+
+#checking correlations between raw vairables
+cor(fsq[,2:9])
+
+#----------------------------------------
+#Calibrating data using the TRF method
+#----------------------------------------
+
+## using the TFR methods (total fuzzy relative) to calibrate PCA memberships into QCA memberships.
+## it uses the empirical cumulative distribution formula to compute the maximum an minimum membershisp
+##thos are then transformed into fuzzy set memberships
+fsq2 <- fsq[1]
+
+E <- ecdf(fsq$VPDIF)
+fsq2$VPDIF <- pmax(0, (E(fsq$VPDIF) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$SEGM)
+fsq2$SEGM <- pmax(0, (E(fsq$SEGM) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$NETWDIF)
+fsq2$NETWDIF <- pmax(0, (E(fsq$NETWDIF) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$REVDIF)
+fsq2$REVDIF <- pmax(0, (E(fsq$REVDIF) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$SPINDIF)
+fsq2$SPINDIF <- pmax(0, (E(fsq$SPINDIF) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$INTCULT)
+fsq2$INTCULT <- pmax(0, (E(fsq$INTCULT) - E(1)) / (1 - E(1)))
+
+E <- ecdf(fsq$CP)
+fsq2$CP <- pmax(0, (E(fsq$CP) - E(1)) / (1 - E(1)))
+E <- ecdf(fsq$BP)
+fsq2$BP <- pmax(0, (E(fsq$BP) - E(1)) / (1 - E(1)))
+
+#CREATING OUTCOME SETS using fuzzyand() function
+fsq2$BAL <- fuzzyand(fsq2$CP, fsq2$BP) #Firms that show both high creative and business performances
+fsq2$NOBP <- fuzzyand(fsq2$CP, 1-fsq2$BP) #Firms that show high creative and low business performance
+fsq2$NOCP <- fuzzyand(1-fsq2$CP, fsq2$BP) #Firms that show low creative and high business performance
+fsq2$BOTHLOW <- fuzzyand(1-fsq2$CP, 1-fsq2$BP) #Firms that show both low creative and business performances
+
+fsq2[,c(2:13)] <- round(fsq2[,c(2:13)],3)
+table(fsq2$BAL)
+
+#---------------------
+#Calibrated data frame
+#---------------------
+#myfuzzy$ID[124] <- "X" #test for the QCA code
+write.csv2(fsq2, "myfuzzydataTFR.csv")
+#write.csv2(fsq2, "myfuzzydataDirect.csv")
+
+#--------------------------------
+#Descriptive statistics raw data
+#--------------------------------
+d.summary.extended <- fsq[2:9] %>%
+  psych::describe(quant=c(.25,.75)) %>%
+  as_tibble() %>%
+  rownames_to_column() %>%
+  print()
+
+# Select stats for comparison with other solutions
+d.summary <- d.summary.extended %>%
+  dplyr::select(var=rowname, min, max, mean, sd, skew) %>%
+  print()
+
+#-------------------------------------
+#Plotting the distribution of raw data
+#-------------------------------------
+
+library(lattice)
+densityplot(~CP+BP+VPDIF+SEGM+NETWDIF+REVDIF+SPINDIF+INTCULT, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores all conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BP +CP, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores BAL",
+            auto.key = list(space = "right"))
+
+densityplot(~VPDIF+SEGM+NETWDIF+REVDIF, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores proximate conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~SPINDIF+INTCULT, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores remote conditions and outcome",
+            auto.key = list(space = "right"))
+
+#-------------------------------------
+#Plotting the distribution of calibrated data
+#-------------------------------------
+
+library(lattice)
+densityplot(~BAL+VPDIF+SEGM+NETWDIF+REVDIF+SPINDIF+INTCULT, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Clibrated scores all conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL +CP +BP, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores BAL",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL+VPDIF+SEGM+NETWDIF+REVDIF, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores proximate conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL+SPINDIF+INTCULT, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores remote conditions and outcome",
+            auto.key = list(space = "right"))
+
+
+#-----------------------------------------
+#Plotting calibration against raw scores
+#-----------------------------------------
+
+#Business performance
+plot(fsq$BP, fsq2$BP, pch=18, col="black",
+     main='Business performance',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Creative performance
+plot(fsq$CP, fsq2$CP, pch=18, col="black",
+     main='Creative performance',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Value proposition differentiation
+plot(fsq$VPDIF, fsq2$VPDIF, pch=18, col="black",
+     main='Value proposition differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Client segmentation
+plot(fsq$SEGM, fsq2$SEGM, pch=18, col="black",
+     main='Client segmentation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Network differentiation
+plot(fsq$NETWDIF, fsq2$NETWDIF, pch=18, col="black",
+     main='Network differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Revenue model  differentiation
+plot(fsq$REVDIF, fsq2$REVDIF, pch=18, col="black",
+     main='Revenue model  differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Venture separation
+plot(fsq$SPINDIF, fsq2$SPINDIF, pch=18, col="black",
+     main='Venture separation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Integrated culture
+plot(fsq$INTCULT, fsq2$INTCULT, pch=18, col="black",
+     main='Integrated culture',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Most of the calibrations seem reasonable, however the "remote conditions" aka Integrated Culture and 
+#Venture Separation, as well as the creative performance variable (each to slightly different extents)
+#exclude raw values of 5 (intcult and CP), and even 6 (spindif) as being out of the set. 
+
+#SINCE DIFFERENTIATED APPROACH TO VENTURES IS MORE OF A YES OR NO QUESTION THEN I SHOULD INCLUDE ABOVE 4.01
+
+#Checking if there are any calibrations at the 0.5 crossover point.
+#The code returns "0", if there are any. 
+row.names(fsq2[which(fsq2[,2:13]==0.5),])
+#None in our case
+
+#---------------------
+# SKEWNESS TABLE
+#---------------------
+
+skewSETS  <- function(x){
+ y <- as.numeric(x > 0.5)
+    prop.table(table(y))
+  }
+
+skewTAB <- as.data.frame(apply(fsq2, 2, skewSETS))
+skewTAB <- skewTAB[!grepl(".y", names(skewTAB))]
+skewTAB <- t(skewTAB) %>% as.data.frame()
+skewTAB <- skewTAB[2:13,]
+colnames(skewTAB) <- c("Perc. 0", "Perc.1")
+skewTAB
+
+#               Perc. 0    Perc.1
+#VPDIF.Freq   0.4916201 0.5083799
+#SEGM.Freq    0.3296089 0.6703911
+#NETWDIF.Freq 0.4636872 0.5363128
+#REVDIF.Freq  0.4413408 0.5586592
+#SPINDIF.Freq 0.8491620 0.1508380
+#INTCULT.Freq 0.3687151 0.6312849
+#CP.Freq      0.4301676 0.5698324
+#BP.Freq      0.3575419 0.6424581
+#BAL.Freq     0.5977654 0.4022346
+#NOBP.Freq    0.8324022 0.1675978
+#NOCP.Freq    0.7597765 0.2402235
+#BOTHLOW.Freq 0.8100559 0.1899441
+
+##################################
+## ANALYSIS FOR TFR CALIBRATION ##
+##################################
+
+#--------------------------------
+#--------------------------------
+#ANALYSIS FOR PRESENCE OF BALANCE 
+#--------------------------------
+#--------------------------------
+
+#REMOTE: INTCULT & SPINDIF (org level)
+#PROXIMATE: VPDIF + SEGM + NETWDIF + REVDIF (business model level)
+
+#---------------------------------------------------
+# STEP I:  NECCESSITY OF CONDITIONS
+#---------------------------------------------------
+
+#NECCESSITY OF PRESENCE OF REMOTE CONDITIONS
+
+QCAfit(fsq2[, c(6,7)], fsq2$BAL, names(fsq2[, c(6,7)]), necessity = TRUE)
+
+#           Cons.Nec  Cov.Nec   RoN
+# SPINDIF    0.217    0.482    0.896
+# INTCULT    0.774    0.579    0.663
+
+#NECCESSITY OF ABSENCE OF REMOTE CONDITIONS
+
+QCAfit(1 - fsq2[, c(6,7)], fsq2$BAL, paste("not", names(fsq2[, c(6,7)])), necessity = TRUE)
+
+#             Cons.Nec  Cov.Nec   RoN
+# not SPINDIF    0.848   0.424   0.281
+# not INTCULT    0.628   0.566   0.735
+
+#NECCESSITY OF PRESENCE OF PROXIMATE CONDITIONS
+
+QCAfit(fsq2[, c(2:5)], fsq2$BAL, names(fsq2[, c(2:5)]), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+#VPDIF      0.736   0.546 0.643
+#SEGM       0.724   0.542 0.644
+#NETWDIF    0.696   0.580 0.712
+#REVDIF     0.699   0.548 0.670
+
+#NECCESSITY OF ABSENCE OF PROXIMATE CONDITIONS
+QCAfit(1 - fsq2[, c(2:5)], fsq2$BAL, paste("not", names(fsq2[, c(2:5)])), necessity = TRUE)
+
+
+# Cons. Nec. Cov. Nec.   RoN
+#not VPDIF      0.635   0.578 0.744
+#not SEGM       0.609   0.549 0.728
+#not NETWDIF    0.680   0.545 0.679
+#not REVDIF     0.665   0.568 0.716
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "BAL", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF", "INTCULT"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+ssFSQ
+##there are no combinations of conditions that would be neccessary with the set cut-offs, even not with 0.8
+##we can conclude that there are no conditions that are individually or jointly neccessary for the outcome to occur
+
+#---------------------------------------------------
+# STEP I:  SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF")
+cons2 <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF", "INTCULT")
+
+TTs <- truthTable(fsq2, outcome = "BAL", 
+                   conditions = cons,
+                   incl.cut1 = .8,
+                   n.cut=2,
+                   complete = TRUE,
+                   show.cases = F,
+                   PRI = TRUE,
+                   sort.by = c("incl", "n"))
+TTs
+
+# Conservative:
+
+Conss <- minimize(TTs, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conss
+
+
+# Parsimonious:
+
+Parss <- minimize(TTs, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parss
+
+
+# Intermediate:
+
+Inters <- minimize(TTs, details = TRUE, dir.exp = "1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Inters
+
+###All three of the solutions are identic in our case
+###The problem is that the PRI and coverahe scores are rather low 
+###Coverage shows that we might be missing out on variables
+###PRI indicates the degree to which a given causal configuration is not simultaneously 
+###sufficient for aso the non-occurence of the outcome, in our case thus is. --> does this indicate calibration problems?
+
+#n OUT = 1/0/C: 22/157/0 
+#Total      : 179 
+
+#Number of multiple-covered cases: 6 
+
+#M1: vpdif*segm*REVDIF + vpdif*netwdif*REVDIF + VPDIF*segm*NETWDIF*revdif => BAL
+
+#                               inclS  PRI    covS   covU   cases 
+#----------------------------------------------------------------------------------------------------------- 
+# 1  vpdif*segm*REVDIF          0.770  0.281  0.346  0.023  42,48,67,163,168,178; 36,93,100,149,169 
+# 2  vpdif*netwdif*REVDIF       0.780  0.284  0.366  0.073  42,48,67,163,168,178; 40,88,91,99,103,128,167,173 
+# 3  VPDIF*segm*NETWDIF*revdif  0.803  0.301  0.298  0.079  37,98,158 
+#----------------------------------------------------------------------------------------------------------- 
+#    M1                         0.738  0.306  0.498 
+
+TTs2 <- truthTable(fsq2, outcome = "BAL", 
+                  conditions = cons2,
+                  incl.cut1 = .8,
+                  n.cut=1,
+                  complete = TRUE,
+                  show.cases = F,
+                  PRI = TRUE,
+                  sort.by = c("incl", "n"))
+TTs2
+
+# Conservative:
+
+Conss2 <- minimize(TTs2, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conss2
+
+
+# Parsimonious:
+
+Parss2 <- minimize(TTs2, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parss2
+
+
+# Intermediate:
+Inters2 <- minimize(TTs2, details = TRUE, dir.exp = "1, 1, 1, 1,1,1", include="?", row.dom=TRUE, show.cases = TRUE)
+Inters2
+
+#I tried several ways of changing the conditions in the analysis with intcult and spindif, 
+#the one that worked the best was when I take out VPDIF
+#However, in general I have concerns about calibration, especially for the conditions which are mixed, like spind dif,
+#performances, and intcult
+
+mcor<-round(cor(fsq[2:9]),2)
+mcor
+upper<-mcor
+upper[upper.tri(mcor)]<-""
+upper<-as.data.frame(upper)
+upper
+
+
+tab <- corstars(fsq[,2:9])
+
+
+
+# x is a matrix containing the data
+# method : correlation method. "pearson"" or "spearman"" is supported
+# removeTriangle : remove upper or lower triangle
+# results :  if "html" or "latex"
+# the results will be displayed in html or latex format
+corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
+                    result=c("none", "html", "latex")){
+  #Compute correlation matrix
+  require(Hmisc)
+  x <- as.matrix(x)
+  correlation_matrix<-rcorr(x, type=method[1])
+  R <- correlation_matrix$r # Matrix of correlation coeficients
+  p <- correlation_matrix$P # Matrix of p-value 
+  
+  ## Define notions for significance levels; spacing is important.
+  mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "**  ", ifelse(p < .05, "*   ", "    "))))
+  
+  ## trunctuate the correlation matrix to two decimal
+  R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+  
+  ## build a new matrix that includes the correlations with their apropriate stars
+  Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
+  diag(Rnew) <- paste(diag(R), " ", sep="")
+  rownames(Rnew) <- colnames(x)
+  colnames(Rnew) <- paste(colnames(x), "", sep="")
+  
+  ## remove upper triangle of correlation matrix
+  if(removeTriangle[1]=="upper"){
+    Rnew <- as.matrix(Rnew)
+    Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+    Rnew <- as.data.frame(Rnew)
+  }
+  
+  ## remove lower triangle of correlation matrix
+  else if(removeTriangle[1]=="lower"){
+    Rnew <- as.matrix(Rnew)
+    Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
+    Rnew <- as.data.frame(Rnew)
+  }
+  
+  ## remove last column and return the correlation matrix
+  Rnew <- cbind(Rnew[1:length(Rnew)-1])
+  if (result[1]=="none") return(Rnew)
+  else{
+    if(result[1]=="html") print(xtable(Rnew), type="html")
+    else print(xtable(Rnew), type="latex") 
+  }
+} 

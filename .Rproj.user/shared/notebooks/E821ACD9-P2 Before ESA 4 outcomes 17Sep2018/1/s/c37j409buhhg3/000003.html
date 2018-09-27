@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script src="lib/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="lib/viz-0.3/viz.js"></script>
+<link href="lib/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="lib/grViz-binding-1.0.0/grViz.js"></script>
+
+</head>
+<body style="background-color:white;">
+<!-- htmlwidget-container-begin -->
+<div id="htmlwidget-06e4999b485b279bd4f5" style="width:500px;height:500px;" class="grViz html-widget"></div>
+<!-- htmlwidget-container-end -->
+<script type="application/json" data-for="htmlwidget-06e4999b485b279bd4f5">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  segm; SEGM\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 1.5] // sets as circles\n  NETWDIF; VPDIFnetwdif; vpdifnetwdif; revdif; spindifREVDIF; SPINDIFrevdif; SPINDIF\n\n  # several \"edge\" statements\n  segm->NETWDIF NETWDIF-> revdif \n  segm->VPDIFnetwdif VPDIFnetwdif->spindifREVDIF VPDIFnetwdif->SPINDIFrevdif \n  SEGM->vpdifnetwdif vpdifnetwdif->SPINDIF\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<!-- htmlwidget-sizing-policy-base64 PHNjcmlwdCB0eXBlPSJhcHBsaWNhdGlvbi9odG1sd2lkZ2V0LXNpemluZyIgZGF0YS1mb3I9Imh0bWx3aWRnZXQtMDZlNDk5OWI0ODViMjc5YmQ0ZjUiPnsidmlld2VyIjp7IndpZHRoIjo0NTAsImhlaWdodCI6MzUwLCJwYWRkaW5nIjoxNSwiZmlsbCI6dHJ1ZX0sImJyb3dzZXIiOnsid2lkdGgiOjk2MCwiaGVpZ2h0Ijo1MDAsInBhZGRpbmciOjQwLCJmaWxsIjpmYWxzZX19PC9zY3JpcHQ+ -->
+</body>
+</html>

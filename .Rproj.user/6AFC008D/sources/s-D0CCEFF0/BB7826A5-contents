@@ -1,0 +1,1737 @@
+
+####################################
+#FILE FOR INSPECTION OF NECESSARY AND SUFFICIENT CONDITIONS, COMMANDS ADDED, ALL STEPS UNCHANGED
+# Notice the argument "row.names=1" this would make the intial "NR." column in your data 
+# the label of each case. It will subsequently use this in plots and analyses.
+#####
+
+SR <- read.csv("EFP raw data.csv", sep=",", row.names = 1)
+head(SR)
+SF_def<- read.csv("SF_defMar23.csv", sep=",", row.names = 1)
+head(SF_def)
+#####
+# It would be good to have some descriptive statistics on the raw data before deciding on calibration
+#####
+
+summary(SR)
+
+#####
+# Here are some other ways to check distributions as well
+#####
+
+dotchart(SR$CON, xlab="Content")
+
+hist(SR$CON, xlab="Content")
+
+plot(density(SR$CON))
+
+# We can make it more colourful:
+
+plot(density(SR$CON), main="Kernel Density of Raw Content data") # main gives a name for the plot (xlim and ylim give names for the axes)
+polygon(con, col="red", border="blue")
+
+# Or we can plot conditions together in the same plot so we can see how their distributions compare:
+# (there are a lot of them for the same graph, but you can split them and find the graph useful later)
+# if you don't have lattice already there: install.packages(lattice)
+# Density describes the relative likelihood for a variable to take on a given value
+
+library(lattice)
+densityplot(~OUT+CON+FOR+ENV+INT+ORG+LEA+HR+MAR+DIS+EXT, data=SR, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores",
+            auto.key = list(space = "right"))
+
+densityplot(~OUT, data=SR, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores OUT",
+            auto.key = list(space = "right"))
+
+densityplot(~OUT+CON+FOR+MAR+DIS, data=SR, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores Proximate conditions and OUT",
+            auto.key = list(space = "right"))
+
+densityplot(~OUT+ENV+INT+ORG+LEA+HR+EXT, data=SR, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores remote conditions and OUT",
+            auto.key = list(space = "right"))
+
+###########################
+###########################
+# NEW CALIBRATION PROPOSAL
+###########################
+###########################
+
+
+# Don't forget to add labels to sets (e.g. the set of High market share attainment)
+
+
+fuzfil <- SR
+fuzfil$OUT <- calibrate(SR$OUT, type = "fuzzy", thresholds = c(1.05, 4.50, 5.95), logistic = TRUE)
+
+# The outcome values do not come from an index and have discrete values. 
+# That's why we make calibration anchor 4.50. Values of 4 and 
+# below are considered more out than in of the set of success in market share.
+# With this calibration also, we keep the qualitative difference between values 
+# of 4 and below and values 5 or 6. 
+# 6 means the responded has fully achieved the outcome;
+# Values of 1 represent complete failure in achieving the outcome;
+
+
+fuzfil$ENV <- calibrate(SR$ENV, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$INT <- calibrate(SR$INT, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$ORG <- calibrate(SR$ORG, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$LEA <- calibrate(SR$LEA, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$HR <- calibrate(SR$HR, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$MAR <- calibrate(SR$MAR, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$DIS <- calibrate(SR$DIS, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+fuzfil$EXT <- calibrate(SR$EXT, type = "fuzzy", thresholds = c(1.05, 4.00, 5.95), logistic = TRUE)
+
+# The conditions come from an average of several survey items, 
+# so we can pick integer values for the 0.5 threshold, 
+# as the values are more fine-grained.
+# While one could pick the middle of the Likert scale (3.5) as the 
+# crossover point, we want to make membership in the set a bit stricter than this
+# since we want members in these sets represent highly achieved conditions.
+# 4.00 could be justifiable in this respect.
+
+
+fuzfil$CON <- calibrate(SR$CON, type = "fuzzy", thresholds = c(3.00, 4.50, 5.95), logistic = TRUE)
+fuzfil$FOR <- calibrate(SR$FOR, type = "fuzzy", thresholds = c(2.00, 4.50, 5.95), logistic = TRUE)
+
+# There are two conditions which are quite skewed. 
+# Condition CON only has values above 3, and condition FOR only values above 2.
+# This gives us reason to think that there might have been something 
+# (some psychological mechanism, or the way we phrased the question)
+# that made respondents rate themselfs higher on these questions.
+# Due to this presupposed bias, we raise the 0.5 and 0 anchors 
+# in order to preserve the qualitative meaning of what we mean by in or out of these two sets.
+
+SF_def <- fuzfil
+rm(fuzfil)
+
+head(SF_def)
+
+# Let's save the data:
+
+write.csv(SF_def, "SF_defMar23.csv")
+
+#Summary of calibrated data:
+
+summary(SF_def)
+
+# Plots of raw & fuzzy scores for outcome and 10 conditions
+
+plot(SR$OUT, SF_def$OUT, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Market share audience, calibration 1.05, 4.50, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"OUT"]==0.5),]) 
+
+# returns null if there are no conditions with 0.5 score, 
+# returs names of cases of there are ones with 0.5;
+#0
+############################
+plot(SR$MAR, SF_def$MAR, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Marketing, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"MAR"]==0.5),])
+#"8"   "11"  "16"  "28"  "41"  "70"  "108" "118" "121" "133" "144" "162" "223" "231" "235" "263" "315" "317"
+# Quite a few rows, 
+# let's recalibrate these as below the anchor since they are exactly at 4.0,
+# and we are looking for strict membership; (see afer plots at the end)
+
+###########################
+plot(SR$CON, SF_def$CON, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Content, calibration 3.00, 4.50, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"CON"]==0.5),])
+#"27"  "35"  "38"  "84"  "230" "257" "260" "269" "275" "285" "329"
+
+###########################
+plot(SR$FOR, SF_def$FOR, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Form, calibration 2.00, 4.50, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"FOR"]==0.5),])
+#0
+
+##########################
+plot(SR$DIS, SF_def$DIS, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='DIS, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"DIS"]==0.5),])
+#"22"  "27"  "75"  "76"  "104" "111" "113" "154" "220" "234" "240" "263" "266" "300" "307" "312" "328"
+
+##########################
+plot(SR$INT, SF_def$INT, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Process, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"INT"]==0.5),])
+#"17"  "30"  "33"  "60"  "76"  "105" "176" "234" "253" "320"
+
+##########################
+plot(SR$ENV, SF_def$ENV, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Marketing, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"ENV"]==0.5),])
+#"75"  "78"  "95"  "122" "164" "203" "223" "240" "299" "323" "324"
+
+##########################
+plot(SR$LEA, SF_def$LEA, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Lead, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"LEA"]==0.5),])
+#"2"   "59"  "75"  "98"  "110" "111" "128" "139" "159" "193" "219" "265" "267"
+
+##########################
+plot(SR$EXT, SF_def$EXT, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='Ext Evaluation, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"EXT"]==0.5),])
+#"44"  "59"  "70"  "75"  "77"  "87"  "99"  "126" "141" "160" "165" "185" "212" "235" "239" "243" "264" "267" "307" "311" "315" "318"
+#"324" "332"
+##########################
+plot(SR$HR, SF_def$HR, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='HR, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"HR"]==0.5),])
+#"15"  "16"  "37"  "131" "199" "231" "241" "307" "317"
+##########################
+
+plot(SR$ORG, SF_def$ORG, pch=19, xlim=c(0, 6), col=rgb(0,0,1,0.5),
+     main='ORG, calibration 1.05, 4.00, 5.95',
+     xlab='Raw score', ylab='Fuzzy score')
+abline(h=0.5, v=3, col=rgb(.5,.5,.5,.5))
+
+row.names(SF_def[which(SF_def[,"ORG"]==0.5),])
+
+# Recalibrate 0.5 cases to 0.4:
+# A better strategy would be to look into these cases and decide manually their score:
+
+SF_def$MAR[SF_def$MAR==0.5]<-0.4
+SF_def$CON[SF_def$CON==0.5]<-0.4
+SF_def$DIS[SF_def$DIS==0.5]<-0.4
+SF_def$INT[SF_def$INT==0.5]<-0.4
+SF_def$ENV[SF_def$ENV==0.5]<-0.4
+SF_def$LEA[SF_def$LEA==0.5]<-0.4
+SF_def$EXT[SF_def$EXT==0.5]<-0.4
+SF_def$HR[SF_def$HR==0.5]<-0.4
+SF_def$ORG[SF_def$ORG==0.5]<-0.4
+
+
+#########################################################
+# Plots of conditions and outcome (fuzzy scores)
+#########################################################
+
+#ORG
+
+xy.plot(SF_def$ORG, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy ORG and OUT',
+        xlab='Organisation',ylab='Market share audience', labs=rownames(SF_def), pos = 3, srt = -80)
+
+# The last three arguments show cases labs=rownames(SF3.5), pos= 2, srt = -80, 
+# you can play around with the values and leave them out if you don't like how they show.
+
+# If you want to use case labels and make them nicer, there is this package, 
+# but it doesn't work with xy.plot, so no parameters of fit 
+# With this many cases it is hard to find something to work smoothly.
+
+library(ggplot2)
+library(ggrepel)
+
+#File with 5 paths and solution, made in excel "Paths2.csv"
+Paths2 <- read.csv("Paths2.csv", sep=",", row.names = 1)
+head(Paths2)
+
+#Plotting the sufficient paths to success
+ggplot(Paths2) +
+  geom_point(aes(A1, OUT), color = 'red') +
+  geom_text_repel(aes(A1, OUT, label = rownames(Paths2)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(ORG, OUT), color = 'red') +
+  geom_text_repel(aes(ORG, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#CON
+
+xy.plot(SF_def$CON, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy CON and OUT',
+        xlab='Content',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(CON, OUT), color = 'red') +
+  geom_text_repel(aes(CON, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#FOR
+
+xy.plot(SF_def$FOR, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy FOR and OUT',
+        xlab='Form',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(FOR, OUT), color = 'red') +
+  geom_text_repel(aes(FOR, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#ENV
+
+xy.plot(SF_def$ENV, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy ENV and OUT',
+        xlab='Env. Orientation',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+
+ggplot(SF_def) +
+  geom_point(aes(ENV, OUT), color = 'red') +
+  geom_text_repel(aes(ENV, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#INT
+
+
+xy.plot(SF_def$INT, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy INT and OUT',
+        xlab='Int. Processes',ylab='Market share audience', labs=rownames(SF3.5), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(INT, OUT), color = 'red') +
+  geom_text_repel(aes(INT, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#LEA
+
+xy.plot(SF_def$LEA, SF3.5$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy LEA and OUT',
+        xlab='Leadership',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(LEA, OUT), color = 'red') +
+  geom_text_repel(aes(LEA, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#HR
+
+xy.plot(SF_def$HR, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy HR and OUT',
+        xlab='HR',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(HR, OUT), color = 'red') +
+  geom_text_repel(aes(HR, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#MAR
+
+
+xy.plot(SF_def$MAR, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy MAR and OUT',
+        xlab='Marketing',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(MAR, OUT), color = 'red') +
+  geom_text_repel(aes(MAR, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#DIS
+
+
+xy.plot(SF_def$DIS, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy DIS and OUT',
+        xlab='Distribution',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(DIS, OUT), color = 'red') +
+  geom_text_repel(aes(DIS, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#EXT
+
+
+xy.plot(SF_def$EXT, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), main='fuzzy DIS and OUT',
+        xlab='Ext. Evaluation',ylab='Market share audience', labs=rownames(SF_def), pos = 2, srt = -80)
+
+ggplot(SF_def) +
+  geom_point(aes(EXT, OUT), color = 'red') +
+  geom_text_repel(aes(EXT, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#####################################################
+##### Two step QCA - New Protocol & New Calibration
+#####################################################
+
+# The ten conditions we have are split into three groups: process, product and downstream
+# according to what they measure + theory.
+# However, for the two-step QCA we need to split the 10 conditions into two groups: remote and proximate.
+# When we speak of remote and proximate in this case, we refer to CAUSALLY remote or proximate
+# rather than temporally or spatially remote.
+# This is why, even if some downstream conditions might be considered temporally remote (e.g. marketing), 
+# they can actually be causally proximate. 
+# Or vice-versa, for example one might consider leadership as temporally proximate, but causally remote.
+
+# Remote: given to actors as the context in which they act/ often times not properties of unit of analysis
+# Proximate: manipulable by actors/ often times properties of unit of analysis
+
+# Causally remote: ENV, INT, ORG, LEA, HR, EXT
+# Causally proximate: CON, FOR, MAR, DIS
+
+# In the first-set we perform the analyses of necessity on the causally remote conditions.
+# This allows us to see which of these conditions are enabling achieving the outcome.
+# In other words, which of them provide the context in which the proximate conditions could lead to the outcome.
+
+# In the second step we perform the analysis of sufficiency on 
+# these enabling conditions and on the proximate conditions
+
+
+####################################
+### NECESSITY
+####################################
+write.csv(SF_def, "SF_def.csv")
+
+SF_def <- read.csv("SF_def.csv")
+
+#---------------------------------------------------
+# STEP I:  Testing if remote conditions are necessary for outcome (we should also test proximate)
+#---------------------------------------------------
+
+# Presence of remote conditions:
+
+QCAfit(SF_def[, c(4:8,11)], SF_def$OUT, names(SF_def[, c(4:8,11)]), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# ENV      0.911     0.590 0.478
+# INT      0.883     0.655 0.626
+# ORG      0.868     0.613 0.565
+# LEA      0.813     0.640 0.652
+# HR       0.918     0.585 0.461
+# EXT      0.682     0.672 0.769
+
+# We see that ENV and HR are necessary conditions for market share.
+# Consistency is above 0.9 for both.
+# This means that whenever a case has high market share, 
+# it should also display high ENV and high HR.
+# (sets of ENV and HR are bigger than outcome set)
+# Their coverage and relevance of necessity values are not very good (abount 0.5).
+# This happens because both of these sets are quite big.
+# However, these values are not as low as too consider these conditions trivial.
+# Additionally, since these are to be considered enabling contexts,
+# having low values is not as bad.
+
+# We will, thus, introduce them in the second step.
+
+# Absence of remote conditions:
+
+QCAfit(1 - SF_def[, c(4:8,11)], SF_def$OUT, paste("not", names(SF_def[, c(4:8,11)])), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# not ENV      0.412     0.711 0.902
+# not INT      0.522     0.671 0.840
+# not ORG      0.501     0.706 0.871
+# not LEA      0.541     0.633 0.802
+# not HR       0.430     0.773 0.925
+# not EXT      0.666     0.601 0.696
+
+
+# Now we should perform necessity on all conditions to see maybe one of the proximate ones turns out necessary:
+
+#---------------------------------------------------
+#For presence of the outcome
+#---------------------------------------------------
+
+QCAfit(SF_def[, c(2:11)], SF_def$OUT, names(SF_def[, c(2:11)]), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# CON      0.849     0.615 0.583
+# FOR      0.904     0.592 0.491
+# ENV      0.911     0.590 0.478
+# INT      0.883     0.655 0.626
+# ORG      0.868     0.613 0.565
+# LEA      0.813     0.640 0.652
+# HR       0.918     0.585 0.461
+# MAR      0.692     0.774 0.859
+# DIS      0.902     0.617 0.542
+# EXT      0.682     0.672 0.769
+
+# We see that conditions DIS is also necessary for the outcome;
+# Cases with a high market share also have good distribution.
+# This condition goes anyhow into Step II since it is proximate
+# But we will use the fact that it is necessary in ESA 
+# to ban remainders that contradict this;
+
+QCAfit(1-SF_def[, c(2:11)], SF_def$OUT, paste("not", names(SF_def[, c(2:11)])), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# not CON      0.525     0.705 0.863
+# not FOR      0.428     0.714 0.899
+# not ENV      0.412     0.711 0.902
+# not INT      0.522     0.671 0.840
+# not ORG      0.501     0.706 0.871
+# not LEA      0.541     0.633 0.802
+# not HR       0.430     0.773 0.925
+# not MAR      0.723     0.588 0.638
+# not DIS      0.441     0.664 0.868
+# not EXT      0.666     0.601 0.696
+
+
+#---------------------------------------------------
+#For absence of the outcome
+#---------------------------------------------------
+
+
+QCAfit(SF_def[, c(2:11)], 1-SF_def$OUT, names(SF_def[, c(2:11)]), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# CON      0.805     0.656 0.610
+# FOR      0.848     0.625 0.512
+# ENV      0.851     0.620 0.497
+# INT      0.772     0.645 0.619
+# ORG      0.814     0.647 0.587
+# LEA      0.721     0.639 0.651
+# HR       0.888     0.636 0.494
+# MAR      0.549     0.690 0.816
+# DIS      0.802     0.617 0.543
+# EXT      0.606     0.671 0.769
+
+QCAfit(1 - SF_def[, c(2:11)], 1-SF_def$OUT, paste("not", names(SF_def[, c(2:11)])), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+# not CON      0.528     0.797 0.901
+# not FOR      0.447     0.839 0.941
+# not ENV      0.437     0.846 0.946
+# not INT      0.587     0.849 0.920
+# not ORG      0.513     0.813 0.914
+# not LEA      0.594     0.781 0.871
+# not HR       0.422     0.853 0.950
+# not MAR      0.820     0.750 0.744
+# not DIS      0.502     0.852 0.937
+# not EXT      0.704     0.714 0.762
+
+# None, ~MAR no longer is necessary for ~OUT
+
+
+# We should plot the necessary conditions on OUT:
+
+xy.plot(SF_def$ENV, 1-SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), 
+        main='fuzzy ENV and OUT',xlab='ENV',ylab='OUT', 
+        labs=rownames(SF_def), pos = 2, srt = -80, necessity= TRUE)
+
+ggplot(SF_def) +
+  geom_point(aes((1-MAR), (1-OUT)), color = 'red') +
+  geom_text_repel(aes((1-MAR), (1-OUT), label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+xy.plot(SF_def$HR, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), 
+        main='fuzzy HR and OUT',xlab='HR',ylab='OUT', 
+        labs=rownames(SF_def), pos = 2, srt = -80, necessity= TRUE)
+
+xy.plot(SF_def$DIS, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), 
+        main='fuzzy DIS and OUT',xlab='DIS',ylab='OUT', 
+        labs=rownames(SF_def), pos = 2, srt = -80, necessity= TRUE)
+
+xy.plot(SF_def$FOR, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), 
+        main='fuzzy FOR and OUT',xlab='FOR',ylab='OUT', 
+        labs=rownames(SF_def), pos = 2, srt = -80, necessity= TRUE)
+
+xy.plot(SF_def$ENV, SF_def$OUT, pch=19, xlim=c(0.0,1.0), ylim=c(0.0,1.0), col=rgb(0,0,1,0.5), 
+        main='fuzzy ENV and OUT',xlab='ENV',ylab='OUT', 
+        labs=rownames(SF_def), pos = 2, srt = -80, necessity= TRUE)
+
+# inspecting the plot we can see that all four conditions 
+# have True Logical Contradictions cases;
+# We should interpret these cases in the upper left quadrant
+# since they qualitatively contradict the statement of necessity (related to the 0.5 anchors)
+# Cases for which we have the outcome, but no condition, thus how can the condition be necessary?
+# One could look closer at these cases and see what exactly is happening 
+# and then decide if this condition is to be considered necessary or not.
+
+##################
+# SUIN Conditions
+##################
+
+# SUIN conditions are to be interpreted only if one has strong conceptual arguements to say that 
+# two concepts/conditions are functional equivalents. That means that they are mesures of the same 
+# overarching theoretical concept. One example of functional equivalents is 
+# (voting in referenda and voting in elections are functional equivalents for the concept "high voting turnout")
+
+# Since I don't think functional equivalents are the case here, 
+# I belive SUIN conditions should not be interpreted
+
+
+################################
+### STEP II: SUFFICIENCY ANALYSIS of proximate + necessary remote conditions:
+################################
+
+
+TT2S <- truthTable(SF_def, outcome = "OUT", 
+                     conditions = c("CON", "FOR", "MAR", "DIS", "HR", "ENV"),
+                     incl.cut1 = .85,
+                     n.cut=2,
+                     complete = TRUE,
+                     show.cases = F,
+                     PRI = TRUE,
+                     sort.by = c("incl", "n"))
+TT2S
+
+# (I think a threshold of 0.9 fits here.says Nena) Used is 0.85 in the last version of the script
+# It is very strict so you won't get bad comments on it 
+# It also follows a small gap in the includion scores of rows (fro 0.895 to 0.900)
+
+# Conservative:
+
+Cons2S <- eqmcc(TT2S, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Cons2S
+
+# We have some model ambiguity for the conservative solution.
+# If you want to interpret this solution as well, I would just pick model 1
+# OBS. The models that are ambiguous only differ in terms of the paths 
+# that are in the brackets.
+# OBS. You should always use row.dom=TRUE as it eliminates a bit of the model ambiguity 
+# (not in this case though) by eliminating redundant prime implicants in implicants charts
+# For more info, see Schneider Wagemann (page 108 I think);
+
+
+# M1: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*mar*HR + con*FOR*MAR*DIS*ENV) => OUT 
+# M2: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*mar*HR + con*FOR*MAR*HR*ENV) => OUT 
+# M3: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*mar*HR + con*MAR*DIS*HR*ENV) => OUT 
+# M4: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*DIS*HR*ENV + con*FOR*MAR*DIS*ENV) => OUT 
+# M5: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*DIS*HR*ENV + con*FOR*MAR*HR*ENV) => OUT 
+# M6: con*mar*HR*env + FOR*DIS*hr*ENV + for*mar*dis*HR + for*mar*HR*env + con*for*mar*dis +
+#   con*mar*dis*ENV + CON*FOR*mar*dis*hr + CON*mar*DIS*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + (con*for*DIS*HR*ENV + con*MAR*DIS*HR*ENV) => OUT 
+
+# Parsimonious:
+
+Pars2S <- eqmcc(TT2S, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Pars2S
+
+# Parsimonious looks better. We have the problem of disappering necessary conditions
+# All paths should ideally contain ENV*HR*DIS*...
+# Hopefully after ESA things will look better;
+
+# Solution has high consistency (0.804) and not very good coverage (0.509);
+# As I said, perfect coverage is not needed, but we should further inspect
+
+# n OUT = 1/0/C: 90/158/0 
+# Total      : 248 
+# 
+# Number of multiple-covered cases: 155 
+# 
+# M1: hr + con*dis + con*env + con*for + con*MAR + for*dis + for*env + for*MAR + MAR*dis
+# => OUT
+# 
+# incl   PRI    cov.r  cov.u 
+# -------------------------------------- 
+#   1  hr       0.773  0.381  0.430  0.033 
+# 2  con*dis  0.787  0.356  0.361  0.004 
+# 3  con*env  0.811  0.392  0.345  0.002 
+# 4  con*for  0.799  0.373  0.355  0.007 
+# 5  con*MAR  0.853  0.557  0.451  0.038 
+# 6  for*dis  0.807  0.349  0.312  0.007 
+# 7  for*env  0.796  0.295  0.296  0.003 
+# 8  for*MAR  0.853  0.452  0.365  0.013 
+# 9  MAR*dis  0.863  0.483  0.374  0.022 
+# -------------------------------------- 
+#   M1       0.692  0.372  0.631 
+
+
+# Intermediate:
+
+Inter2S <- eqmcc(TT2S, details = TRUE, dir.exp = "1, 1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Inter2S
+
+# n OUT = 1/0/C: 90/158/0 
+# Total      : 248 
+# 
+# p.sol: hr + con*dis + con*env + con*for + con*MAR + for*dis + for*env + for*MAR +
+#   MAR*dis
+# 
+# Number of multiple-covered cases: 158 
+# 
+# M1:    hr*ENV + con*dis + con*for + for*dis + con*HR*env + for*HR*env + con*MAR*ENV +
+#   MAR*dis*ENV + (dis*hr + for*MAR*ENV) => OUT 
+# M2:    hr*ENV + con*dis + con*for + for*dis + con*HR*env + for*HR*env + con*MAR*ENV +
+#   MAR*dis*ENV + (dis*hr + for*MAR*HR) => OUT 
+# M3:    hr*ENV + con*dis + con*for + for*dis + con*HR*env + for*HR*env + con*MAR*ENV +
+#   MAR*dis*ENV + (CON*FOR*hr + for*MAR*ENV) => OUT 
+# M4:    hr*ENV + con*dis + con*for + for*dis + con*HR*env + for*HR*env + con*MAR*ENV +
+#   MAR*dis*ENV + (CON*FOR*hr + for*MAR*HR) => OUT 
+# --------------------------------- 
+#   incl   PRI    cov.r  cov.u  (M1)   (M2)   (M3)   (M4)  
+# ----------------------------------------------------------------------- 
+#   1 con*dis      0.787  0.356  0.361  0.004  0.004  0.004  0.004  0.004 
+# 2 con*for      0.799  0.373  0.355  0.007  0.007  0.007  0.007  0.007 
+# 3 for*dis      0.807  0.349  0.312  0.007  0.007  0.007  0.007  0.007 
+# 4 hr*ENV       0.803  0.424  0.423  0.003  0.026  0.026  0.003  0.003 
+# 5 con*HR*env   0.837  0.435  0.343  0.002  0.002  0.002  0.002  0.002 
+# 6 con*MAR*ENV  0.853  0.551  0.447  0.037  0.037  0.037  0.037  0.037 
+# 7 for*HR*env   0.818  0.326  0.296  0.003  0.003  0.003  0.003  0.003 
+# 8 MAR*dis*ENV  0.872  0.497  0.370  0.022  0.022  0.022  0.022  0.022 
+# ----------------------------------------------------------------------- 
+#   9  dis*hr       0.795  0.311  0.320  0.000  0.001  0.001               
+# 10  CON*FOR*hr   0.834  0.438  0.395  0.001                0.002  0.002 
+# 11  for*MAR*ENV  0.858  0.463  0.364  0.000  0.013         0.013        
+# 12  for*MAR*HR   0.855  0.456  0.364  0.000         0.013         0.013 
+# ----------------------------------------------------------------------- 
+# M1           0.696  0.374  0.629 
+# M2           0.696  0.374  0.629 
+# M3           0.697  0.377  0.630 
+# M4           0.697  0.377  0.630 
+
+# Intermediate has a bit of model ambiguity;
+# One can just go with the first model and 
+# report in a footnote that there was model ambiguity;
+
+# Assuming we go with the first model, let's just plot each path to see how they look;
+
+# We can plot each path:
+# Pay special attention to cases in lower left quadrant;
+# These are True Logical Contradictions are are most problematic
+# since they contradict the most the statement of sufficiency;
+# Sufficiency means that whenever you have that conditions, you must also have the outcome;
+# However, these cases have the condition, but not the outcome;
+# You should explain somehow how these cases ended here, 
+# (maybe it was a data problem due to aggregation etc.)
+
+
+
+
+# The more problematic thing is that actually most cases are out of the solution formula;
+# My hunch is that this problem is created mainly by this:
+
+# the fact that you are working with survey respondents 
+# who vary a lot in their responses to multiple conditions.
+# Because of this cases don't cluster in the same rows as they 
+# do with other types of data. They are spread throughout the TTrows almost equally.
+# This makes it really hard to pick a consistency threshold as well.
+# It is hard to find a single path to OUT when cases vary so much.
+
+# One should really consider the decision of raising n.cut to 2,
+# so a row could be considered sufficient only if it has at least 2 cases;
+
+
+################################
+### Enhanced standard analysis
+################################
+
+# Step 1: Exclude assumptions contradicting necessity:
+
+# For banning untenable assumptions and producing th enhanced standard analysis,
+# one must excluse assumptions that contradict the findings of necessity in the analysis of sufficiency;
+# We found that HR, ENV, DIS are necessary for OUT
+# HR<-OUT which by logical negation (just mathematical logic) leads to ~HR->~OUT.
+# This means that if HR is necessary for OUT, ~HR is sufficient for ~OUT (by definition)
+# But ~HR cannot be simultaneously sufficient for both ~OUT and OUT
+# Therefore, we must exclude assumptions (logical remainders, rows with ? that have no cases) 
+# with ~HR from the minimization process
+# The same for ENV and DIS, we exclude ~ENV and ~DIS;
+
+# Let's check simplifying assumptions (remainder rows which make solution simpler) used for the parsimonious solution:
+
+Pars2S$SA
+
+# There are a lot of them, but we can notice there are some contradicting necessity:
+# For example assumption 9 contains, ~DIS, ~ENV and ~HR. This should be one of the banned ones.
+
+# Step 2: Exclude contradictory rows from simultaneous subset relations:
+
+# We must also exclude rows which are used 
+# in both the analysis of necessity for the outcome in that for the non-outcome;
+
+# For that we must produce the TT for the non-outcome:
+
+TT2Sn <- truthTable(SF_def, outcome = "~OUT",
+                   conditions = c("CON", "FOR", "MAR", "DIS", "ENV", "HR"),
+                   incl.cut1 = .9,
+                   n.cut=2,
+                   complete = TRUE,
+                   show.cases = F,
+                   PRI = TRUE,
+                   sort.by = c("incl", "n"))
+TT2Sn
+
+# I would put here the threshold at 0.9
+
+# And parsimonious solution:
+Pars2Sn <- eqmcc(TT2Sn, details = TRUE, show.cases = TRUE, include="?")
+Pars2Sn
+
+#Here we intersect sufficient rows that coincide in the two TT:
+
+SSR <- intersect(which(grepl(1, TT2S$tt$OUT)), which(grepl(1, TT2Sn$tt$OUT)))
+SSR
+
+# These are the rows which are simultaneously used:
+# 1  2  3  4 18 19 20 23 36 38 39 49 50 
+# This usually happens with very skewed sets.
+# PRI tells us in which minimization (for outcome or ~outcome) to include it;
+# Let's check: (CORRECTION: The following command is corrected, 18, 19 were missing in the old ones)
+
+TT2S$tt[c(1 , 2 , 3 , 4 , 18, 19, 20, 23, 36, 38, 39, 49, 50),]
+#   CON FOR MAR DIS HR ENV OUT n              incl               PRI                      cases
+#1    0   0   0   0  0   0   1 4  0.89215081594198 0.344491737828736            122,201,286,299
+#2    0   0   0   0  0   1   1 3 0.907850621935125   0.4324978943021                 37,104,252
+#3    0   0   0   0  1   0   1 2 0.890525436771424 0.370834692591735                      27,45
+#4    0   0   0   0  1   1   1 2 0.902336583837717  0.46866433500704                     35,266
+#18   0   1   0   0  0   1   1 4 0.886191511358842 0.384303897279299              28,81,121,209
+#19   0   1   0   0  1   0   1 2 0.875821098080212 0.385893226840852                    240,276
+#20   0   1   0   0  1   1   1 6  0.86185007426602 0.388615742941049      38,43,152,275,285,310
+#23   0   1   0   1  1   0   1 2 0.869352394004463 0.462963355909212                    267,269
+#36   1   0   0   0  1   1   1 7 0.877420929502914 0.397081700232511 60,139,162,207,255,300,328
+#38   1   0   0   1  0   1   1 2 0.905947287533782 0.465057529996799                    103,317
+#39   1   0   0   1  1   0   1 3  0.86398741504259 0.328570888640305                 78,120,287
+#49   1   1   0   0  0   0   1 3 0.873701722422994 0.294232394496289                111,193,204
+#50   1   1   0   0  0   1   1 4 0.868551927540481  0.36074558192742             15,154,231,292
+
+TT2Sn$tt[c(1 , 2 , 3 , 4 , 18, 19, 20, 23, 36, 38, 39, 49, 50),]
+
+#   CON FOR MAR DIS ENV HR OUT n              incl               PRI                      cases
+#1    0   0   0   0   0  0   1 4 0.942747909102383 0.652021302360725            122,201,286,299
+#2    0   0   0   0   0  1   1 2 0.935474881524037 0.629165307408265                      27,45
+#3    0   0   0   0   1  0   1 3 0.929772221857583   0.5675021056979                 37,104,252
+#4    0   0   0   0   1  1   1 2 0.913856036765725 0.531335664992956                     35,266
+#18   0   1   0   0   0  1   1 2 0.921968297270412 0.614106773159145                    240,276
+#19   0   1   0   0   1  0   1 4 0.928963257140992 0.615696102720701              28,81,121,209
+#20   0   1   0   0   1  1   1 6 0.912187408480843 0.611384257058953      38,43,152,275,285,310
+#23   0   1   0   1   1  0   1 2 0.904952652857984  0.53637246309932                     16,241
+#36   1   0   0   0   1  1   1 7  0.91926948353587 0.602918299767486 60,139,162,207,255,300,328
+#38   1   0   0   1   0  1   1 3 0.932987837060475 0.669192986613219                 78,120,287
+#39   1   0   0   1   1  0   1 2 0.918234343687879 0.534942470003198                    103,317
+#49   1   1   0   0   0  0   1 3 0.946837485154513 0.702922466363976                111,193,204
+#50   1   1   0   0   0  1   1 5 0.939582010313354  0.73395670195327          10,46,158,202,323
+
+#  PRI is higher in the table for the non-outcome for these rows, 
+# we will exclude these rows from the minimization process
+# in order not to have simultaneous set relations;
+
+# Step 3: Exclude contradictory simplifying assumption:
+
+# We must also exclude remainders used for both minimization processes
+# here we have simplifying assumptions for parsimonious sol to the outcome (M1):
+
+Pars2S$SA$M1
+
+# And same for the ~outcome:
+Pars2Sn$SA$M1
+
+
+# We can intersect them:
+
+CSA <- intersect(rownames(Pars2S$SA$M1), rownames(Pars2Sn$SA$M1))
+CSA
+
+# "5"  "9"  "10" "13" "14" "17" "21" "33" "37" "41" "42" "45" "46"
+
+
+# Now let's exclude all of these untenable rows.
+# Run the file Functions Marcel from beginning to end;
+# In there there is the function esa which does exactly this:
+
+
+row.names(TT2S$tt[(TT2S$tt$HR==0) & (TT2S$tt$OUT=="?"),])
+row.names(TT2S$tt[(TT2S$tt$ENV==0) & (TT2S$tt$OUT=="?"),])
+row.names(TT2S$tt[(TT2S$tt$DIS==0) & (TT2S$tt$OUT=="?"),])
+row.names(TT2S$tt[(TT2S$tt$FOR==0) & (TT2S$tt$OUT=="?"),])
+
+
+TTesa <- esa(TT2S, nec_cond=c("HR","ENV", "DIS", "FOR"), contrad_rows = c(CSA, "1" , "2" , "3" , "4" , "18", "19", "20", "23", "36", "38", "39", "49", "50"))
+TTesa
+    #CON FOR MAR DIS HR ENV OUT n  incl  PRI  
+#30   0   1   1   1  0   1   1   2 0.914 0.560
+#28   0   1   1   0  1   1   1   3 0.912 0.555
+#2    0   0   0   0  0   1   0   3 0.908 0.432
+#38   1   0   0   1  0   1   0   2 0.906 0.465
+#4    0   0   0   0  1   1   0   2 0.902 0.469
+#16   0   0   1   1  1   1   1   2 0.902 0.524
+#62   1   1   1   1  0   1   1   3 0.895 0.545
+#7    0   0   0   1  1   0   1   2 0.893 0.444
+#1    0   0   0   0  0   0   0   4 0.892 0.344
+#3    0   0   0   0  1   0   0   2 0.891 0.371
+#22   0   1   0   1  0   1   1   2 0.890 0.464
+#18   0   1   0   0  0   1   0   4 0.886 0.384
+#60   1   1   1   0  1   1   1   3 0.880 0.462
+#54   1   1   0   1  0   1   1   4 0.880 0.475
+#36   1   0   0   0  1   1   0   7 0.877 0.397
+#19   0   1   0   0  1   0   0   2 0.876 0.386
+#49   1   1   0   0  0   0   0   3 0.874 0.294
+#35   1   0   0   0  1   0   1   4 0.873 0.273
+#48   1   0   1   1  1   1   1   4 0.872 0.465
+#32   0   1   1   1  1   1   1  11 0.870 0.566
+#23   0   1   0   1  1   0   0   2 0.869 0.463
+#50   1   1   0   0  0   1   0   4 0.869 0.361
+#8    0   0   0   1  1   1   1   6 0.865 0.427
+#39   1   0   0   1  1   0   0   3 0.864 0.329
+#20   0   1   0   0  1   1   0   6 0.862 0.389
+#40   1   0   0   1  1   1   0   6 0.842 0.376
+#51   1   1   0   0  1   0   0   5 0.833 0.266
+#64   1   1   1   1  1   1   0  45 0.830 0.607
+#24   0   1   0   1  1   1   0  13 0.825 0.414
+#55   1   1   0   1  1   0   0  12 0.825 0.437
+#52   1   1   0   0  1   1   0  14 0.813 0.335
+#56   1   1   0   1  1   1   0  63 0.758 0.462
+#27   0   1   1   0  1   0   0   1 0.933 0.613
+#43   1   0   1   0  1   0   0   1 0.932 0.477
+#44   1   0   1   0  1   1   0   1 0.926 0.529
+#6    0   0   0   1  0   1   0   1 0.916 0.507
+#5    0   0   0   1  0   0   0   1 0.911 0.448
+#17   0   1   0   0  0   0   0   1 0.903 0.391
+#59   1   1   1   0  1   0   0   1 0.900 0.457
+#9    0   0   1   0  0   0   0   0   -     -  
+#10   0   0   1   0  0   1   0   0   -     -  
+#11   0   0   1   0  1   0   0   0   -     -  
+#12   0   0   1   0  1   1   0   0   -     -  
+#13   0   0   1   1  0   0   0   0   -     -  
+#14   0   0   1   1  0   1   0   0   -     -  
+#15   0   0   1   1  1   0   0   0   -     -  
+#21   0   1   0   1  0   0   0   0   -     -  
+#25   0   1   1   0  0   0   0   0   -     -  
+#26   0   1   1   0  0   1   0   0   -     -  
+#29   0   1   1   1  0   0   0   0   -     -  
+#31   0   1   1   1  1   0   0   0   -     -  
+#33   1   0   0   0  0   0   0   0   -     -  
+#34   1   0   0   0  0   1   0   0   -     -  
+#37   1   0   0   1  0   0   0   0   -     -  
+#41   1   0   1   0  0   0   0   0   -     -  
+#42   1   0   1   0  0   1   0   0   -     -  
+#45   1   0   1   1  0   0   0   0   -     -  
+#46   1   0   1   1  0   1   0   0   -     -  
+#47   1   0   1   1  1   0   0   0   -     -  
+#53   1   1   0   1  0   0   0   0   -     -  
+#57   1   1   1   0  0   0   0   0   -     -  
+#58   1   1   1   0  0   1   0   0   -     -  
+#61   1   1   1   1  0   0   0   0   -     -  
+#63   1   1   1   1  1   0   0   0   -     -  
+  
+
+#######################################################################
+#OO 
+#Lets rerun the parsimonious and the intermediate solutions 
+# with the new TT produced by the ESA function which has the remainder rows (OUT=?) with ~HR, ~ENV, ~DIS, ~FOR banned:
+
+Parsesa <- eqmcc(TTesa, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesa
+
+# #n OUT = 1/0/C: 46/209/0 
+# #Total      : 255 
+# 
+# #Number of multiple-covered cases: 3 
+# 
+# #M1: FOR*DIS*hr*ENV + con*for*mar*DIS*HR + for*MAR*DIS*HR*ENV + FOR*MAR*dis*HR*ENV + CON*for*mar*dis*HR*env + (con*FOR*MAR*DIS*ENV) => OUT 
+# #M2: FOR*DIS*hr*ENV + con*for*mar*DIS*HR + for*MAR*DIS*HR*ENV + FOR*MAR*dis*HR*ENV + CON*for*mar*dis*HR*env + (con*FOR*MAR*HR*ENV) => OUT 
+# #M3: FOR*DIS*hr*ENV + con*for*mar*DIS*HR + for*MAR*DIS*HR*ENV + FOR*MAR*dis*HR*ENV + CON*for*mar*dis*HR*env + (con*MAR*DIS*HR*ENV) => OUT 
+# 
+# #-------------------------- 
+# #  incl   PRI    cov.r  cov.u  (M1)   (M2)   (M3)  
+# #-------------------------------------------------------------------------- 
+# #1 FOR*DIS*hr*ENV          0.854  0.483  0.399  0.034  0.034  0.037  0.037 
+# #2 con*for*mar*DIS*HR      0.856  0.415  0.332  0.013  0.013  0.013  0.013 
+# #3 for*MAR*DIS*HR*ENV      0.859  0.457  0.355  0.018  0.019  0.019  0.018 
+# #4 FOR*MAR*dis*HR*ENV      0.874  0.478  0.354  0.022  0.031  0.022  0.031 
+# #5 CON*for*mar*dis*HR*env  0.873  0.273  0.232  0.002  0.002  0.002  0.002 
+# #-------------------------------------------------------------------------- 
+# #6  con*FOR*MAR*DIS*ENV     0.868  0.564  0.424  0.000  0.044               
+# #7  con*FOR*MAR*HR*ENV      0.865  0.559  0.430  0.000         0.044        
+# #8  con*MAR*DIS*HR*ENV      0.862  0.562  0.430  0.000                0.044 
+# -------------------------------------------------------------------------- 
+# #M1                      0.769  0.439  0.586 
+# #M2                      0.769  0.438  0.585 
+# #M3                      0.769  0.438  0.585 
+# 
+# #cases 
+# -------------------------------- 
+# #1  FOR*DIS*hr*ENV          2,229,242,304; 48,57,76; NA; NA
+# #2  con*for*mar*DIS*HR      6,278; 28,81,121,209
+# #3  for*MAR*DIS*HR*ENV      3,20,54,85,151,175,230,238,260,274,320; NA
+# #4  FOR*MAR*dis*HR*ENV      33,68,95,123,124,133,136,203,254,270,306,324; NA
+# #5  CON*for*mar*dis*HR*env  NA
+# # -------------------------------- 
+# #6  con*FOR*MAR*DIS*ENV     48,57,76; 4,14,23,30,42,44,51,53,65,86,87,93,96,101,102,105,106,127,135,138,157,165,170,181,185,192,194,197,200,212,213,214,215,218,224,239,243,245,264,284,311,316,319,321,325
+# #7  con*FOR*MAR*HR*ENV      33,68,95,123,124,133,136,203,254,270,306,324; 4,14,23,30,42,44,51,53,65,86,87,93,96,101,102,105,106,127,135,138,157,165,170,181,185,192,194,197,200,212,213,214,215,218,224,239,243,245,264,284,311,316,319,321,325
+# #8  con*MAR*DIS*HR*ENV      3,20,54,85,151,175,230,238,260,274,320; 4,14,23,30,42,44,51,53,65,86,87,93,96,101,102,105,106,127,135,138,157,165,170,181,185,192,194,197,200,212,213,214,215,218,224,239,243,245,264,284,311,316,319,321,325
+
+
+Interesa <- eqmcc(TTesa, details = TRUE, dir.exp = "1, 1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa
+
+# Same as parsimonious.THIS IS THE CHOSEN SOLUTION
+
+
+# NOT DONE
+#We can also try a "mild version" of ESA in which we exclude only assumptions conflicting 
+# with necessity from the remote conditions. MV: NOT DONE. 
+# 
+# TTesa1 <- esa(TT2S, nec_cond=c("HR","ENV"),  contrad_rows = c(CSA, "1" , "2" , "3" , "4" , "20", "23", "36", "38", "39", "49", "50"))
+# TTesa1
+# 
+# Parsesa1 <- eqmcc(TTesa1, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+# Parsesa1
+
+# We still get model ambiguity:
+
+# n OUT = 1/0/C: 52/202/0 
+# Total      : 254 
+# 
+# Number of multiple-covered cases: 7 
+# 
+# M1: FOR*DIS*hr*ENV + for*MAR*HR*ENV + MAR*dis*HR*ENV + con*for*mar*DIS*HR + con*FOR*mar*hr*ENV +
+#   con*FOR*mar*dis*HR*env + CON*for*mar*dis*HR*env + (con*MAR*HR*ENV) => OUT 
+# M2: FOR*DIS*hr*ENV + for*MAR*HR*ENV + MAR*dis*HR*ENV + con*for*mar*DIS*HR + con*FOR*mar*hr*ENV +
+#   con*FOR*mar*dis*HR*env + CON*for*mar*dis*HR*env + (con*FOR*MAR*DIS*ENV) => OUT 
+# 
+# ------------------- 
+#   incl   PRI    cov.r  cov.u  (M1)   (M2)  
+# ------------------------------------------------------------------- 
+#   1 FOR*DIS*hr*ENV          0.854  0.483  0.399  0.028  0.029  0.028 
+# 2 for*MAR*HR*ENV          0.860  0.467  0.363  0.016  0.016  0.017 
+# 3 MAR*dis*HR*ENV          0.874  0.500  0.367  0.022  0.022  0.024 
+# 4 con*for*mar*DIS*HR      0.856  0.415  0.332  0.012  0.012  0.012 
+# 5 con*FOR*mar*hr*ENV      0.869  0.427  0.342  0.001  0.001  0.001 
+# 6 con*FOR*mar*dis*HR*env  0.876  0.386  0.272  0.007  0.007  0.007 
+# 7 CON*for*mar*dis*HR*env  0.873  0.273  0.232  0.002  0.002  0.002 
+# ------------------------------------------------------------------- 
+#   8  con*MAR*HR*ENV          0.856  0.556  0.442  0.000  0.044        
+# 9  con*FOR*MAR*DIS*ENV     0.868  0.564  0.424  0.000         0.044 
+# ------------------------------------------------------------------- 
+#   M1                      0.753  0.416  0.597 
+# M2                      0.753  0.417  0.597 
+# 
+# 
+# Interesa1 <- eqmcc(TTesa1, details = TRUE, dir.exp = "1, 1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+# Interesa1
+# 
+# #
+
+# M1:    FOR*DIS*hr*ENV + con*for*mar*DIS*HR + con*FOR*mar*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + con*FOR*mar*dis*HR*env + CON*for*mar*dis*HR*env +
+#   (con*FOR*MAR*DIS*ENV) => OUT 
+# M2:    FOR*DIS*hr*ENV + con*for*mar*DIS*HR + con*FOR*mar*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + con*FOR*mar*dis*HR*env + CON*for*mar*dis*HR*env +
+#   (con*FOR*MAR*HR*ENV) => OUT 
+# M3:    FOR*DIS*hr*ENV + con*for*mar*DIS*HR + con*FOR*mar*hr*ENV + for*MAR*DIS*HR*ENV +
+#   FOR*MAR*dis*HR*ENV + con*FOR*mar*dis*HR*env + CON*for*mar*dis*HR*env +
+#   (con*MAR*DIS*HR*ENV) => OUT 
+# -------------------------- 
+#   incl   PRI    cov.r  cov.u  (M1)   (M2)   (M3)  
+# --------------------------------------------------------------------------- 
+#   1 FOR*DIS*hr*ENV          0.854  0.483  0.399  0.028  0.028  0.029  0.029 
+# 2 con*for*mar*DIS*HR      0.856  0.415  0.332  0.012  0.012  0.012  0.012 
+# 3 con*FOR*mar*hr*ENV      0.869  0.427  0.342  0.001  0.001  0.001  0.001 
+# 4 for*MAR*DIS*HR*ENV      0.859  0.457  0.355  0.018  0.019  0.019  0.018 
+# 5 FOR*MAR*dis*HR*ENV      0.874  0.478  0.354  0.022  0.025  0.022  0.025 
+# 6 con*FOR*mar*dis*HR*env  0.876  0.386  0.272  0.007  0.007  0.007  0.007 
+# 7 CON*for*mar*dis*HR*env  0.873  0.273  0.232  0.002  0.002  0.002  0.002 
+# --------------------------------------------------------------------------- 
+#   8  con*FOR*MAR*DIS*ENV     0.868  0.564  0.424  0.000  0.044               
+# 9  con*FOR*MAR*HR*ENV      0.865  0.559  0.430  0.000         0.044        
+# 10  con*MAR*DIS*HR*ENV      0.862  0.562  0.430  0.000                0.044 
+# --------------------------------------------------------------------------- 
+#   M1                      0.753  0.415  0.593 
+# M2                      0.753  0.414  0.593 
+# M3                      0.753  0.414  0.593 
+
+
+
+# We still have the problem of disappering necessary conditions in these solutions:
+# This problem happens because  are sets are still skewed.
+
+# I would also go with M1 of these solutions and just report 
+# in a footnote that the solution was model ambiguous;
+
+# Let's plot:
+
+pimplot(data=SF_def, results = Interesa, outcome = "OUT", intermed=TRUE, sol=1, lab_jitter = TRUE)
+
+# Again, very few cases are part of the solution...
+# Let's discuss tomorrow and see what we can make of it.
+
+#File with 5 paths and solution, made in excel "xxxx.csv"
+PathsMarch17 <- read.csv("PathsMarch17.csv", sep=",", row.names = 1)
+head(PathsMarch17)
+
+#Plotting the sufficient paths to success
+#A1 DIS*FOR*ENV*hr (7 cases) 
+ggplot(PathsMarch17) +
+  geom_point(aes(A1, OUT), color = 'red') +
+  geom_text_repel(aes(A1, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#A2 DIS*FOR*ENV*MAR*con (48 cases)
+ggplot(PathsMarch17) +
+  geom_point(aes(A2, OUT), color = 'red') +
+  geom_text_repel(aes(A2, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#B1 DIS*for*HR*ENV*MAR (11 cases)
+ggplot(PathsMarch17) +
+  geom_point(aes(B1, OUT), color = 'red') +
+  geom_text_repel(aes(B1, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#B2 DIS*for*HR*mar*con (6 cases)   
+ggplot(PathsMarch17) +
+  geom_point(aes(B2, OUT), color = 'red') +
+  geom_text_repel(aes(B2, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#C1 dis*HR*FOR*MAR (12 cases)
+ggplot(PathsMarch17) +
+  geom_point(aes(C1, OUT), color = 'red') +
+  geom_text_repel(aes(C1, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+#C2 dis*HR*FOR*MAR 
+ggplot(PathsMarch17) +
+  geom_point(aes(C2, OUT), color = 'red') +
+  geom_text_repel(aes(C2, OUT, label = rownames(PathsMarch17)),
+                  size = 2.5,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+
+#FINDING TYPICAL AND DEVIANT CASES
+
+#Path (A1) DIS*FOR*ENV*hr
+#Path (A2) DIS*FOR*ENV*MAR*con
+#Path (B1) DIS*for*HR*ENV*MAR
+#Path (B2) DIS*for*HR*mar*con
+#Path (C1) dis*HR*FOR*MAR*ENV
+#Path (C2) dis*HR*for*env*mar*CON
+
+
+cases.suf.typ.unique(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+#       case          term         term_membership      OUT     St most_typical    uniquely_cov
+#A1 #1    131      FOR*DIS*hr*ENV       0.5932681 0.7340607 0.2373170         TRUE         TRUE
+#A1 #3    265      FOR*DIS*hr*ENV       0.5414925 0.7340607 0.3556250        FALSE         TRUE
+#A1 #2    190      FOR*DIS*hr*ENV       0.6232399 0.9546083 0.5316867        FALSE         TRUE
+#A2 #31    85 con*FOR*MAR*DIS*ENV       0.7032535 0.7340607 0.0438067         TRUE         TRUE
+#A2 #6    274 con*FOR*MAR*DIS*ENV       0.7732667 0.9546083 0.2345136        FALSE         TRUE
+#A2 #21    54 con*FOR*MAR*DIS*ENV       0.5932681 0.7340607 0.2373170        FALSE         TRUE
+#A2 #17    20 con*FOR*MAR*DIS*ENV       0.6202807 0.9546083 0.5389940        FALSE         TRUE
+#A2 #41   175 con*FOR*MAR*DIS*ENV       0.6202807 0.9546083 0.5389940        FALSE         TRUE
+#A2 #5    260 con*FOR*MAR*DIS*ENV       0.6000000 0.9546083 0.5910138        FALSE         TRUE
+#B2 #22   164  con*for*mar*DIS*HR       0.5489170 0.7340607 0.3372891         TRUE         TRUE
+#B2 #32   279  con*for*mar*DIS*HR       0.5489170 0.7340607 0.3372891         TRUE         TRUE
+#B2 #18   132  con*for*mar*DIS*HR       0.5610366 0.9546083 0.7015082        FALSE         TRUE
+#B1 #19     2  for*MAR*DIS*HR*ENV       0.6431099 0.7340607 0.1414234         TRUE         TRUE
+#B1 #23   242  for*MAR*DIS*HR*ENV       0.6563633 0.9546083 0.4543901        FALSE         TRUE
+#C1 #110  160  FOR*MAR*dis*HR*ENV       0.5625854 0.7340607 0.3047988         TRUE         TRUE
+cases.suf.typ(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+#identical to previous command
+cases.suf.typ.most(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+       #case                term   term_membership    OUT        St most_typical
+#A1 #1    131      FOR*DIS*hr*ENV       0.5932681 0.7340607 0.2373170         TRUE
+#A2 #31    85 con*FOR*MAR*DIS*ENV       0.7032535 0.7340607 0.0438067         TRUE
+#B2 #22   164  con*for*mar*DIS*HR       0.5489170 0.7340607 0.3372891         TRUE
+#B2 #32   279  con*for*mar*DIS*HR       0.5489170 0.7340607 0.3372891         TRUE
+#B1 #19     2  for*MAR*DIS*HR*ENV       0.6431099 0.7340607 0.1414234         TRUE
+#C1 #110  160  FOR*MAR*dis*HR*ENV       0.5625854 0.7340607 0.3047988         TRUE
+#uniquely_cov
+#1           TRUE
+#31          TRUE
+#22          TRUE
+#32          TRUE
+#19          TRUE
+#110         TRUE
+cases.suf.iir(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+#not archived, run it
+cases.suf.dcn(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+#not archived, run it
+cases.suf.dcv(results=Interesa, outcome="OUT", neg.out=FALSE, intermed=TRUE, sol=1)
+#not archived, run it
+#########
+# Plotting TT_rows: 
+#MV:I HAVE CORRECTED THE PLOTS, THE PREVIOUS ONES (IN PATHS 2) WERE BASED ON SF-DEF FILE THAT WAS OPEN, BUT DID NOT HAVE THE 0.5 VALUES REMOVED 
+
+########
+
+# This is integrated in the new version of the SetMethods package 
+# on Github for the moment, but on cran in the next 2 weeks:
+
+install.packages("devtools")
+library(devtools)
+install_github("nenaoana/SetMethods")
+force=TRUE
+library(SetMethods)
+
+# The argument incl.tt=0.85 will plot all rows with a consistency higher than 0.85. 
+# Out of these you can pick the ones included in each solution:
+
+pimplot(SF_def, Interesa, outcome = "OUT", incl.tt = 0.85, intermed=TRUE, sol=1, lab_jitter = TRUE)
+
+# Rows included in Pattern A:
+
+#Path (A1) DIS*FOR*ENV*hr
+
+rownames(TTesa$tt[TTesa$tt$DIS==1 & TTesa$tt$HR==0 & TTesa$tt$FOR==1 &  TTesa$tt$ENV==1, ])
+
+# "22" "30" "54" "62"
+
+#Path (A2) DIS*FOR*ENV*MAR*con
+
+rownames(TTesa$tt[TTesa$tt$DIS==1 & TTesa$tt$MAR==1 & TTesa$tt$FOR==1 &  TTesa$tt$ENV==1 &  TTesa$tt$CON==0, ])
+
+# "30" "32"
+
+# Rows included in Pattern B:
+
+#Path (B1) DIS*for*HR*ENV*MAR
+
+rownames(TTesa$tt[TTesa$tt$DIS==1 & TTesa$tt$MAR==1 & TTesa$tt$FOR==0 &  TTesa$tt$ENV==1 &  TTesa$tt$HR==1, ])
+
+# "16" "48"
+
+#Path (B2) DIS*for*HR*mar*con
+
+rownames(TTesa$tt[TTesa$tt$DIS==1 & TTesa$tt$MAR==0 & TTesa$tt$FOR==0 &  TTesa$tt$CON==0 &  TTesa$tt$HR==1, ])
+
+# "7" "8"
+
+## As an example for patterns C:
+
+#	(C1) dis*HR*FOR*ENV*MAR ??? OUT 
+
+# Looking at the TT this includes TTrows: 
+
+rownames(TTesa$tt[TTesa$tt$DIS==0 & TTesa$tt$HR==1 & TTesa$tt$FOR==1 &  TTesa$tt$ENV==1 & TTesa$tt$MAR==1, ])
+
+# "28" "60"
+
+# So from the plots above pick the plots for Row 28 and Row 60:
+# We can see that even if we have more cases as members of the rows, there is only one (130) 
+# that is also a member of the outcome;I DONT KNOW WHAT YOU SAY, THERE IS NO CASE 130, and 160 is right as one only case
+# The probelm now is that in your plot for patterns the case that shows as typical is 160 (yayks)...
+# Since the Paths2 folder was made in excell I don't know where the error came.
+# For safety, I am redoing the plot analysis for each path below;
+
+#	(C2) dis*HR*for*env*mar*CON ??? OUT
+
+# Looking at the TT this includes TTrows: 
+
+rownames(TTesa$tt[TTesa$tt$DIS==0 & TTesa$tt$HR==1 & TTesa$tt$FOR==0 &  TTesa$tt$ENV==0 & TTesa$tt$MAR==0 & TTesa$tt$CON==1, ])
+
+# "35"
+
+# Let's plot it:
+
+pimplot(SF_def, Interesa, outcome = "OUT", ttrows = "35", intermed=TRUE, sol=1, lab_jitter = TRUE)
+
+# We can see that even if we have more cases as members of the rows, 
+# there is none that is also a member for the outcome;
+
+### One conclusion out of this could be that this is not a trully sufficient path 
+### despite what the Parameters of fit tell us;
+
+# Let's also check the curious row 64:
+
+pimplot(SF_def, Interesa, outcome = "OUT", ttrows = "64", intermed=TRUE, sol=1, lab_jitter = TRUE)
+
+# This doesn't look that bad actually...
+
+#### Redone plots for each path:
+
+SF_def$A1 <- pmin( SF_def$FOR, SF_def$ENV, (1-SF_def$HR), SF_def$DIS)
+SF_def$A2 <-  pmin( (1-SF_def$CON), SF_def$FOR, SF_def$ENV, SF_def$MAR, SF_def$DIS)
+SF_def$B1 <-  pmin((1-SF_def$FOR), SF_def$ENV, SF_def$HR, SF_def$MAR, SF_def$DIS)
+SF_def$B2 <- pmin( (1-SF_def$CON), (1-SF_def$FOR), SF_def$HR, (1-SF_def$MAR), SF_def$DIS)
+SF_def$C1 <- pmin( SF_def$FOR, SF_def$ENV, SF_def$HR, SF_def$MAR, (1-SF_def$DIS))
+SF_def$C2 <-  pmin( SF_def$CON, (1-SF_def$FOR), (1-SF_def$ENV), SF_def$HR, (1-SF_def$MAR), (1-SF_def$DIS))
+
+# Plots:
+
+ggplot(SF_def) +
+  geom_point(aes(A1, OUT), color = 'red') +
+  geom_text_repel(aes(A1, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(A2, OUT), color = 'red') +
+  geom_text_repel(aes(A2, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(B1, OUT), color = 'red') +
+  geom_text_repel(aes(B1, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(B2, OUT), color = 'red') +
+  geom_text_repel(aes(B2, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(C1, OUT), color = 'red') +
+  geom_text_repel(aes(C1, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(C2, OUT), color = 'red') +
+  geom_text_repel(aes(C2, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+
+### Ok, plots look wrong for every pattern,
+### It is my mistake as well as I took for granted your excel file Paths2, 
+# because I remember you said you have to rename the cases and you know what names you've given them
+# That's why I didn't interfere with these as I assumed there was some relabelling.
+# Seeing the number (the amount) of typical cases that also seemed about right, 
+# but know I see there are differences in the plots damn it.
+
+
+#####
+# Checking for SUIN conditions (to be included in the appendix only):
+####
+
+superSubset(SF_def, outcome = "OUT", conditions = c("CON", "FOR", "MAR", "DIS", "ENV", "HR"), incl.cut = 0.9)
+
+# incl   RoN    cov.r 
+# --------------------------------------- 
+#   1  HR               0.918  0.461  0.585 
+# 2  ENV              0.911  0.478  0.590 
+# 3  DIS              0.902  0.542  0.617 
+# 4  FOR              0.904  0.491  0.592 
+# 5  CON+mar          0.902  0.432  0.565 
+# 6  CON+MAR          0.907  0.528  0.612 
+# 7  CON+for+dis+hr   0.902  0.474  0.584 
+# 8  CON+for+dis+env  0.900  0.474  0.583 
+# --------------------------------------- 
+
+# Even if there are unions of conditions that pass the usual necessity threshold of 0.9
+# these cannot be meaningfully interpreted theoretically as functional equivalents
+# (P.S. That's of course unless you think there is some theory for that)
+
+
+#####################
+# New ESA try-out with banned row 35 and included row 64:
+##################
+
+TT2S
+TT2Sn
+
+# Simultaneous set-relations:
+
+SSR <- intersect(which(grepl(1, TT2S$tt$OUT)), which(grepl(1, TT2Sn$tt$OUT)))
+SSR
+
+# 1  2  3  4 18 19 20 23 36 38 39 49 50
+
+# Let's leave the contradictory simplifying assumptions out for now since we might get a better solution
+# and add banned row 35:
+
+TTesa2 <- esa(TT2S, nec_cond=c("HR","ENV", "DIS", "FOR"), contrad_rows = c("35", "1" , "2" , "3" , "4" , "18", "19", "20", "23", "36", "38", "39", "49", "50"))
+TTesa2
+
+# Let's leave the contradictory simplifying assumptions in:
+
+TTesa3 <- esa(TT2S, nec_cond=c("HR","ENV", "DIS", "FOR"), contrad_rows = c(CSA, "35","1" , "2" , "3" , "4" , "18", "19", "20", "23", "36", "38", "39", "49", "50"))
+TTesa3
+
+# Let's now include Row 64:
+
+TTesa2$tt["64", "OUT"] <- 1
+TTesa2
+
+TTesa3$tt["64", "OUT"] <- 1
+TTesa3
+
+# Let's rerun the intermediate:
+
+Interesa2 <- eqmcc(TTesa2, details = TRUE, dir.exp = "1, 1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa2
+
+#  FOR*DIS*hr*ENV + FOR*MAR*HR*ENV + MAR*DIS*HR*ENV + con*for*mar*DIS*HR => OUT 
+
+# Let's rerun the intermediate:
+
+Interesa3 <- eqmcc(TTesa3, details = TRUE, dir.exp = "1, 1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa3
+
+#  FOR*DIS*hr*ENV + FOR*MAR*HR*ENV + MAR*DIS*HR*ENV + con*for*mar*DIS*HR => OUT 
+
+
+# We get exactly the same!
+
+# Maybe you will like this solution better ???
+
+# Now let's plot each of these paths and get the cases:
+
+# Plotting:
+
+SF_def$P1 <- pmin(SF_def$FOR, SF_def$DIS, 1-SF_def$HR, SF_def$ENV)
+SF_def$P2 <- pmin(SF_def$FOR, SF_def$MAR, SF_def$HR, SF_def$ENV)
+SF_def$P3 <- pmin(SF_def$MAR, SF_def$DIS, SF_def$HR, SF_def$ENV)
+SF_def$P4 <- pmin(1-SF_def$CON, 1-SF_def$FOR, SF_def$DIS, SF_def$HR, 1-SF_def$MAR)
+
+
+
+ggplot(SF_def) +
+  geom_point(aes(P1, OUT), color = 'red') +
+  geom_text_repel(aes(P1, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(P2, OUT), color = 'red') +
+  geom_text_repel(aes(P2, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(P3, OUT), color = 'red') +
+  geom_text_repel(aes(P3, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+ggplot(SF_def) +
+  geom_point(aes(P4, OUT), color = 'red') +
+  geom_text_repel(aes(P4, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+# And now lets plot the entire solution:
+
+SF_def$Sol <- pmax(SF_def$P1, SF_def$P2, SF_def$P3, SF_def$P4)
+
+ggplot(SF_def) +
+  geom_point(aes(Sol, OUT), color = 'red') +
+  geom_text_repel(aes(Sol, OUT, label = rownames(SF_def)),
+                  size = 3,
+                  fontface = 'italic',
+                  segment.size = 0.04,
+                  force = 0.07,
+                  max.iter = 2e3) +
+  xlim(0,1)+
+  ylim(0,1)+
+  theme_classic(base_size = 16) +
+  geom_vline(xintercept = 0.5)+
+  geom_hline(yintercept = 0.5)+
+  geom_abline(intercept = 0)
+
+
+#####################
+# And now the cases:
+#####################
+
+# Typical for each Path:
+
+cases.suf.typ(Interesa3, outcome="OUT", intermed = TRUE)
+cases.suf.typ.most(Interesa3, outcome="OUT", intermed = TRUE)
+
+
+# Deviant consistency for each path:
+
+cases.suf.dcn(Interesa3, outcome="OUT", intermed = TRUE)
+
+
+###############
+# I suggest you put the TTRow plots only in the Appendix of the paper and do it through the usual command
+# even if it doesn't show nicely the cases:
+
+rownames(TTesa3$tt[TTesa3$tt$OUT==1, ])
+# "7"  "8"  "16" "22" "28" "30" "32" "48" "54" "60" "62" "64"
+
+# How each path covers the TTrows included:
+
+# Path 1 (equal to A1 from before): "30", "62", "22", "54"
+# Path 2 (similar to C1 from before): "64","32","60", "28"
+# Path 3 (similar to pattern B1): "16", "48", "32", "64"
+# Path 4 (equal to pattern B2): "7", "8"
+
+
+pimplot(data=SF_def, results = Interesa3, outcome = "OUT", intermed = TRUE, 
+        ttrows = c("7",  "8",  "16", "22", "28", "30", "32", "48", "54", "60", "62", "64"),
+        lab_jitter = TRUE)
+

@@ -1,0 +1,29 @@
+library(fmsb)
+
+# Create data: note in High school for Jonathan:
+data=c(10, 10, 10, 10, 10, 10, 10, 5, 5, 5, 5, 5, 5, 5, 7, 9, 8, 10, 6, 7, 6, 7, 9, 8, 10, 6, 7, 6, 7, 9, 8, 10, 6, 7, 6)
+data <- matrix(data, ncol=7, nrow=5, byrow = TRUE)
+colnames(data)=c("urban planning" , "design research" , "creative industries" , "sustainability" , "R-programming", "business models" , "cognitive science" )
+data <- as.data.frame(data)
+data$sustainability <- c(10, 5, 9, 9, 9)
+data$`urban planning` <- c(10, 5, 9, 9, 9)
+data$`design research` <- c(10, 5, 9, 9, 9)
+data$`creative industries` <- c(10, 5, 6, 6, 6)
+data$`R-programming` <- c(10, 5, 5, 5, 5)
+data$`business models` <- c(10, 5, 6, 6, 6)
+data$`cognitive science` <- c(10,5,7,7,7)
+data <- data[,c(4,3,7,2,5,1,6)]
+
+# The default radar chart proposed by the library:
+radarchart(data, maxmin = T)
+radarchart( data  , axistype=0 , 
+            
+            #custom polygon
+            pcol="pink" , pfcol=rgb(0.6,0.6,1,1) , plwd=0.5 , 
+            
+            #custom the grid
+            cglcol="pink", cglty=1, caxislabels=seq(10,15,5), cglwd=0.8,
+            
+            #custom labels
+            vlcex=0.6
+)

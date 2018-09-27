@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536322015457.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B2BC226",
+    "lastKnownWriteTime" : 1536857185,
+    "last_content_update" : 1536857185524,
+    "path" : "~/Dropbox/1PhD/Articles/Paper2/Markdown/P2 R code 07092018 .R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "16,238",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

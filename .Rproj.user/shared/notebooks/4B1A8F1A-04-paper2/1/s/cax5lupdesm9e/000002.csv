@@ -1,0 +1,18 @@
+"0","ssBAL <- superSubset(fsq2, outcome = ""BAL"", conditions = c(""VPDIF"", ""SEGM"", ""NETWDIF"", ""REVDIF"", ""SPINDIF""), incl.cut = 0.90, cov.cut = 0.6, relation = ""necessity"")"
+"2","Error in is.data.frame(x) : object 'fsq2' not found
+"
+"2","In addition: "
+"2","Warning messages:
+"
+"2","1: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"2","2: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"

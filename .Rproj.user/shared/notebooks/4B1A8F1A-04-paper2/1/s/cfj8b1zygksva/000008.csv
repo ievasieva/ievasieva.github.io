@@ -1,0 +1,3 @@
+"0","mcor<-round(cor(fsq[2:9]),2)"
+"2","Error in is.data.frame(x) : object 'fsq' not found
+"

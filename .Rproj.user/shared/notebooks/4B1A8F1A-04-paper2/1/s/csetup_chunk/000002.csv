@@ -1,0 +1,11 @@
+"0","# List of packages required for this analysis
+pkg <- c(""corrr"", ""readr"", ""tidyr"", ""devtools"", ""dplyr"", ""plyr"", ""tidyselect"", ""e1071"", ""purrr"", ""psy"", ""psych"", ""GPArotation"", ""tibble"", ""boot"", ""ltm"", ""xtable"", ""kableExtra"", ""sem"", ""lavaan"", ""irr"", ""QCA"", ""SetMethods"", ""venn"", 
+         ""Hmisc"", ""janitor"")
+"
+"2","Warning message:
+"
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"

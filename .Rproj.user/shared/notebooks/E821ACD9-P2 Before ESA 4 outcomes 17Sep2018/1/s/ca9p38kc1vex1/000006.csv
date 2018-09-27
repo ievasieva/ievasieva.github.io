@@ -1,0 +1,16 @@
+"0","cons2 <- c(""VPDIF"", ""SEGM"", ""NETWDIF"", ""REVDIF"", ""SPINDIF"", ""INTCULT"")"
+"2","Warning message:
+"
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"0","TT <- truthTable(fsq2, outcome = ""BAL"", "
+"0","                 conditions = cons2,"
+"0","                 show.cases = TRUE,"
+"0","                 incl.cut1 = 0.9,"
+"0","                 complete = T,"
+"0","                 sort.by = c(""incl"", ""n""))"
+"0","tt <- TT$tt %>% arrange(desc(TT$tt$incl))"
+"0","knitr::kable(tt, booktabs = TRUE, caption = ""Truth table presence of the outcome"")"

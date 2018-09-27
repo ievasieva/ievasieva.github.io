@@ -1,0 +1,997 @@
+###############################################################################
+##                                                                           ##
+##  Title       : Replication material for "Paper 2"                         ##
+##                                                                           ##
+##  Author      : Ieva Rozentale                                             ##
+##  Affiliation : Amsterdam Business School                                  ##
+##  Version     : 07/09/2018                                                 ##
+##  RQ          : What (combinations of) separation strategies at            ## 
+##                BM level are nec./suf. for superior perfromance in both    ##
+##                goals?                                                     ##
+##  Description : Data only from the surveys   N=179                         ## 
+##                Calibration direct                                         ## 
+##                                                                           ## 
+##                                                                           ## 
+###############################################################################
+
+pkg <- c("corrr", "readr", "tidyr", "devtools", "dplyr", "plyr", "tidyselect", "e1071", "purrr", "psy", "psych", "GPArotation", "tibble", "boot", "ltm", "xtable", "kableExtra", "sem", "lavaan", "irr", "QCA", "SetMethods")
+
+# Check if packages are not installed and assign the
+# names of the packages not installed to the variable new.pkg
+new.pkg <- pkg[!(pkg %in% installed.packages())]
+install.packages("install.load")
+library(install.load)
+
+# If there are any packages in the list that aren't installed,
+# install them
+if (length(new.pkg)) {
+  install.packages(new.pkg, repos = "http://cran.rstudio.com")
+}
+
+# Load the packages into R
+library(dplyr)
+library(knitr)
+library(corrr)
+library(readr)
+library(tidyr)
+library(devtools)
+library(plyr)
+library(tidyselect)
+library(QCA)
+library(SetMethods)
+library(graphics)
+
+#fsq <- read.csv("C:/Users/irozent1/Dropbox/1PhD/Articles/Survey Data/myrawdata.csv")
+fsq <- read.csv2("~/Dropbox/1PhD/Articles/Survey Data/myrawdataP2.csv") 
+fsq <- fsq[2:10]
+fsq2 <- fsq[1]
+
+#checking correlations between raw vairables
+cor(fsq[,2:9])
+
+#------------------------------------------------------------------------
+#Calibrating data using the direct method and a crossover point of 4.01
+#------------------------------------------------------------------------
+fsq2$VPDIF <-  calibrate(fsq$VPDIF, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$SEGM <-  calibrate(fsq$SEGM, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$NETWDIF <-  calibrate(fsq$NETWDIF, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$REVDIF <-  calibrate(fsq$REVDIF, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$SPINDIF <-  calibrate(fsq$SPINDIF, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$INTCULT <-  calibrate(fsq$INTCULT, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$CP <-  calibrate(fsq$CP, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+fsq2$BP <-  calibrate(fsq$BP, type="fuzzy", method= "direct", thresholds = c(1,4.01,7))
+
+#CREATING OUTCOME SETS using fuzzyand() function
+fsq2$BAL <- fuzzyand(fsq2$CP, fsq2$BP) #Firms that show both high creative and business performances
+fsq2$NOBP <- fuzzyand(fsq2$CP, 1-fsq2$BP) #Firms that show high creative and low business performance
+fsq2$NOCP <- fuzzyand(1-fsq2$CP, fsq2$BP) #Firms that show low creative and high business performance
+fsq2$BOTHLOW <- fuzzyand(1-fsq2$CP, 1-fsq2$BP) #Firms that show both low creative and business performances
+
+fsq2[,c(2:13)] <- round(fsq2[,c(2:13)],3)
+table(fsq2$BAL)
+
+#Checking if there are any calibrations at the 0.5 crossover point.
+#The code returns "0", if there are any. 
+row.names(fsq2[which(fsq2[,2:13]==0.5),])
+#None in our case
+
+#---------------------
+#Calibrated data frame
+#---------------------
+#myfuzzy$ID[124] <- "X" #test for the QCA code
+write.csv2(fsq2, "myfuzzydataDIRECT.csv")
+
+#--------------------------------
+#Descriptive statistics raw data
+#--------------------------------
+d.summary.extended <- fsq[2:9] %>%
+  psych::describe(quant=c(.25,.75)) %>%
+  as_tibble() %>%
+  rownames_to_column() %>%
+  print()
+
+# Select stats for comparison with other solutions
+d.summary <- d.summary.extended %>%
+  dplyr::select(var=rowname, min, max, mean, sd, skew) %>%
+  print()
+
+#-------------------------------------
+#Plotting the distribution of raw data
+#-------------------------------------
+
+library(lattice)
+densityplot(~CP+BP+VPDIF+SEGM+NETWDIF+REVDIF+SPINDIF+INTCULT, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores all conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BP +CP, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores BAL",
+            auto.key = list(space = "right"))
+
+densityplot(~VPDIF+SEGM+NETWDIF+REVDIF, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores proximate conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~SPINDIF+INTCULT, data=fsq, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Raw scores remote conditions and outcome",
+            auto.key = list(space = "right"))
+
+#-------------------------------------
+#Plotting the distribution of calibrated data
+#-------------------------------------
+
+library(lattice)
+densityplot(~BAL+VPDIF+SEGM+NETWDIF+REVDIF+SPINDIF+INTCULT, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Clibrated scores all conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL +CP +BP, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores BAL",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL+VPDIF+SEGM+NETWDIF+REVDIF, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores proximate conditions and outcome",
+            auto.key = list(space = "right"))
+
+densityplot(~BAL+SPINDIF+INTCULT, data=fsq2, 
+            plot.points=FALSE, ref=TRUE, 
+            xlab="Calibrated scores remote conditions and outcome",
+            auto.key = list(space = "right"))
+
+
+#-----------------------------------------
+#Plotting calibration against raw scores
+#-----------------------------------------
+
+#Business performance
+plot(fsq$BP, fsq2$BP, pch=18, col="black",
+     main='Business performance',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Creative performance
+plot(fsq$CP, fsq2$CP, pch=18, col="black",
+     main='Creative performance',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Value proposition differentiation
+plot(fsq$VPDIF, fsq2$VPDIF, pch=18, col="black",
+     main='Value proposition differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Client segmentation
+plot(fsq$SEGM, fsq2$SEGM, pch=18, col="black",
+     main='Client segmentation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Network differentiation
+plot(fsq$NETWDIF, fsq2$NETWDIF, pch=18, col="black",
+     main='Network differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Revenue model  differentiation
+plot(fsq$REVDIF, fsq2$REVDIF, pch=18, col="black",
+     main='Revenue model  differentiation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Venture separation
+plot(fsq$SPINDIF, fsq2$SPINDIF, pch=18, col="black",
+     main='Venture separation',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#Integrated culture
+plot(fsq$INTCULT, fsq2$INTCULT, pch=18, col="black",
+     main='Integrated culture',
+     xlab=' Raw score ',
+     ylab=' Fuzzy score ')
+abline(h=0.5, col="black")
+abline(v= 4.01, col="black")
+
+#---------------------
+# SKEWNESS TABLE
+#---------------------
+
+skewSETS  <- function(x){
+  y <- as.numeric(x > 0.5)
+  prop.table(table(y))
+}
+
+skewTAB <- as.data.frame(apply(fsq2, 2, skewSETS))
+skewTAB <- skewTAB[!grepl(".y", names(skewTAB))]
+skewTAB <- t(skewTAB) %>% as.data.frame()
+skewTAB <- skewTAB[2:13,]
+colnames(skewTAB) <- c("Perc. 0", "Perc.1")
+skewTAB
+
+#The percentages that differ from the TFR calibration are - 
+# NETWDIF, SPINDDIF (more in), INTCULT (more in), CP (more in), 
+# BP (more out), hence also balance more out, 
+
+#               Perc. 0    Perc.1
+#VPDIF.Freq   0.4916201 0.5083799
+#SEGM.Freq    0.3296089 0.6703911
+#NETWDIF.Freq 0.6368715 0.3631285
+#REVDIF.Freq  0.4413408 0.5586592
+#SPINDIF.Freq 0.7709497 0.2290503
+#INTCULT.Freq 0.2793296 0.7206704
+#CP.Freq      0.2793296 0.7206704
+#BP.Freq      0.5921788 0.4078212
+#BAL.Freq     0.6648045 0.3351955
+#NOBP.Freq    0.6145251 0.3854749
+#NOCP.Freq    0.9273743 0.0726257
+#BOTHLOW.Freq 0.7932961 0.2067039
+
+
+#####################################
+## ANALYSIS FOR DIRECT CALIBRATION ##
+#####################################
+
+#--------------------------------
+#--------------------------------
+#ANALYSIS FOR PRESENCE OF BALANCE 
+#--------------------------------
+#--------------------------------
+
+#REMOTE: INTCULT & SPINDIF (org level)
+#PROXIMATE: VPDIF + SEGM + NETWDIF + REVDIF (business model level)
+
+#---------------------------------------------------
+# STEP I:  NECCESSITY OF CONDITIONS
+#---------------------------------------------------
+
+#NECCESSITY OF PRESENCE OF REMOTE CONDITIONS
+
+QCAfit(fsq2[, c(6,7)], fsq2$BAL, names(fsq2[, c(6,7)]), necessity = TRUE)
+
+#           Cons.Nec  Cov.Nec   RoN
+# SPINDIF    0.279   0.568 0.883
+# INTCULT    0.899   0.628 0.554
+
+###Still no neccessary conds of these two, but integrated culture gets closer to that status. 
+
+#NECCESSITY OF ABSENCE OF REMOTE CONDITIONS
+
+QCAfit(1 - fsq2[, c(6,7)], fsq2$BAL, paste("not", names(fsq2[, c(6,7)])), necessity = TRUE)
+
+#             Cons.Nec  Cov.Nec   RoN
+# not SPINDIF    0.809   0.505 0.383
+# not INTCULT    0.517   0.780 0.908
+
+#NECCESSITY OF PRESENCE OF PROXIMATE CONDITIONS
+
+QCAfit(fsq2[, c(2:5)], fsq2$BAL, names(fsq2[, c(2:5)]), necessity = TRUE)
+
+# Cons. Nec. Cov. Nec.   RoN
+#VPDIF      0.761   0.625 0.658
+#SEGM       0.803   0.600 0.585
+#NETWDIF    0.639   0.673 0.786
+#REVDIF     0.760   0.626 0.659
+
+#NECCESSITY OF ABSENCE OF PROXIMATE CONDITIONS
+QCAfit(1 - fsq2[, c(2:5)], fsq2$BAL, paste("not", names(fsq2[, c(2:5)])), necessity = TRUE)
+
+
+# Cons. Nec. Cov. Nec.   RoN
+#not VPDIF      0.620   0.707 0.826
+#not SEGM       0.531   0.704 0.857
+#not NETWDIF    0.724   0.633 0.693
+#not REVDIF     0.613   0.698 0.820
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "BAL", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+ssFSQ
+
+#inclN  RoN    covN  
+#-------------------------------------------------- 
+# 1  SPINDIF+INTCULT             0.907  0.505  0.607 
+# 2  vpdif+NETWDIF+revdif        0.929  0.501  0.615 
+# 3  segm+NETWDIF+revdif         0.901  0.512  0.608 
+# 4  NETWDIF+revdif+intcult      0.904  0.525  0.615 
+# 5  vpdif+segm+netwdif+intcult  0.904  0.499  0.603 
+# 6  vpdif+segm+NETWDIF+intcult  0.918  0.498  0.608 
+-------------------------------------------------- 
+
+##there are no combinations of conditions that would be neccessary with the required RoN cut-offs
+##however there are a lot that come close. 
+  
+#This is when excluding the INTCULT as variable
+# -------------------------------------------- 
+# 1  vpdif+NETWDIF+revdif  0.929  0.501  0.615 
+# 2  segm+NETWDIF+revdif   0.901  0.512  0.608 
+# -------------------------------------------- 
+
+#---------------------------------------------------
+# STEP I:  SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+
+cons2 <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF")
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF") 
+
+
+TTs <- truthTable(fsq2, outcome = "BAL", 
+                  conditions = cons,
+                  incl.cut1 = .9,
+                  n.cut=2,
+                  complete = TRUE,
+                  show.cases = F,
+                  PRI = TRUE,
+                  sort.by = c("incl", "n"))
+TTs
+
+# Conservative:
+
+Conss <- minimize(TTs, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conss
+
+
+# Parsimonious:
+
+Parss <- minimize(TTs, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parss
+
+# Intermediate:
+
+Inters <- minimize(TTs, details = TRUE, dir.exp = "1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Inters
+
+###All three of the solutions are identic in our case
+###The problem is that the PRI and coverahe scores are rather low 
+###Coverage shows that we might be missing out on variables
+###PRI indicates the degree to which a given causal configuration is not simultaneously 
+###sufficient for aso the non-occurence of the outcome, in our case thus is. --> does this indicate calibration problems?
+
+#n OUT = 1/0/C: 22/157/0 
+#Total      : 179 
+
+#Number of multiple-covered cases: 3 
+
+#M1: NETWDIF*revdif + vpdif*netwdif*REVDIF + VPDIF*segm*netwdif + (vpdif*segm*NETWDIF) => BAL 
+#M2: NETWDIF*revdif + vpdif*netwdif*REVDIF + VPDIF*segm*netwdif + (vpdif*segm*REVDIF) => BAL 
+
+#------------------- 
+#  inclS  PRI    covS   covU   (M1)   (M2)  
+#----------------------------------------------------------------- 
+#1 NETWDIF*revdif        0.876  0.444  0.396  0.096  0.096  0.113 
+#2 vpdif*netwdif*REVDIF  0.894  0.475  0.394  0.072  0.104  0.072 
+#3 VPDIF*segm*netwdif    0.865  0.240  0.332  0.070  0.070  0.070 
+#----------------------------------------------------------------- 
+#4  vpdif*segm*NETWDIF    0.913  0.362  0.289  0.000  0.013        
+#5  vpdif*segm*REVDIF     0.907  0.448  0.327  0.000         0.013 
+#----------------------------------------------------------------- 
+#M1                    0.810  0.411  0.626 
+#M2                    0.809  0.410  0.626  
+
+#Again all teh solutions when using 4 conditions are the same, and compared to previous calibration, they 
+#also show better consistency, PRI and coverage scores. Could also be use dto the 0.9 treshold of inclusion. 
+
+
+#--------------------------------
+#--------------------------------
+#ANALYSIS FOR ABSENCE OF BP 
+#--------------------------------
+#--------------------------------
+
+#NECCESSITY OF PRESENCE OF ALL CONDITIONS
+
+QCAfit(fsq2[, c(2:6)], fsq2$NOBP, names(fsq2[, c(2:6)]), necessity = TRUE)
+
+#Cons.Nec Cov.Nec   RoN
+#VPDIF      0.804   0.586 0.635
+#SEGM       0.818   0.542 0.552
+#NETWDIF    0.676   0.631 0.766
+#REVDIF     0.797   0.582 0.634
+#SPINDIF    0.290   0.522 0.872
+
+###No neccessary conditions.  
+
+#NECCESSITY OF ABSENCE OF CONDITIONS
+
+QCAfit(1 - fsq2[, c(2:6)], fsq2$NOBP, paste("not", names(fsq2[, c(2:6)])), necessity = TRUE)
+
+#             Cons.Nec  Cov.Nec   RoN
+#not VPDIF      0.640   0.647 0.797
+#not SEGM       0.563   0.661 0.839
+#not NETWDIF    0.740   0.573 0.660
+#not REVDIF     0.622   0.627 0.788
+#not SPINDIF    0.813   0.450 0.359
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "NOBP", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+ssFSQ
+
+##there are no combinations of conditions that would be neccessary with the required RoN cut-offs
+
+
+#---------------------------------------------------
+# STEP I:  SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF") 
+
+
+TTnobp <- truthTable(fsq2, outcome = "NOBP", 
+                  conditions = cons,
+                  incl.cut1 = .9,
+                  n.cut=2,
+                  complete = TRUE,
+                  show.cases = F,
+                  PRI = TRUE,
+                  sort.by = c("incl", "n"))
+TTnobp
+
+# Conservative:
+
+Conssnobp <- minimize(TTnobp, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conssnobp
+
+
+# Parsimonious:
+
+Parssnobp <- minimize(TTnobp, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parssnobp
+
+# Intermediate:
+
+Intersnobp <- minimize(TTnobp, details = TRUE, dir.exp = "0, 0, 0, 0, 0", include="?", row.dom=TRUE, show.cases = TRUE)
+Intersnobp
+
+
+#--------------------------------
+#--------------------------------
+#ANALYSIS FOR ABSENCE OF CP 
+#--------------------------------
+#--------------------------------
+
+#NECCESSITY OF PRESENCE OF ALL CONDITIONS
+
+QCAfit(fsq2[, c(2:6)], fsq2$NOCP, names(fsq2[, c(2:6)]), necessity = TRUE)
+
+#Cons.Nec Cov.Nec   RoN
+#VPDIF      0.869   0.405 0.548
+#SEGM       0.862   0.365 0.470
+#NETWDIF    0.708   0.423 0.676
+#REVDIF     0.833   0.389 0.542
+#SPINDIF    0.304   0.350 0.833
+
+###No neccessary conditions.  
+
+#NECCESSITY OF ABSENCE OF CONDITIONS
+
+QCAfit(1 - fsq2[, c(2:6)], fsq2$NOCP, paste("not", names(fsq2[, c(2:6)])), necessity = TRUE)
+
+#             Cons.Nec  Cov.Nec   RoN
+#not VPDIF      0.728   0.470 0.724
+#not SEGM       0.658   0.494 0.778
+#not NETWDIF    0.854   0.423 0.590
+#not REVDIF     0.738   0.476 0.725
+#not SPINDIF    0.848   0.300 0.305
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "NOCP", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+ssFSQ
+
+##there are no combinations of conditions that would be neccessary with the required RoN cut-offs
+
+
+#---------------------------------------------------
+# STEP I:  SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF") 
+
+
+TTnocp <- truthTable(fsq2, outcome = "NOCP", 
+                     conditions = cons,
+                     incl.cut1 = .85,
+                     n.cut=1,
+                     complete = TRUE,
+                     show.cases = F,
+                     PRI = TRUE,
+                     sort.by = c("incl", "n"))
+TTnocp
+
+# Conservative:
+
+Conssnocp <- minimize(TTnocp, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conssnocp
+
+
+# Parsimonious:
+
+Parssnocp <- minimize(TTnocp, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parssnocp
+
+# Intermediate:
+
+Intersnocp <- minimize(TTnocp, details = TRUE, dir.exp = "0, 0, 0, 0, 0", include="?", row.dom=TRUE, show.cases = TRUE)
+Intersnocp
+
+
+#---------------------------------------
+#---------------------------------------
+#ANALYSIS FOR ABSENCE OF BOTH CP AND BP 
+#---------------------------------------
+#--------------------------------
+
+#NECCESSITY OF PRESENCE OF ALL CONDITIONS
+
+necbothlow <- QCAfit(fsq2[, c(2:6)], fsq2$BOTHLOW, names(fsq2[, c(2:6)]), necessity = TRUE)
+
+#Cons.Nec Cov.Nec   RoN
+#VPDIF      0.838   0.445 0.565
+#SEGM       0.858   0.414 0.490
+#NETWDIF    0.678   0.461 0.691
+#REVDIF     0.790   0.420 0.555
+#SPINDIF    0.281   0.368 0.837
+
+###No neccessary conditions.  
+
+#NECCESSITY OF ABSENCE OF CONDITIONS
+
+QCAfit(1 - fsq2[, c(2:6)], fsq2$BOTHLOW, paste("not", names(fsq2[, c(2:6)])), necessity = TRUE)
+
+#             Cons.Nec  Cov.Nec   RoN
+#not VPDIF      0.705   0.519 0.742
+#not SEGM       0.603   0.515 0.785
+#not NETWDIF    0.823   0.464 0.608
+#not REVDIF     0.709   0.520 0.742
+#not SPINDIF    0.857   0.345 0.320
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "BOTHLOW", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+
+##there are no combinations of conditions that would be neccessary with the required RoN cut-offs
+
+
+#---------------------------------------------------
+# STEP I:  SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF") 
+
+
+TTbothlow <- truthTable(fsq2, outcome = "BOTHLOW", 
+                     conditions = cons,
+                     incl.cut1 = .9,
+                     n.cut=2,
+                     complete = TRUE,
+                     show.cases = F,
+                     PRI = TRUE,
+                     sort.by = c("incl", "n"))
+TTbothlow
+
+# Conservative:
+
+Conssbothlow <- minimize(TTbothlow, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conssbothlow
+
+
+# Parsimonious:
+
+Parssbothlow <- minimize(TTbothlow, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parssbothlow
+
+# Intermediate:
+
+Intersbothlow <- minimize(TTbothlow, details = TRUE, dir.exp = "0, 0, 0, 0, 0", include="?", row.dom=TRUE, show.cases = TRUE)
+Intersbothlow
+
+
+#--------------------------------
+#--------------------------------
+#ANALYSIS FOR ABSENCE OF BALANCE 
+#--------------------------------
+#--------------------------------
+
+
+#NECCESSITY OF PRESENCE OF PROXIMATE CONDITIONS
+
+QCAfit(fsq2[, c(2:5)], 1-fsq2$BAL, names(fsq2[, c(2:5)]), necessity = TRUE)
+
+
+#NECCESSITY OF ABSENCE OF PROXIMATE CONDITIONS
+QCAfit(1 - fsq2[, c(2:5)], 1 - fsq2$BAL, paste("not", names(fsq2[, c(2:5)])), necessity = TRUE)
+
+
+#SUPERSUBSET RELATIONSHIPS
+# all necessary combinations with at least 0.9 inclusion and 0.6 coverage cut-offs
+ssFSQ <- superSubset(fsq2, outcome = "~BAL", conditions = c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF"), incl.cut = 0.90, cov.cut = 0.6, relation = "necessity")
+ssFSQ
+
+
+#---------------------------------------------------
+# SUFFICIENCY OF CONDITIONS
+#---------------------------------------------------
+
+cons2 <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF")
+cons <- c("VPDIF", "SEGM", "NETWDIF", "REVDIF", "SPINDIF") 
+
+
+TTns <- truthTable(fsq2, outcome = "~BAL", 
+                  conditions = cons,
+                  incl.cut1 = .90,
+                  n.cut=2,
+                  complete = TRUE,
+                  show.cases = F,
+                  PRI = TRUE,
+                  sort.by = c("incl", "n"))
+TTns
+
+# Conservative:
+
+Consn <- minimize(TTns, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Consn
+
+
+# Parsimonious:
+
+Parsn <- minimize(TTns, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parsn
+
+# Intermediate:
+
+Intern <- minimize(TTns, details = TRUE, dir.exp = "0, 0, 0, 0, 0", include="?", row.dom=TRUE, show.cases = TRUE)
+Intern
+
+###All three of the solutions are identic in our case
+###The problem is that the PRI and coverahe scores are rather low 
+###Coverage shows that we might be missing out on variables
+###PRI indicates the degree to which a given causal configuration is not simultaneously 
+###sufficient for aso the non-occurence of the outcome, in our case thus is. --> does this indicate calibration problems?
+
+#n OUT = 1/0/C: 22/157/0 
+#Total      : 179 
+
+#Number of multiple-covered cases: 3 
+
+#M1: NETWDIF*revdif + vpdif*netwdif*REVDIF + VPDIF*segm*netwdif + (vpdif*segm*NETWDIF) => BAL 
+#M2: NETWDIF*revdif + vpdif*netwdif*REVDIF + VPDIF*segm*netwdif + (vpdif*segm*REVDIF) => BAL 
+
+#------------------- 
+#  inclS  PRI    covS   covU   (M1)   (M2)  
+#----------------------------------------------------------------- 
+#1 NETWDIF*revdif        0.876  0.444  0.396  0.096  0.096  0.113 
+#2 vpdif*netwdif*REVDIF  0.894  0.475  0.394  0.072  0.104  0.072 
+#3 VPDIF*segm*netwdif    0.865  0.240  0.332  0.070  0.070  0.070 
+#----------------------------------------------------------------- 
+#4  vpdif*segm*NETWDIF    0.913  0.362  0.289  0.000  0.013        
+#5  vpdif*segm*REVDIF     0.907  0.448  0.327  0.000         0.013 
+#----------------------------------------------------------------- 
+#M1                    0.810  0.411  0.626 
+#M2                    0.809  0.410  0.626  
+
+#Again all teh solutions when using 4 conditions are the same, and compared to previous calibration, they 
+#also show better consistency, PRI and coverage scores. Could also be use dto the 0.9 treshold of inclusion. 
+
+
+######DIAGRAMMER
+
+solvizBAL <- grViz("
+digraph boxes_and_circles {
+                   
+                   # a 'graph' statement
+                   graph [overlap = true, fontsize = 10]
+                   
+                   # several 'node' statements
+                   node [shape = box,
+                   fontname = Helvetica]
+                   SPIN; spin
+                   
+                   node [shape = circle,
+                   fixedsize = true,
+                   width = 1.5] // sets as circles
+                   REVDIF; revdif; NETWDIF;vpdif; REVDIFsegm; revdifSEGM; netwdifvpdif; NETWDIFVPDIF; netwdif
+                   
+                   # several 'edge' statements
+                   spin->REVDIF spin->revdif REVDIF->vpdif revdif->NETWDIF 
+                   SPIN->REVDIFsegm SPIN->revdifSEGM REVDIFsegm->netwdifvpdif REVDIFsegm->NETWDIFVPDIF
+                   revdifSEGM->netwdif
+                   }
+                   ") 
+
+solvizBAL %>% export_svg %>% charToRaw %>% rsvg %>% png::writePNG("solvizBAL.png")
+
+
+
+#---------------------------------------------------
+# ENHANCED STANDARD ANALYSIS
+#---------------------------------------------------
+
+# Step 1: Exclude assumptions contradicting necessity:
+# Let's check simplifying assumptions (remainder rows which make solution simpler) used for the parsimonious solution:
+
+Parss$SA #which rows do not include neccessary conditions (or supersets)
+#M6 18, 20, 22.
+
+# Step 2: Exclude contradictory rows from simultaneous subset relations:
+
+EASYCOUNTnobp <- intersect(which(grepl(1, TTs$tt$OUT)), which(grepl(1, TTnobp$tt$OUT)))
+EASYCOUNTnobp
+#3  5  7 10 13 17 19 21 26 29
+
+EASYCOUNTnocp <- intersect(which(grepl(1, TTs$tt$OUT)), which(grepl(1, TTnocp$tt$OUT)))
+EASYCOUNTnocp
+#5 10 19 21
+
+EASYCOUNTbothlow <- intersect(which(grepl(1, TTs$tt$OUT)), which(grepl(1, TTbothlow$tt$OUT)))
+EASYCOUNTbothlow
+#10
+
+EASYCOUNTns <- intersect(which(grepl(1, TTs$tt$OUT)), which(grepl(1, TTns$tt$OUT)))
+EASYCOUNTns
+#2  3  5  7 10 11 13 15 17 19 21 26 29
+
+# These are the rows which are simultaneously used. 
+# This usually happens with very skewed sets.
+# PRI tells us in which minimization (for outcome or ~outcome) to include it;
+#to leave in BAL: 5, 7, 13, 14, 17, 21, 26, 29
+#to leave in NOBP: 3, 10, 16, 19, 23, 24
+
+TTs$tt[c(3, 5,  7, 10, 13, 14, 16, 17, 19, 21, 23, 24, 26, 29),]
+
+TTnobp$tt[c(3, 5,  7, 10, 13, 14, 16, 17, 19, 21, 23, 24, 26, 29),]
+
+
+
+#Simplifying assumptions: 
+Parss$SA$M6
+
+# And same for the ~outcome:
+Parssnobp$SA$M1
+
+Parsn$SA$M1
+#6, 8, 12, 18, 22, 30
+
+CSA <- intersect(rownames(Parss$SA$M6), rownames(Parssnobp$SA$M1))
+CSA
+#"18" "20" "22" 
+CSA2 <- intersect(rownames(Parss$SA$M6), rownames(Parssnocp$SA$M1))
+CSA2
+#0
+CSA3 <- intersect(rownames(Parss$SA$M6), rownames(Parssbothlow$SA$M1))
+CSA3
+#0
+CSA4 <-intersect(rownames(Parss$SA$M6), rownames(Parsn$SA$M1)) 
+CSA4  
+#18, 20
+
+TTesa <- esa(TTs, contrad_rows = c(3, 10, 16, 19, 23, 24))
+TTesa
+
+#Intermediate esa
+
+Interesa <- eqmcc(TTesa, details = TRUE, dir.exp = "1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa
+
+#Parsimonious esa
+
+Parsesa <- minimize(TTesa, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesa
+
+###ESA NOBP
+TTesanobp <- esa(TTnobp, contrad_rows = c(CSA, 5, 7, 13, 14, 17, 21, 26, 29))
+TTesanobp
+
+#Intermediate esa
+
+Interesa2 <- eqmcc(TTesanobp, details = TRUE, dir.exp = "1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa2
+
+#Parsimonious esa
+
+Parsesa2 <- minimize(TTesanobp, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesa2
+
+
+###ESA NOBP
+TTesanocp <- esa(TTnocp, contrad_rows = c(5, 10, 19, 21))
+TTesanocp
+
+
+#Intermediate esa
+
+Interesa3 <- minimize(TTesanocp, details = TRUE, dir.exp = "1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa3
+
+#Parsimonious esa
+
+Parsesa3 <- minimize(TTesanocp, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesa3
+
+
+
+Parss 
+Parsesa
+
+Inters
+Interesa
+
+Parssnobp
+Parsesa2
+
+Intersnobp
+Interesa2
+
+#ESA IF ONLY BALANCE
+TTns$tt[c(2,3,  5,  7, 10, 11, 13, 15, 17, 19, 21, 26, 29),]
+TTs$tt[c(2,3,  5,  7, 10, 11, 13, 15, 17, 19, 21, 26, 29),]
+
+# PRI tells us in which minimization (for outcome or ~outcome) to include it;
+#to leave in NOBAL: 3, 5, 7, 10, 13, 15, 17, 19, 21, 26, 29
+#to leave in BAL: 2, 11
+
+
+#Simplifying assumptions: 
+Parss$SA$M6
+
+# And same for the ~outcome:
+Parsn$SA$M1
+#6, 8, 12, 18, 22, 30
+
+CSA4 <-intersect(rownames(Parss$SA$M6), rownames(Parsn$SA$M1)) 
+CSA4  
+#18, 20
+
+TTesa <- esa(TTs, contrad_rows = c(CSA4, 3, 5, 7, 10, 13, 15, 17, 19, 21, 26, 29))
+TTesa
+
+#Intermediate esa
+
+Interesa <- minimize(TTesa, details = TRUE, dir.exp = "1, 1, 1, 1, 1", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesa
+
+#Parsimonious esa
+
+Parsesa <- minimize(TTesa, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesa
+
+TTnesa <- esa(TTns, contrad_rows = c(CSA4, 2, 11 ))
+TTnesa
+
+#Intermediate esa
+
+Interesan <- minimize(TTnesa, details = TRUE, dir.exp = "0, 0, 0, 0, 0", include="?", row.dom=TRUE, show.cases = TRUE)
+Interesan
+
+#Parsimonious esa
+
+Parsesan <- minimize(TTnesa, details = TRUE, show.cases = TRUE, include="?", row.dom=TRUE, all.sol = FALSE)
+Parsesan
+
+
+#######################################################
+#OLD CODE WITH MORE CONDS
+
+TTs2 <- truthTable(fsq2, outcome = "BAL", 
+                   conditions = cons2[1:5],
+                   incl.cut1 = .9,
+                   n.cut=2,
+                   complete = TRUE,
+                   show.cases = F,
+                   PRI = TRUE,
+                   sort.by = c("incl", "n"))
+TTs2
+
+# Conservative:
+
+Conss2 <- minimize(TTs2, details = TRUE, show.cases = TRUE, row.dom=TRUE)
+Conss2
+
+
+# Parsimonious:
+
+Parss2 <- minimize(TTs2, details = TRUE, show.cases = TRUE, include="?", row.dom = TRUE)
+Parss2
+
+# n OUT = 1/0/C: 64/111/0 
+# Total      : 175 
+
+# Number of multiple-covered cases: 7 
+
+# M1: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*segm*REVDIF + vpdif*REVDIF*spindif + VPDIF*segm*netwdif) => BAL 
+# M2: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*netwdif*REVDIF + vpdif*NETWDIF*spindif + VPDIF*segm*netwdif)
+# => BAL 
+# M3: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*netwdif*REVDIF + vpdif*REVDIF*spindif + VPDIF*segm*netwdif) => BAL 
+# M4: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*netwdif*SPINDIF + vpdif*REVDIF*spindif + VPDIF*segm*netwdif)
+# => BAL 
+# M5: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*REVDIF*spindif + VPDIF*segm*netwdif + segm*netwdif*REVDIF) => BAL 
+# M6: netwdif*revdif*SPINDIF + NETWDIF*revdif*spindif + (vpdif*REVDIF*spindif + VPDIF*segm*revdif + segm*netwdif*REVDIF) => BAL 
+
+# ----------------------------------------------- 
+#   inclS  PRI    covS   covU   (M1)   (M2)   (M3)   (M4)   (M5)   (M6)  
+# ------------------------------------------------------------------------------------------------ 
+#   1 netwdif*revdif*SPINDIF  0.850  0.350  0.156  0.013  0.048  0.033  0.033  0.013  0.048  0.048 
+# 2 NETWDIF*revdif*spindif  0.888  0.391  0.338  0.036  0.075  0.050  0.075  0.075  0.075  0.061 
+------------------------------------------------------------------------------------------------ 
+  #   3  vpdif*segm*REVDIF       0.907  0.448  0.327  0.003  0.020                                    
+  # 4  vpdif*netwdif*REVDIF    0.894  0.475  0.394  0.000         0.079  0.016                      
+  # 5  vpdif*netwdif*SPINDIF   0.888  0.480  0.157  0.000                       0.016               
+  # 6  vpdif*NETWDIF*spindif   0.871  0.423  0.339  0.001         0.032                             
+  # 7  vpdif*REVDIF*spindif    0.853  0.431  0.397  0.004  0.088         0.036  0.119  0.099  0.099 
+  # 8  VPDIF*segm*netwdif      0.865  0.240  0.332  0.002  0.062  0.062  0.062  0.062  0.024        
+  # 9  VPDIF*segm*revdif       0.918  0.445  0.332  0.010                                     0.036 
+  # 10  segm*netwdif*REVDIF     0.906  0.405  0.339  0.000                              0.014  0.042 
+  # ------------------------------------------------------------------------------------------------ 
+# M1                      0.787  0.385  0.652 
+# M2                      0.796  0.393  0.645 
+# M3                      0.793  0.395  0.648 
+# M4                      0.790  0.391  0.648 
+# M5                      0.792  0.395  0.646 
+# M6                      0.805  0.421  0.658 
+
+# cases 
+# --------------------------------- 
+#   1  netwdif*revdif*SPINDIF  102,161,171; 50,122,131,147,153; 49,60,127,177
+# 2  NETWDIF*revdif*spindif  41,124,154; 23,52; 37,158; 22,25,44,84,144,155
+--------------------------------- 
+  #   3  vpdif*segm*REVDIF       48,93,163,178; 42,67,168; 100,149,169
+  # 4  vpdif*netwdif*REVDIF    48,93,163,178; 42,67,168; 18,19,29,40,73,88,91,99,103,128,140,167,170,173
+  # 5  vpdif*netwdif*SPINDIF   102,161,171; 42,67,168; 50,122,131,147,153
+  # 6  vpdif*NETWDIF*spindif   41,124,154; 100,149,169; 23,52; 17,32,81,89,113,165,179
+  # 7  vpdif*REVDIF*spindif    48,93,163,178; 100,149,169; 18,19,29,40,73,88,91,99,103,128,140,167,170,173; 17,32,81,89,113,165,179
+  # 8  VPDIF*segm*netwdif      56,83,126,129; 11,61,70,109
+  # 9  VPDIF*segm*revdif       56,83,126,129; 37,158
+  # 10  segm*netwdif*REVDIF     48,93,163,178; 42,67,168; 11,61,70,109
+
+# Intermediate:
+  # Inters2 <- minimize(TTs2, details = TRUE, dir.exp = "1, 1, 1, 1,1", include="?", row.dom=TRUE, show.cases = TRUE)
+# Inters2
+
+# M1:    vpdif*REVDIF*spindif + NETWDIF*revdif*spindif + vpdif*segm*netwdif*SPINDIF + VPDIF*segm*netwdif*spindif +
+#  SEGM*netwdif*revdif*SPINDIF => BAL 
+
+# inclS  PRI    covS   covU  
+# ---------------------------------------------------------- 
+# 1  vpdif*REVDIF*spindif         0.853  0.431  0.397  0.119 
+# 2  NETWDIF*revdif*spindif       0.888  0.391  0.338  0.075 
+# 3  vpdif*segm*netwdif*SPINDIF   0.900  0.554  0.132  0.037 
+# 4  VPDIF*segm*netwdif*spindif   0.864  0.237  0.298  0.056 
+# 5  SEGM*netwdif*revdif*SPINDIF  0.882  0.266  0.134  0.040 
+# ---------------------------------------------------------- 
+#   M1                           0.798  0.402  0.637 
+
+#The first analysis I ran with the full set had extreme model ambuiguity, especialy if also single case rows are 
+#included in the minimization. IN the end the most reasinable was parsimonious solution with 0.9 and 2 case cutoffs, 
+#but still, the model was worse than the 4 element one. The problem is with the INTCULT variable, the spindif seems legit. 
+
+#I tried several ways of changing the conditions in the analysis with intcult and spindif, 
+#the one that worked the best was when I take out VPDIF
+#However, in general I have concerns about calibration, especially for the conditions which are mixed, like spind dif,
+#performances, and intcult
+
+

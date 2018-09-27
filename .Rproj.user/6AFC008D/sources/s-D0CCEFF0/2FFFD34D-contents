@@ -1,0 +1,39 @@
+---
+title: "Survey questions and variable names "
+output: html_notebook
+---
+
+#Paradox scales
+
+##Dutch 
+
+"Q16_Q16_INT1" In al onze diensten en producten is het zoeken naar de balans tussen creatieve en commerciële aspiraties aanwezig. 
+"Q16_Q16_INT2" Wij zijn voortdurend bezig met het creëren van synergie en interactie tussen onze zakelijke en onze puur creatieve activiteiten. 
+"Q16_Q16_INT3"Al onze projecten moeten zowel creatief als commercieel interessant zijn, anders zullen we ze niet doen. 
+"Q16_Q16_INT4" Ons bureau deelt dezelfde creatieve visie en ondernemershcapsrisico's met al onze partners.  
+"Q16_Q16_INT5" Wij hanteren voor al onze projecten en opdrachtgevers dezelfde uurtarieven en betalingscondities.   
+"Q16_Q16_INT6" Bij het nemen van beslissingen in ons bedrijf zoeken wij samenwerkingen, interactie en compromissen tussen onze creatieve en commerciële ambities.  
+"Q16_Q16_DIF1" Sommige onderdelen van onze dienstverlening zijn specifiek gericht op het realiseren van zakelijke en financiële doelen terwijl andere juist bijdragen aan creatieve ambities. 
+"Q16_Q16_DIF2" Wij benadrukken de verschillen tussen de creatieve aspecten van onze dienstverlening en de aspecten die verband houden met onze zakelijke performance. 
+"Q16_Q16_DIF3"Sommige van onze klanten bieden financiële continuiteit, terwijl andere klanten voor creatief werk, reputatie en zichtbaarheid zorgen. 
+"Q16_Q16_DIF4" Wij maken een duidelijk onderscheid tussen creatieve en zakelijke partners.  
+"Q16_Q16_DIF5" Voor creatief uitdagende projecten hanteren wij andere verdienmodellen dan voor projecten die vooral commercieel interessant zijn.  
+"Q16_Q16_DIF6" In ons bedrijf maken we een duidelijk onderscheid tussen beslissingen die gemaakt worden ten behoeve van onze creatieve ambities en beslissingen die bijdragen aan ons commercieel bedrijfsresultaat.   
+
+
+##English 
+
+"Q16_Q16_INT1" 
+"Q16_Q16_INT2"
+"Q16_Q16_INT3"
+"Q16_Q16_INT4"
+"Q16_Q16_INT5"  
+"Q16_Q16_INT6"
+"Q16_Q16_DIF1"
+"Q16_Q16_DIF2"
+"Q16_Q16_DIF3"
+"Q16_Q16_DIF4"
+"Q16_Q16_DIF5"
+"Q16_Q16_DIF6"
+
+

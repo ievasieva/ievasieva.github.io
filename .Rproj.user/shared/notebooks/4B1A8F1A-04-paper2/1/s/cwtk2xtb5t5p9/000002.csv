@@ -1,0 +1,32 @@
+"0","M1 <- ""vpdif*segm*SPINDIF + vpdif*SEGM*netwdif*REVDIF => BAL"""
+"2","Warning messages:
+"
+"2","1: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"2","2: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"2","3: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"2","4: "
+"2","In readLines(input, encoding = ""UTF-8"") :"
+"2","
+ "
+"2"," incomplete final line found on '_output.yml'
+"
+"0","print(M1)"
+"1","[1]"
+"1"," ""vpdif*segm*SPINDIF + vpdif*SEGM*netwdif*REVDIF => BAL"""
+"1","
+"

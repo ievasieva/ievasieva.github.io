@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537132084263.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BB7826A5",
+    "lastKnownWriteTime" : 1531474921,
+    "last_content_update" : 1531474921,
+    "path" : "~/Downloads/Analyses Marcel  CAL2_June.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "903,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
