@@ -5,7 +5,7 @@ active = true
 date = 2016-04-20T00:00:00
 
 # Order that this section will appear in.
-weight = 5
+weight = 1
 
 # List your academic interests.
 [interests]
@@ -41,4 +41,4 @@ weight = 5
 
 # Biography
 
-Ieva's experience and interests combine strategic management, particularly in beyond-profit settings, with topics related to creativity, design, sustainability, and urban planning. In her Ph.D. project at the University of Amsterdam, she studies how creative service firms manage conflicting goals through business model design. In addition, she is a cofounder of a strategic design consultancy ???n??betj????? (Latvian for nobutyes) working on placemaking projects that involve using creativity and community development as tools for solving complex urban and organizational problems in a more sustainable and responsible manner. Ieva lectures and consults on these topics.   
+Ieva's experience and interests combine strategic management, particularly in beyond-profit settings, with topics related to creativity, design, sustainability, and urban planning. In her Ph.D. project at the University of Amsterdam, she studies how creative service firms manage conflicting goals through business model design. In addition, she is a cofounder of a strategic design consultancy nebetja (Latvian for nobutyes) working on placemaking projects that involve using creativity and community development as tools for solving complex urban and organizational problems in a more sustainable and responsible manner. Ieva lectures and consults on these topics.   
