@@ -1,0 +1,103 @@
+# INTRODUCTION {#intro}  
+
+>'Building business models that merely pursue profits almost pale as a hedonistic or pecuniary quest aside the grand challenge of building business models that matter.'  
+>-- <cite>Alex Osterwalder</cite>  
+
+Most business surveys will reveal that having a good business model has become more important than having a new product or service.^[For intance, many sector specifc surveys of the Economist Business Intelligence Unit confirm this statement http://www.eiu.com/home.aspx#about ] According to most textbooks, designing a business model is easy. One should figure out what value the firm can bring to which customer segments, find the best way of doing so, and it should work for both the customer and the business. The real world, however, is not one where clients, managers, suppliers, employees, and the society magically want the same. 
+  
+This thesis explores the decisions top-managers make about their firms' business models in the presence of strategic demands of a particular kind - paradoxes. *Strategic paradoxes* denote competing, conflicting, yet interrelated strategic goals, which cause tensions as a result of seemingly irreconcilable requirements and persist over time [@Smith2011; @Lewis2014; @Jarzabkowski2013].  Most commonly, strategic paradoxes are pairs of goals, which appear as opposites but are both needed. Think of learning and performing, long-term and short-term planning, exploring and exploiting. While I study how the conflict between creativity and commercialization is navigated in creative service firms^[Design consultancies, architecture firms, advertisement companies, firms providing audiovisual services, digital agencies and similar firms.], the work presented in this thesis is driven by a broader question, namely - how can firms use business model design to make conflicting, yet interdependent strategies work? I strongly believe this question is relevant beyond the studied field, as incorporating beyond-profit considerations, mostly social and environmental, in enterprise design is (hopefully) on its way of becoming the norm. At a personal level, it is driven by a more mundane question - when presented with seemingly impossible choices, how do we proceed in the most successful way? How do we as entrepreneurs and decision-makers *kill two birds with one stone*?   
+    
+Business models were chosen as the focus of investigation for they are increasingly recognized among the most important sets of strategic decisions that firms can make, determining largely the value that firm creates [@Casadesus2011]. This is also how I understand business models in this thesis - as a set of decisions made about the product(s) and/or service(s) to deliver, target customers, as well as the appropriate value creation and capture mechanisms to link the two [@Smith2013]. To explore the process and content of business model design for strategic paradoxes thus means to explore the specific decisions and the process behind them. I use paradox theory as a conceptual lens for framing competing demands, and creative industries as an exemplary *paradoxical setting*. The general model is presented in Figure 1.1, and the concepts of focus on are marked in bold. 
+```{r figIntro1, echo = FALSE, fig.cap = 'Conceptual relationships between the theoretical domains used.'}
+knitr::include_graphics("Figures/introframe.png" , dpi = NA)
+```
+These relationships are investigated through one conceptual and three empirical studies, each using different methods. In the consequent sections I explain the main theoretical and methodic assumptions this thesis relies on. I address three questions in particular - 1) Why paradoxes?; 2) Why business models?; and 3) How should we conceptualize organizations in order to study the relationship between the two? The question "Why creative industries?" will be tackled in-depth in the next chapter. 
+
+## Encountering and studying paradoxes: Why?  
+
+>> How wonderful that we have met with a paradox. Now we have some hope of making progress. (Niels Bohr, 1885 - 1962)
+
+Uninventively, this is the most common quote about paradoxes one would find in an online search. It comes, however, from a field very distant to that of organization studies - quantum physics. I hope you will forgive the short detour and take this leap with me.  
+  
+This quote was part of Niels Bohr's response to Einstein's famous thought experiment 'Can Quantum-Mechanical Description of Physical reality Be Considered Complete?' [@Einstein1935]. In this article, Einstein put forward what he considered a fundamental *flaw* in the quantum mechanics. This at that time very new field of physics posited that a measurement performed on one particle from an interacting pair would affect the state of the other particle in the same way, no matter what the distance between them. According to Einstein, this was untenable, as it would have meant that information is transmitted faster than the speed of light, thereby defying the Theory of Relativity. In short - the main premise of the new-born quantum mechanics field seemed counterintuitive, and hence could not be true. However, this is, in fact, now known as the *EPR paradox*, and is one of the best-known examples illustrating the concept of *quantum entanglement*. But how can we link quantum mechanics with the study of organizational paradoxes? Besides being a beautiful quote about the opportunities paradoxical encounters can offer, the presented context in which Bohr wrote these words perfectly highlights three cornerstones of this thesis:
+  
+First, paradoxes are a prevalent and universal part of human experience, whether it would be the development of theoretical physics, study of organizational behavior and decision-making, or our daily lives. As in the case of the EPR Paradox, we cannot dismiss their existence only because they go against our perceived ideas about the reality. The famous management scholar Charles Handy referred to the contemporary times as the *Age of Paradox* [@Handy1995] already more than 20 years ago. According to the author, 'paradox has almost become a cliche of our times. The word crops up again and again as people look for a way to describe the dilemmas facing the governments, businesses, and, increasingly, individuals.' (p.xi). Consequently, while most of business studies, particularly in the domain of strategy, rely on the established profit-maximization paradigm, it does not mean that it is the right paradigm to describe all the challenges facing contemporary firms.     
+  
+Second, the discovery of a paradox, and above all - the acceptance of it, as Bohr rightly noted, paved the way of many new scientific discoveries that nowadays constitute a big part of physics as a scientific discipline. In a similar vein, the rich and growing body of research relying on the paradox theory [@Lewis2014] and related theories for explaining many organizational phenomena has proved that the paradox perspective can help to look at many traditionally troublesome and difficult questions from a fresh point of view. Scholars have successfully shown how paradox theory can assist in re-framing our understanding of the relationship between phenomena like science and commerce [@Bednarek2017], exploration and exploitation [@Papachroni2015], control and collaboartion in the context of governance [@Sundaramurthy2003], and many others. Studies so far have extensively dealt with the very nature, sources, and implications of paradoxical tensions [@Poole1989; @Smith2011]. Building on that, authors have made conclusions about the leadership styles [@Lewis2014] and structures [@Ebbers2017] needed in order to manage paradoxes, mindsets that help to accommodate paradoxical thinking [@Miron2017], rethorical devices [@Bednarek2017], identity work [@Gotsi2010], innovation management [@Andriopoulos2009] and more. Yet surprisingly, the topic of this thesis - strategic decision-making about business models - has so far received very little conceptual and almost no empirical attention. This is hence the gap I try to fill.    
+  
+Third, the main object of dispute between Bohr and Einstein - quantum entanglement - has surprisingly a lot in common with the main object of this research - strategic paradoxes. '*Quantum entanglement* is a quantum mechanical phenomenon in which the quantum states of two or more objects have to be described with reference to each other, even though the individual objects may be spatially separated.' *Strategic paradoxes*, in turn, denote inherently contradictory, yet inseparable and interdependant objectives that an organization is pursuing [@Bednarek2017]. In both cases we are dealing with the relationship between two (or more) interconnected elements, their influence over each other, and the way we interpret the nature and outcomes of this interaction. Although very different from each other, both theories share the idea that it is impossible and useless to observe or perform a measurement on a single part of an interrelated whole. When it comes to organizational life, this invites us to dismiss the separatist approaches, attempt to observe the integrity of processes, and embrace the uncertain, inconsistent, and paradoxical nature of strategic decision-making.             
+    
+### Framing competing strategic demands   
+
+How do we understand our world when it gets more complex than getting to A? How do we interpret what has to be done when there is more than one goal? How do we priortize, and do we, at all? 
+  
+Competing strategic demands are not a new phenomenon in the management literature [@Poole1989; @Fairhurst2016]. Many theories explicitly or implicitly have dealt with the issue, and many terms have been coined to denote such conflicts; just to name a few - dualities, polarities [@Johnson1992], dilemmas, tensions, pluralism, institutional logics. These and similar topics have been addressed in the literatures on competitive strategy, ambidexterity, tripple bottom line, innovation management, internationalization, social entrepreneurship, and others. 
+
+Yet, even though contradictions are inherent to organizational life, we have a natural tendency to strive towards consistency. Psychologists have repeatedly concluded that humans are not confortable with cognitively dissonant states [@Festinger]. Unsurprisingly, this is also reflected in the dominant narratives of the management scholarship. Even though tensions and strategic conflicts are recognized, they are then often tackled as an optimal solution problem, using a *contingency approach*. A contingency approach or "if-then" thinking focuses on finding conditions in which a choice towards one or the other strategy can be consider as the optimal. But the way we interpret things changes the way we experience them, and consequently act upon them. 
+
+As argued by paradox scholars and outlined earlier in this introduction, in many situations, approaching problems from a choice perspective is impossible. The pace of development and the interconectedness of the world in the 21st has lead us to believe that we organize and manage in unprecendetly complex environments. In a reality characterized by high complexity, the ability to navigate tensions and competing demands has transformed from a peripheral skill to a neccesity. Consequently, those managers and firms that can embrace dualities, as opposed to seeking solutions, will win. 
+
+So what does a paradox perspective offer? What changes if we frame the conflicts differently? Chapter 2 tackles these questions in a thoeretical thought experiment supported by empirical evidence gathered in the qualitative stage of the field work for this dissertation. 
+
+### Pursuing conflicting goals
+
+The negatives associated with the seeming incompatibility and complexity of the realities the managers have to deal with. 
+Pursuing conflicting strategies is frustrating [], it can trigger withdrawal, denial, cause tensions, ignorance, xxxx. 
+
+On the opposite, literature has also discussed the positives of xxx. inspiring, creativity triggering, enabling. 
+
+the most importnat theoretical model 
+
+In the end, organizations need to come up with coping mechanisms, balancing acts, as "usual" decision-making strategies do not work. 
+
+According to @Gaim2017, succesfully dealing with paradoxes requires specific mindsets and practices, as well as organizational-level conditions that enable them. Much research has been done recently on the mindset part [@Miron2017], as well as the organizational conditions [REF]. The empirical part of this dissertation focuses on investigating the practice-level of paradox management.  
+
+According to this model, strategic
+paradoxes create tensions, which have to be accepted and ???worked through???. Paradoxical resolution
+requires ???confronting paradoxical tensions via iterating responses of splitting and integration???(Wendy K.
+Smith and Lewis 2011, 389). In paradox theory, these integration and differentiation (or separation)
+strategies are thus seen as the generic responses for coping with conflicting goals; and their application
+has been discovered and discussed at many levels and domains of management and organization but
+not at the business model leve
+
+Integration and separation at different levels. 
+
+Chapter 3 looks more in detail in what forms can these two decision-making strategies can take, and how they are applied to business models. 
+
+### Business modelling for complexity   
+  
+Are these strateies equifinal? Does it matter what we choose? Are there performance implications? 
+These questions are tackled in Chapter 4. 
+
+### Business model heterogeneity and performance implications
+
+Do differences in the importance that are attached to each of the dimensions lead to business model heterogeneity? And what are the performance implications? Chapter 5. 
+
+How can we make them fit complex strategic intents?  
+
+## Same same but different: Operationalizing business models    
+While conventional standards would probably require this study to use a consistent operationalization of the business model concept, it instead mirrors the plurality of the study field. The business model scholars have by now agreed on a general definition which delineates the domain studied, as well as the different possible purposes of using the concept. However, finding a single operationalization has proven to be impossible. Studies use very different ways of observing and measuring business models. This is also because the concept as a tool can be used for different purposes both empirically in the practice of entrepreneurship [@Baden2010]. 
+While staying true to the conventional definition and domain delineation which relies on 4 domains in which decision can be made - value proposition, value delivery, value creation, and value caoture - each of the papers in this thesis in fact looks at the business model from a slightly different perspective. 
+
+1. Chapter 3: the purpose of decision making 
+2. Chapter 4: the extent to which they integrate of differentiate paradoxical considerations
+3. Chapter 5: specific decisions that compose a business model, based on which we derive a taxonomy
+
+## Purpose and overview of the thesis  
+
+| Chapter  	| Research Question  	| Research Approach  	| Data  	| Contributions 	| Business model conceptualization | 
+|---------------------------------------------------------------------------------------	|---------------------------------------------------------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------	|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	| ------------- |   
+| 1 Thriving off of Tensions  	| How can paradox perspective enrich creative industries research?  	| Conceptual with empirical support 	| - 	| The identification of an alternative conceptual framework for framing and studying tensions in the creative industries context; 	| -   |
+| 2 Crafting Business Models for Paradoxical Goals  	| How do firms use business model design in order to attend strategic paradoxes?  	| Qualitative, inductive, cross-case analysis  	| In-depth interviews (n=16), expert panels, field notes 	| The identification of a menu of business model related decisions that can be used to address paradoxical strategies simultaneously; Paradox management at the business model level' 	| Process of decision-making |
+| 3 Killing Two Birds with One Business Model  	| How do integration and separation decisions within different business model elements lead to (mis-) balanced performance in conflicting domains?  	| Combined qualitative and quantitative, configurational analysis (using Qualitative Comparative Analysis)  	| In-depth interviews (n=16), survey data (n=179), expert surveys (n=4)  	| A configurational perspective to paradox management; Empirical evidence for inter-relatedness of business model elements; 	| Configurations of integration and differentiation decisions |  
+| 4 Organizational commitments to conflicting values,  business models and performance  	| How do organizational values influence business model heterogeneity, and what are the joint performance implications? 	| Quantitative, deductive, factor analyses, QCA Survey data  	| (n=196) 	| Explaining business model heterogeneity as a result of different value profiles, and linking them to performance outcomes; 	|  Empirically derived taxonomy |    
+  
+## A note on methodology: Studying organizations as configurations  
+      
+What is the configurationl perspective and why is it the most relevant for this thesis?   
+
+The rest of this dissertation is written in the first person plural, not only because of the conventions dictated by academia, but because it has been a collaborative work with people that have worked with me on each of the papers. 
+
+## References {-} 
+  
+<div id="refs"></div>  

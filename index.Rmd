@@ -1,3 +1,33 @@
+--- 
+title: "Managing competing goals through business model design"
+subtitle: "Paradoxical and configurational learnings from creative service firms"
+author: "Ieva Rozentale"
+date: "`r Sys.Date()`"  
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [my.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is my dissertation draft. Please do not distribute without permission. If needed, you can contact me at ieva@nebetja.eu"
 ---
-site: blogdown:::blogdown_site
----
+
+# Abstract {-}
+
+# Acknowledgments {-}
+
+
+
+```{r eval=FALSE, include = FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
+
+
+```{r eval=FALSE, include = FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
